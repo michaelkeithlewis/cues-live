@@ -1600,7 +1600,9 @@ struct EditView: View {
 
     private func detectSections() {
         guard !isDetectingSections else { return }
-        let urls = SongSectionDetector.analysisTracks(in: song)
+        let tracks = SongSectionDetector.analysisTracks(in: song)
+        let urls = tracks.compactMap { FileStore.trackURL(for: song, track: $0) }
+        let lyricURLs = SongSectionDetector.lyricTracks(in: tracks)
             .compactMap { FileStore.trackURL(for: song, track: $0) }
         let songDuration = sourceDuration
         isDetectingSections = true
@@ -1608,9 +1610,9 @@ struct EditView: View {
         Task {
             defer { isDetectingSections = false }
             do {
-                let starts = try await SongSectionDetector.detectSectionStarts(from: urls)
-                let detected = SongSectionDetector.markers(
-                    fromSectionStarts: starts,
+                let detected = try await SongSectionDetector.detectSections(
+                    from: urls,
+                    lyricURLs: lyricURLs,
                     songDuration: songDuration
                 )
                 guard detected.count > 1 else { throw SongSectionDetectorError.noSectionsFound }

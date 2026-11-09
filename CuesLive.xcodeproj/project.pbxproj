@@ -325,6 +325,8 @@
 		AA00000100000000000005A2 /* SmartGuideCallPlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000005A2 /* SmartGuideCallPlannerTests.swift */; };
 		AA00000100000000000005A3 /* AnnouncementSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000005A3 /* AnnouncementSource.swift */; };
 		AA0000010000000000000A01 /* SongSectionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000A01 /* SongSectionDetector.swift */; };
+		ECAFBE6711C01D8484A85140 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F7596EC7A84C0B914029C /* SongSectionLabeler.swift */; };
+		3AC7A5A1D7E39B6DACF65401 /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF62ACB5A36ED075D0FEC3 /* SongSectionProfiler.swift */; };
 		AA0000010000000000000A02 /* SongSectionDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000A02 /* SongSectionDetectorTests.swift */; };
 		AA0000010000000000000A03 /* WaveformLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000A03 /* WaveformLoaderTests.swift */; };
 		AA0000010000000000000B01 /* MeasureBoundaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000B01 /* MeasureBoundaryTests.swift */; };
@@ -387,6 +389,8 @@
 		E207A200470468143ED9F367 /* GroupMixFadeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000203 /* GroupMixFadeController.swift */; };
 		E3DDF6D0C253E5995CB81C2A /* AppModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000084 /* AppModifiers.swift */; };
 		E4CD3BB92968A28A81E49C65 /* SongSectionDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000A01 /* SongSectionDetector.swift */; };
+		8945D04302BE0C1E1C607856 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012F7596EC7A84C0B914029C /* SongSectionLabeler.swift */; };
+		1839C8564B2B89A2F35E9627 /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDF62ACB5A36ED075D0FEC3 /* SongSectionProfiler.swift */; };
 		E4D058D968BCA6A8646D91FA /* SongProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000072 /* SongProjectDocument.swift */; };
 		E54434E2BCC59128689F1709 /* InputMappingSessionViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000327 /* InputMappingSessionViews.swift */; };
 		E5C5977DB09E54250B578B38 /* AudioOutputLostBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000004A4 /* AudioOutputLostBanner.swift */; };
@@ -636,6 +640,8 @@
 		AA00000200000000000005A2 /* SmartGuideCallPlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartGuideCallPlannerTests.swift; sourceTree = "<group>"; };
 		AA00000200000000000005A3 /* AnnouncementSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementSource.swift; sourceTree = "<group>"; };
 		AA0000020000000000000A01 /* SongSectionDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionDetector.swift; sourceTree = "<group>"; };
+		012F7596EC7A84C0B914029C /* SongSectionLabeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabeler.swift; sourceTree = "<group>"; };
+		5DDF62ACB5A36ED075D0FEC3 /* SongSectionProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionProfiler.swift; sourceTree = "<group>"; };
 		AA0000020000000000000A02 /* SongSectionDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionDetectorTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000A03 /* WaveformLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformLoaderTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000B01 /* MeasureBoundaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureBoundaryTests.swift; sourceTree = "<group>"; };
@@ -1164,6 +1170,8 @@
 				AA000002000000000000001F /* SongArrangementStore.swift */,
 				AA00000200000000000000F4 /* SongSectionNameNormalizer.swift */,
 				AA0000020000000000000A01 /* SongSectionDetector.swift */,
+				012F7596EC7A84C0B914029C /* SongSectionLabeler.swift */,
+				5DDF62ACB5A36ED075D0FEC3 /* SongSectionProfiler.swift */,
 				AA00000200000000000000D7 /* SongUndoController.swift */,
 				AA00000200000000000000A0 /* TimelineRippleStore.swift */,
 				AA000002000000000000002B /* TrackGroupStore.swift */,
@@ -1409,6 +1417,8 @@
 				AA00000100000000000000F3 /* SongSectionPresets.swift in Sources */,
 				AA00000100000000000000F4 /* SongSectionNameNormalizer.swift in Sources */,
 				AA0000010000000000000A01 /* SongSectionDetector.swift in Sources */,
+				ECAFBE6711C01D8484A85140 /* SongSectionLabeler.swift in Sources */,
+				3AC7A5A1D7E39B6DACF65401 /* SongSectionProfiler.swift in Sources */,
 				AA0000010000000000000201 /* SparkleUpdater.swift in Sources */,
 				AA0000010000000000000202 /* ToolbarSharedBackground.swift in Sources */,
 				AA000001000000000000001C /* TimelineLayout.swift in Sources */,
@@ -1636,6 +1646,8 @@
 				7E1007493D2F275F94D7A49B /* SongSectionPresets.swift in Sources */,
 				429ED83386A4DFAA235EFD97 /* SongSectionNameNormalizer.swift in Sources */,
 				E4CD3BB92968A28A81E49C65 /* SongSectionDetector.swift in Sources */,
+				8945D04302BE0C1E1C607856 /* SongSectionLabeler.swift in Sources */,
+				1839C8564B2B89A2F35E9627 /* SongSectionProfiler.swift in Sources */,
 				C645950FE0BEFC91246500EF /* SparkleUpdater.swift in Sources */,
 				6E0D669AE634664FE0C646CE /* ToolbarSharedBackground.swift in Sources */,
 				0F3EF9B5611E0354E1A203DC /* TimelineLayout.swift in Sources */,
