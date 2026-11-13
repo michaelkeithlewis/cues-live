@@ -33,6 +33,8 @@ struct LivePlaybackView: View {
     @State private var songToEditID: UUID?
     /// Song to open once the library sheet has dismissed, so the editor pushes as a screen.
     @State private var songPendingEditorID: UUID?
+    /// Set while the editor runs on the live engine without stopping playback.
+    @State private var editorHandoff: LiveEditorHandoff?
     @State private var showingManageOutputs = false
     @State var showingShowFileImporter = false
     @State var showingSetlistPackageExporter = false
@@ -343,20 +345,16 @@ struct LivePlaybackView: View {
                 guard !isShowing, let pendingID = songPendingEditorID else { return }
                 songPendingEditorID = nil
                 Task { @MainActor in
-                    songToEditID = pendingID
+                    openSongEditor(songID: pendingID)
                 }
             }
             .onDisappear {
+                // Pushing the song editor covers this view; playback carries on underneath it.
+                guard songToEditID == nil else { return }
                 stopPlayback()
             }
             .onChange(of: songToEditID) { oldValue, newValue in
-                if newValue != nil {
-                    clearMarkerCue()
-                    sectionLoop.reset()
-                    groupMixFade.cancel()
-                    coordinator.unbindPlaybackHandlers()
-                    coordinator.pause()
-                } else if let editedSongID = oldValue {
+                if newValue == nil, let editedSongID = oldValue {
                     coordinator.refreshWaveformAfterEdit(for: editedSongID)
                 }
                 handleSongEditorDismissed(newValue)
@@ -377,7 +375,23 @@ struct LivePlaybackView: View {
             return
         }
         #endif
-        songToEditID = song.id
+        openSongEditor(songID: song.id)
+    }
+
+    /// Sets up the engine before the editor is built, so the editor sees the handoff on its first appearance.
+    private func openSongEditor(songID: UUID) {
+        clearMarkerCue()
+        sectionLoop.reset()
+        groupMixFade.cancel()
+        if coordinator.canHandOffToEditor(songID: songID) {
+            editorHandoff = LiveEditorHandoff(songID: songID)
+            coordinator.handOffToEditor()
+        } else {
+            editorHandoff = nil
+            coordinator.unbindPlaybackHandlers()
+            coordinator.pause()
+        }
+        songToEditID = songID
     }
 
     private var songEditorDestination: Binding<Bool> {
@@ -437,14 +451,29 @@ struct LivePlaybackView: View {
     @ViewBuilder
     private func songEditorDestinationContent(for setlist: Setlist) -> some View {
         if let songToEditID, let song = songForEditing(id: songToEditID) {
-            SongDetailView(song: song)
+            SongDetailView(song: song, liveHandoff: editorHandoff)
         }
     }
 
     private func handleSongEditorDismissed(_ songToEditID: UUID?) {
         guard songToEditID == nil else { return }
+        guard let handoff = editorHandoff else {
+            coordinator.bindPlaybackHandlers()
+            coordinator.loadCurrentSong()
+            return
+        }
+        editorHandoff = nil
+        if handoff.isEngineIntact {
+            coordinator.resumeAfterEditor()
+            return
+        }
+        // The editor reloaded the engine. Load the live version again, picking up where the
+        // editor left off when it was still on this song.
+        let engine = AudioEngineManager.shared
+        let continues = !handoff.editorSwitchedSong && engine.isPlaying
+        let time = handoff.editorSwitchedSong ? nil : engine.currentTime
         coordinator.bindPlaybackHandlers()
-        coordinator.loadCurrentSong()
+        coordinator.loadCurrentSong(autoPlay: continues, preservedTime: time)
     }
 
     /// The song editor owns the shared engine while it is open.

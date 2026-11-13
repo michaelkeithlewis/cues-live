@@ -24,7 +24,12 @@ extension EditView {
             nudgeGainUp: { nudgeSelectedClipGain(by: 1) },
             nudgeGainDown: { nudgeSelectedClipGain(by: -1) },
             trimSongStart: trimSongStart,
-            trimSongEnd: trimSongEnd
+            trimSongEnd: trimSongEnd,
+            cut: cutClips,
+            copy: copyClips,
+            paste: pasteClipboard,
+            delete: removeClipSelection,
+            selectAll: selectAllClips
         )
     }
 

@@ -109,8 +109,8 @@ struct EditView: View {
         .focusable()
         .focused($isTimelineFocused)
         .focusEffectDisabled()
-        .focusedValue(\.clipEditorActions, clipEditorActions)
-        .focusedValue(\.trackHeightActions, trackHeightActions)
+        .focusedSceneValue(\.clipEditorActions, clipEditorActions)
+        .focusedSceneValue(\.trackHeightActions, trackHeightActions)
         .onKeyPress(phases: .down) { press in
             guard isTimelineFocused else { return .ignored }
             guard press.modifiers.contains(.control),
@@ -192,9 +192,6 @@ struct EditView: View {
 #if os(macOS)
         .onDeleteCommand {
             removeClipSelection()
-        }
-        .onCommand(#selector(NSResponder.selectAll(_:))) {
-            selectAllClips()
         }
         .onExitCommand {
             clipSelection.deselectAll()

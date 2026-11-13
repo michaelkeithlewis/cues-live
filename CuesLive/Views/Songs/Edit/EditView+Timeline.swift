@@ -251,6 +251,7 @@ extension EditView {
             onAddSection: addSection,
             onRenameSection: beginRenameSection,
             onRemoveMarker: removeMarker,
+            sectionClipboard: sectionClipboardActions,
             onTimeSignatureRulerTap: handleTimeSignatureRulerTap,
             onEditTimeSignatureMarker: { marker in
                 timeSignatureLanePrompt = TimeSignatureLanePrompt(

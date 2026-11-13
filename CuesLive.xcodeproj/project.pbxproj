@@ -495,6 +495,16 @@
 		B62FCB804048FEFF5003FECD /* LiveStretcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7C8EBFD83E755AD91F893B /* LiveStretcherTests.swift */; };
 		71F17C7A76C8662CCDFF3E6B /* EditView+SongTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */; };
 		85C64084EEBE2F2F8B68FBE7 /* EditView+SongTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */; };
+		635FBD3AC53975EEA2F504DE /* LiveEditorHandoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043CBAAD7A59DB061D4412 /* LiveEditorHandoff.swift */; };
+		4B879FF9825CEC005F999CFF /* LiveEditorHandoff.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3043CBAAD7A59DB061D4412 /* LiveEditorHandoff.swift */; };
+		C2C7C6AED97E5B8136BDC813 /* SongSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE607949E4DEF75D53C1C99E /* SongSpan.swift */; };
+		DB5F7E50411BEC062ED6DDB9 /* SongSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE607949E4DEF75D53C1C99E /* SongSpan.swift */; };
+		6646C4CB6463E40DD216E93C /* EditorClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */; };
+		BFA52BC1DAEEB99CB715131C /* EditorClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */; };
+		A5195B8FA1FF8DD92CC5200C /* EditView+Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */; };
+		BF670FA5596DDEDEFD19DFF0 /* EditView+Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */; };
+		CA44FAA09C1FB29A29D42614 /* EditorPasteboardCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */; };
+		FEE2593102F0BD83912D7872 /* EditorPasteboardCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -780,6 +790,11 @@
 		E97947A53B488CFB5D9FA9D5 /* LiveStretcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStretcher.swift; sourceTree = "<group>"; };
 		AA7C8EBFD83E755AD91F893B /* LiveStretcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStretcherTests.swift; sourceTree = "<group>"; };
 		87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+SongTrim.swift"; sourceTree = "<group>"; };
+		F3043CBAAD7A59DB061D4412 /* LiveEditorHandoff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveEditorHandoff.swift; sourceTree = "<group>"; };
+		FE607949E4DEF75D53C1C99E /* SongSpan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSpan.swift; sourceTree = "<group>"; };
+		4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorClipboard.swift; sourceTree = "<group>"; };
+		D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+Clipboard.swift"; sourceTree = "<group>"; };
+		10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPasteboardCommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -884,6 +899,7 @@
 		AA0000050000000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FE607949E4DEF75D53C1C99E /* SongSpan.swift */,
 				B50BEFA6E2DC468DE5A65EF3 /* TrackClip.swift */,
 				AA0000050000000000000012 /* Project */,
 				AA00000500000000000000D6 /* Editing */,
@@ -1185,6 +1201,7 @@
 		AA00000500000000000BB001 /* Playback */ = {
 			isa = PBXGroup;
 			children = (
+				F3043CBAAD7A59DB061D4412 /* LiveEditorHandoff.swift */,
 				E97947A53B488CFB5D9FA9D5 /* LiveStretcher.swift */,
 				AA0000020000000000000007 /* AudioEngineManager.swift */,
 				AA0000020000000000000022 /* AudioPlaybackTransport.swift */,
@@ -1291,6 +1308,7 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */,
 				B7A689E2E3CD1BE86914752E /* TempoTrackLock.swift */,
 				AA0000020000000000000021 /* ArrangementTimelineMapper.swift */,
 				AA0000F20000000000000002 /* ClipEditing.swift */,
@@ -1336,6 +1354,8 @@
 		AA00000500000000000EDI01 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */,
+				D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */,
 				87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */,
 				DC25BD6402D9BD88EE21B294 /* TempoChangePrompt.swift */,
 				E6712D5D85AAF092506750C1 /* EditView+LaneCanvas.swift */,
@@ -1493,6 +1513,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA44FAA09C1FB29A29D42614 /* EditorPasteboardCommands.swift in Sources */,
+				A5195B8FA1FF8DD92CC5200C /* EditView+Clipboard.swift in Sources */,
+				6646C4CB6463E40DD216E93C /* EditorClipboard.swift in Sources */,
+				C2C7C6AED97E5B8136BDC813 /* SongSpan.swift in Sources */,
+				635FBD3AC53975EEA2F504DE /* LiveEditorHandoff.swift in Sources */,
 				71F17C7A76C8662CCDFF3E6B /* EditView+SongTrim.swift in Sources */,
 				B9A9A3411448CB7D9D6B7AB0 /* LiveStretcher.swift in Sources */,
 				37D81FDCD140E9CFC150928E /* TempoChangePrompt.swift in Sources */,
@@ -1764,6 +1789,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEE2593102F0BD83912D7872 /* EditorPasteboardCommands.swift in Sources */,
+				BF670FA5596DDEDEFD19DFF0 /* EditView+Clipboard.swift in Sources */,
+				BFA52BC1DAEEB99CB715131C /* EditorClipboard.swift in Sources */,
+				DB5F7E50411BEC062ED6DDB9 /* SongSpan.swift in Sources */,
+				4B879FF9825CEC005F999CFF /* LiveEditorHandoff.swift in Sources */,
 				85C64084EEBE2F2F8B68FBE7 /* EditView+SongTrim.swift in Sources */,
 				3E459F880BA5C5FB38B9D5CA /* LiveStretcher.swift in Sources */,
 				7722C0E1C231AFCCCD6E17F1 /* TempoChangePrompt.swift in Sources */,

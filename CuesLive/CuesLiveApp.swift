@@ -68,6 +68,7 @@ struct CuesLiveApp: App {
             FileMenuCommands()
             SongMenuCommands()
             SongUndoCommands()
+            EditorPasteboardCommands()
             ClipEditorCommands()
             LiveMappingCommands()
             HelpMenuCommands()
@@ -114,6 +115,11 @@ struct ClipEditorActions {
     var nudgeGainDown: () -> Void = {}
     var trimSongStart: () -> Void = {}
     var trimSongEnd: () -> Void = {}
+    var cut: () -> Void = {}
+    var copy: () -> Void = {}
+    var paste: () -> Void = {}
+    var delete: () -> Void = {}
+    var selectAll: () -> Void = {}
 }
 
 struct TrackHeightActions {

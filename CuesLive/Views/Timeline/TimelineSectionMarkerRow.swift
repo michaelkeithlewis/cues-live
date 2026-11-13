@@ -1,5 +1,13 @@
 import SwiftUI
 
+/// Copy, cut and paste for whole sections, offered from the section ruler's menu.
+struct SectionClipboardActions {
+    var canPaste = false
+    var copy: (SongSection) -> Void = { _ in }
+    var cut: (SongSection) -> Void = { _ in }
+    var pasteBefore: (SongSection) -> Void = { _ in }
+}
+
 /// Point markers on the section ruler. Each one is a right-pointing triangle at the
 /// beat it starts. Right-click the row to add one.
 struct TimelineSectionMarkerRowView: View {
@@ -17,6 +25,7 @@ struct TimelineSectionMarkerRowView: View {
     let onAddSection: (TimeInterval) -> Void
     let onRenameSection: (SongSection) -> Void
     let onRemoveMarker: (SongSection) -> Void
+    var clipboard = SectionClipboardActions()
 
     @State private var pointerX: CGFloat = 0
     @State private var markerFrames: [UUID: CGRect] = [:]
@@ -55,6 +64,18 @@ struct TimelineSectionMarkerRowView: View {
                         if isPlaying {
                             Button("Cue Section") {
                                 onCueSection(section)
+                            }
+                        }
+                        Divider()
+                        Button("Copy Section") {
+                            clipboard.copy(section)
+                        }
+                        Button("Cut Section") {
+                            clipboard.cut(section)
+                        }
+                        if clipboard.canPaste {
+                            Button("Paste Before This Section") {
+                                clipboard.pasteBefore(section)
                             }
                         }
                         Divider()

@@ -7,6 +7,7 @@ final class SongEditorViewModel {
     private let audioEngine = AudioEngineManager.shared
 
     let song: Song
+    private let liveHandoff: LiveEditorHandoff?
     private(set) var loadError: String?
     private(set) var isLoaded = false
     private(set) var isReloadingSong = false
@@ -17,14 +18,32 @@ final class SongEditorViewModel {
     /// Set once the editor has applied show routing, so a later reload keeps it.
     private var monitorsOutputRouting = false
 
-    init(song: Song) {
+    init(song: Song, liveHandoff: LiveEditorHandoff? = nil) {
         self.song = song
+        self.liveHandoff = liveHandoff
     }
 
-    func loadSong(context: ModelContext) {
+    /// With `adoptingLoadedEngine`, live playback already has this song loaded, so the editor
+    /// works on that engine as it is and playback keeps running.
+    func loadSong(context: ModelContext, adoptingLoadedEngine: Bool = false) {
         modelContext = context
+        if adoptingLoadedEngine {
+            adoptLoadedEngine()
+            return
+        }
         claimEngineForSongEditing()
         reloadSong()
+    }
+
+    private func adoptLoadedEngine() {
+        // Live playback loaded the song with show routing. Keep it if the editor reloads later.
+        monitorsOutputRouting = true
+        preloadTrackDurations()
+        isLoaded = true
+        loadError = nil
+        let projectState = SongProjectBridge.projectStateOrDefaults(for: song)
+        syncArrangement(projectState.timeline)
+        syncTempoMap(projectState.tempoChanges, timeSignatureChanges: projectState.timeSignatureChanges)
     }
 
     /// Detaches live setlist playback from the shared engine so editing owns it.
@@ -57,6 +76,7 @@ final class SongEditorViewModel {
 
     @MainActor
     private func performReload() async {
+        liveHandoff?.editorReloadedEngine = true
         claimEngineForSongEditing()
         audioEngine.stop()
         reloadGeneration += 1

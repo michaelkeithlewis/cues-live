@@ -135,6 +135,35 @@ final class PlaybackCoordinator {
         clockEngine.onWillReachEnd = nil
     }
 
+    /// Whether the editor can take the shared engine as it is: `songID` is loaded on it alone,
+    /// with no overlap engine attached.
+    func canHandOffToEditor(songID: UUID) -> Bool {
+        isLoaded && !isLoadingSong && loadedSongID == songID
+            && audioEngine === clockEngine && incomingAudioEngine == nil
+    }
+
+    /// Detaches setlist callbacks and pending overlap work. The song keeps playing.
+    func handOffToEditor() {
+        audioEngine.cancelScheduledOverlapStart()
+        clearIncomingPrefetch()
+        activeOverlapConfig = nil
+        unbindPlaybackHandlers()
+    }
+
+    /// Takes the engine back from the editor without reloading it. The editor has saved its
+    /// edits, so the arrangement is read again and the overlap into the next song is re-armed.
+    func resumeAfterEditor() {
+        guard let song = currentSong, song.id == loadedSongID else {
+            bindPlaybackHandlers()
+            loadCurrentSong()
+            return
+        }
+        bindPlaybackHandlers()
+        applySongEngineState(for: song)
+        applyGroupMixFromProvider()
+        configureOverlapSchedulingIfNeeded()
+    }
+
     private func bindPlaybackFinishedHandler() {
         bindPlaybackHandlers()
     }

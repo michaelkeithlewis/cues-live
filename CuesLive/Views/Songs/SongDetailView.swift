@@ -7,6 +7,8 @@ struct SongDetailView: View {
     @Environment(\.dismiss) private var dismiss
 
     @Bindable var song: Song
+    /// Present when live view handed over its engine with this song already loaded.
+    var liveHandoff: LiveEditorHandoff? = nil
     @Query(sort: \Song.name) private var songs: [Song]
 
     @State private var viewModel: SongEditorViewModel?
@@ -88,17 +90,40 @@ struct SongDetailView: View {
                 )
             }
             #if os(macOS)
-            .focusedValue(\.songEditorActions, songEditorActions)
-            .focusedValue(\.songUndoActions, songUndoActions)
+            // Scene-wide so the Song and Edit menus work wherever focus sits in the editor window.
+            .focusedSceneValue(\.songEditorActions, songEditorActions)
+            .focusedSceneValue(\.songUndoActions, songUndoActions)
             #endif
+            .liveInputMappingSession(handler: handleMappedEditorAction)
             .onDisappear {
-                AudioEngineManager.shared.stop()
+                // Under a handoff, live view decides what the engine does next.
+                if liveHandoff == nil {
+                    AudioEngineManager.shared.stop()
+                }
                 persistSongState()
             }
     }
 
     private var activeSong: Song {
         songs.first(where: { $0.id == selectedSongID }) ?? song
+    }
+
+    /// Mapped Play and Stop drive the editor transport, so live shortcuts keep working here.
+    /// Song, section, fade and loop actions belong to the setlist and wait until the editor closes.
+    private func handleMappedEditorAction(_ action: MappableLiveAction) {
+        guard let viewModel, viewModel.isLoaded else { return }
+        switch action {
+        case .playPause:
+            if AudioEngineManager.shared.isPlaying {
+                viewModel.pause()
+            } else {
+                viewModel.play()
+            }
+        case .stop:
+            viewModel.stop()
+        case .fade, .loop, .goToSong, .goToSection:
+            break
+        }
     }
 
     private func attemptDismiss() {
@@ -214,9 +239,17 @@ struct SongDetailView: View {
     }
     #endif
 
+    /// True while the engine still holds the live load of the song on screen.
+    private var adoptsLiveEngine: Bool {
+        guard let liveHandoff else { return false }
+        return liveHandoff.isEngineIntact && liveHandoff.songID == activeSong.id
+    }
+
     private func handleAppear() {
         let audioEngine = AudioEngineManager.shared
-        audioEngine.pause()
+        if !adoptsLiveEngine {
+            audioEngine.pause()
+        }
         audioEngine.onPlaybackFinished = nil
         selectedSongID = selectedSongID ?? song.id
         loadEditor(for: activeSong, forceReloadViewModel: viewModel?.song.id != activeSong.id)
@@ -224,9 +257,9 @@ struct SongDetailView: View {
 
     private func loadEditor(for song: Song, forceReloadViewModel: Bool) {
         if viewModel == nil || forceReloadViewModel {
-            let model = SongEditorViewModel(song: song)
+            let model = SongEditorViewModel(song: song, liveHandoff: liveHandoff)
             model.preloadTrackDurations()
-            model.loadSong(context: modelContext)
+            model.loadSong(context: modelContext, adoptingLoadedEngine: adoptsLiveEngine)
             viewModel = model
         }
 
@@ -268,6 +301,7 @@ struct SongDetailView: View {
         guard nextSong.id != activeSong.id else { return }
         persistSongState()
         AudioEngineManager.shared.stop()
+        liveHandoff?.editorSwitchedSong = true
         selectedSongID = nextSong.id
         undoController = SongUndoController()
         loadEditor(for: nextSong, forceReloadViewModel: true)
