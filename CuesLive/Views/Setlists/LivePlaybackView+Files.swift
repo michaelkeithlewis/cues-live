@@ -5,7 +5,9 @@ import AppKit
 #endif
 
 extension LivePlaybackView {
-    func importSongs(from requests: [SongFolderImporter.ImportRequest]) {
+    /// Imports each folder as a song. With `insertingAtRow`, the new songs also go into the
+    /// setlist in front of that visible row.
+    func importSongs(from requests: [SongFolderImporter.ImportRequest], insertingAtRow row: Int? = nil) {
         guard !isImportingSongFolder, !requests.isEmpty else { return }
 
         isImportingSongFolder = true
@@ -33,6 +35,10 @@ extension LivePlaybackView {
                             : "\(label.isEmpty ? request.folderURL.lastPathComponent : label): \(error.localizedDescription)"
                     )
                 }
+            }
+
+            if let row {
+                insertSongs(importedSongs, atRow: row)
             }
 
             if !failureMessages.isEmpty {

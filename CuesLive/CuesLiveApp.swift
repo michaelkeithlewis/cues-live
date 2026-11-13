@@ -103,6 +103,8 @@ struct ClipEditorActions {
     var canDeselect = false
     var canAdjustGain = false
     var canNudgeGain = false
+    var canTrimSongStart = false
+    var canTrimSongEnd = false
     var split: () -> Void = {}
     var join: () -> Void = {}
     var duplicate: () -> Void = {}
@@ -110,6 +112,8 @@ struct ClipEditorActions {
     var adjustGain: () -> Void = {}
     var nudgeGainUp: () -> Void = {}
     var nudgeGainDown: () -> Void = {}
+    var trimSongStart: () -> Void = {}
+    var trimSongEnd: () -> Void = {}
 }
 
 struct TrackHeightActions {
@@ -313,6 +317,20 @@ struct ClipEditorCommands: Commands {
             }
             .keyboardShortcut(.downArrow, modifiers: [.control, .shift])
             .disabled(actions?.canNudgeGain != true)
+
+            Divider()
+
+            Button("Trim Song Start to Edit Point") {
+                actions?.trimSongStart()
+            }
+            .keyboardShortcut("[", modifiers: [.command, .option])
+            .disabled(actions?.canTrimSongStart != true)
+
+            Button("Trim Song End at Edit Point") {
+                actions?.trimSongEnd()
+            }
+            .keyboardShortcut("]", modifiers: [.command, .option])
+            .disabled(actions?.canTrimSongEnd != true)
         }
     }
 }

@@ -1,5 +1,6 @@
 import SwiftData
 import SwiftUI
+import UniformTypeIdentifiers
 #if os(macOS)
 import AppKit
 #endif
@@ -27,10 +28,8 @@ extension LivePlaybackView {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(AppSpacing.md)
                     .contentShape(Rectangle())
-                    .dropDestination(for: String.self) { items, _ in
-                        let ids = items.compactMap(SongDragPayload.songID(from:))
-                        insertDroppedSongs(at: 0, songIDs: ids)
-                        return !ids.isEmpty
+                    .onDrop(of: [.plainText, .fileURL], isTargeted: nil) { providers in
+                        handleEmptySetlistDrop(providers)
                     }
                     .contextMenu {
                         Button {
@@ -48,7 +47,8 @@ extension LivePlaybackView {
                         actions: setlistRowActions(for:),
                         onMove: moveSetlistRows,
                         onAddHeader: addHeader,
-                        onInsertSongs: insertDroppedSongs
+                        onInsertSongs: insertDroppedSongs,
+                        onInsertFiles: importDroppedFolders
                     )
                     .frame(maxWidth: 720, maxHeight: .infinity)
                     .frame(maxWidth: .infinity)
@@ -121,19 +121,60 @@ extension LivePlaybackView {
         )
     }
 
-    /// Translates list offsets (visible rows only) into offsets in the full sorted entry list.
-    /// `rowIndex` is a position among the visible rows; map it to `sortedEntries` like `moveSetlistRows`.
-    private func insertDroppedSongs(at rowIndex: Int, songIDs: [UUID]) {
+    /// Translates a position among the visible rows into an offset in the full sorted entry list,
+    /// like `moveSetlistRows`.
+    private func sortedEntryIndex(forRow rowIndex: Int) -> Int {
         let sorted = workingSetlist.sortedEntries
         let visible = sorted.filter { $0.isHeader || $0.song != nil }
-        var index = rowIndex < visible.count
+        return rowIndex < visible.count
             ? (sorted.firstIndex(where: { $0 === visible[rowIndex] }) ?? sorted.count)
             : sorted.count
-        for id in songIDs {
+    }
+
+    private func insertDroppedSongs(at rowIndex: Int, songIDs: [UUID]) {
+        let songs = songIDs.compactMap { id in
             let descriptor = FetchDescriptor<Song>(predicate: #Predicate { $0.id == id })
-            guard let song = try? modelContext.fetch(descriptor).first else { continue }
+            return try? modelContext.fetch(descriptor).first
+        }
+        insertSongs(songs, atRow: rowIndex)
+    }
+
+    func insertSongs(_ songs: [Song], atRow rowIndex: Int) {
+        var index = sortedEntryIndex(forRow: rowIndex)
+        for song in songs {
             addSong(song, at: index)
             index += 1
+        }
+    }
+
+    private func handleEmptySetlistDrop(_ providers: [NSItemProvider]) -> Bool {
+        if SongFolderDrop.containsFiles(providers) {
+            importDroppedFolders(at: 0, providers: providers)
+            return true
+        }
+        Task { @MainActor in
+            insertDroppedSongs(at: 0, songIDs: await SongDragPayload.songIDs(from: providers))
+        }
+        return true
+    }
+
+    /// Finder folders dropped on the setlist go through the same setup sheet as the library,
+    /// then land in the setlist where they were dropped.
+    private func importDroppedFolders(at rowIndex: Int, providers: [NSItemProvider]) {
+        guard !isImportingSongFolder, setlistFolderSetup == nil else { return }
+        Task { @MainActor in
+            let folderURLs = await SongFolderDrop.folderURLs(from: providers)
+            guard !folderURLs.isEmpty else {
+                songImportFeedback = .failure("Drop a folder containing audio files to add a song.")
+                return
+            }
+            let (previews, failures) = await SongFolderDrop.previews(for: folderURLs)
+            if !failures.isEmpty {
+                songImportFeedback = .failure(failures.joined(separator: "\n"))
+            }
+            guard !previews.isEmpty else { return }
+            setlistFolderDropRow = rowIndex
+            setlistFolderSetup = SongFolderSetupSession(previews: previews)
         }
     }
 

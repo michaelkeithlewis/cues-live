@@ -51,7 +51,6 @@ final class OverlapPreviewEngine {
         let outgoingDuration = outgoingSnapshot.timelineDuration
         let clampedOffset = OverlapTransitionTiming.clampedStartOffset(
             startOffsetSeconds,
-            windowDuration: windowDuration,
             outgoingDuration: outgoingDuration
         )
 

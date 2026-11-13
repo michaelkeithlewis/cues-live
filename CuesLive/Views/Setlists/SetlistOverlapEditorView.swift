@@ -35,7 +35,7 @@ struct SetlistOverlapEditorView: View {
     @State private var windowZoom: CGFloat
     @State private var pinchStartZoom: CGFloat?
     @State private var startOffsetSeconds: TimeInterval
-    @State private var dragStartOffset: TimeInterval?
+    @State private var dragStart: (offset: TimeInterval, windowDuration: TimeInterval)?
     @State private var previewEngine = OverlapPreviewEngine()
     @State private var isLoadingPreview = false
     @State private var previewError: String?
@@ -49,6 +49,8 @@ struct SetlistOverlapEditorView: View {
     private let laneHeight: CGFloat = 88
     private static let minimumWindowZoomFloor: CGFloat = 0.25
     private static let zoomAdjustmentStep: CGFloat = 0.15
+    private static let zoomButtonFactor: CGFloat = 1.5
+    private static let nudgeStepSeconds: TimeInterval = 0.25
 
     private var waveformStackHeight: CGFloat {
         laneHeight * 2 + AppSpacing.sm
@@ -64,8 +66,11 @@ struct SetlistOverlapEditorView: View {
 
     private var minimumWindowZoom: CGFloat {
         guard baseWindowDuration > 0 else { return Self.minimumWindowZoomFloor }
-        let overlapLimitedZoom = CGFloat(startOffsetSeconds / baseWindowDuration)
-        return max(Self.minimumWindowZoomFloor, min(1, overlapLimitedZoom))
+        // The window always holds the whole overlap plus a short lead-in of the outgoing song.
+        let overlapLimitedZoom = CGFloat(
+            (startOffsetSeconds + OverlapTransitionTiming.editorLeadInSeconds) / baseWindowDuration
+        )
+        return max(Self.minimumWindowZoomFloor, min(maximumWindowZoom, overlapLimitedZoom))
     }
 
     private var maximumWindowZoom: CGFloat {
@@ -297,6 +302,8 @@ struct SetlistOverlapEditorView: View {
 
     private var controlsRow: some View {
         HStack(spacing: AppSpacing.md) {
+            overlapNudgeControls
+            zoomControls
             Spacer()
 
             Button {
@@ -316,6 +323,64 @@ struct SetlistOverlapEditorView: View {
             .disabled(windowDuration <= 0 || isLoadingPreview)
         }
         .foregroundStyle(AppColors.textPrimary)
+    }
+
+    private var overlapNudgeControls: some View {
+        HStack(spacing: AppSpacing.xs) {
+            Button {
+                nudgeOverlap(by: -Self.nudgeStepSeconds)
+            } label: {
+                Image(systemName: "minus")
+            }
+            .help("Shorter overlap")
+            .accessibilityLabel("Shorter overlap")
+
+            Text(String(format: "Overlap %.2f s", startOffsetSeconds))
+                .font(.subheadline.monospacedDigit())
+                .foregroundStyle(AppColors.textSecondary)
+                .frame(minWidth: 116)
+
+            Button {
+                nudgeOverlap(by: Self.nudgeStepSeconds)
+            } label: {
+                Image(systemName: "plus")
+            }
+            .help("Longer overlap")
+            .accessibilityLabel("Longer overlap")
+        }
+        .disabled(isLoadingWaveforms)
+    }
+
+    private var zoomControls: some View {
+        HStack(spacing: AppSpacing.xs) {
+            Button {
+                setWindowZoom(windowZoom * Self.zoomButtonFactor)
+            } label: {
+                Image(systemName: "minus.magnifyingglass")
+            }
+            .disabled(windowZoom >= maximumWindowZoom)
+            .help("Zoom out")
+            .accessibilityLabel("Zoom out")
+
+            Button {
+                setWindowZoom(windowZoom / Self.zoomButtonFactor)
+            } label: {
+                Image(systemName: "plus.magnifyingglass")
+            }
+            .disabled(windowZoom <= minimumWindowZoom)
+            .help("Zoom in")
+            .accessibilityLabel("Zoom in")
+        }
+        .disabled(isLoadingWaveforms)
+    }
+
+    private func nudgeOverlap(by delta: TimeInterval) {
+        startOffsetSeconds = OverlapTransitionTiming.clampedStartOffset(
+            startOffsetSeconds + delta,
+            outgoingDuration: outgoingDuration
+        )
+        windowZoom = Self.clampedWindowZoom(windowZoom, maximum: maximumWindowZoom, minimum: minimumWindowZoom)
+        invalidatePreviewConfiguration()
     }
 
     private func scrollContentWidth(viewportWidth: CGFloat, incomingLaneEndX: CGFloat) -> CGFloat {
@@ -360,6 +425,7 @@ struct SetlistOverlapEditorView: View {
     }
 
     private func setWindowZoom(_ proposed: CGFloat) {
+        guard !isLoadingWaveforms else { return }
         let clamped = Self.clampedWindowZoom(
             proposed,
             maximum: maximumWindowZoom,
@@ -477,26 +543,32 @@ struct SetlistOverlapEditorView: View {
         .frame(width: rowWidth, height: laneHeight, alignment: .leading)
     }
 
+    /// Dragging right shortens the overlap and dragging left lengthens it. The seconds-per-point
+    /// scale is fixed at drag start, so the lane tracks the pointer while the window widens.
     private func dragGesture(contentWidth: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 1)
             .onChanged { value in
-                if dragStartOffset == nil {
-                    dragStartOffset = startOffsetSeconds
+                if dragStart == nil {
+                    dragStart = (offset: startOffsetSeconds, windowDuration: windowDuration)
                 }
-                guard let dragStartOffset, windowDuration > 0 else { return }
-                let deltaTime = TimeInterval(value.translation.width / contentWidth) * windowDuration
-                let outgoingWindowStart = max(0, outgoingDuration - windowDuration)
-                let startAlignment = outgoingDuration - dragStartOffset
-                let newAlignment = startAlignment + deltaTime
-                let newLaneOffset = newAlignment - outgoingWindowStart
-                startOffsetSeconds = OverlapTransitionTiming.startOffset(
-                    outgoingDuration: outgoingDuration,
-                    windowDuration: windowDuration,
-                    incomingLaneOffset: newLaneOffset
-                )
+                guard let dragStart, dragStart.windowDuration > 0 else { return }
+                let deltaTime = TimeInterval(value.translation.width / contentWidth) * dragStart.windowDuration
+                var transaction = Transaction()
+                transaction.disablesAnimations = true
+                withTransaction(transaction) {
+                    startOffsetSeconds = OverlapTransitionTiming.clampedStartOffset(
+                        dragStart.offset - deltaTime,
+                        outgoingDuration: outgoingDuration
+                    )
+                    windowZoom = Self.clampedWindowZoom(
+                        windowZoom,
+                        maximum: maximumWindowZoom,
+                        minimum: minimumWindowZoom
+                    )
+                }
             }
             .onEnded { _ in
-                dragStartOffset = nil
+                dragStart = nil
                 invalidatePreviewConfiguration()
             }
     }

@@ -91,6 +91,8 @@ struct SetlistListView: View {
     var onAddHeader: (() -> Void)? = nil
     /// Called with the row index to insert at when a library song is dropped on the list.
     var onInsertSongs: ((Int, [UUID]) -> Void)? = nil
+    /// Called with the row index to insert at when Finder items are dropped on the list.
+    var onInsertFiles: ((Int, [NSItemProvider]) -> Void)? = nil
 
     #if os(iOS)
     @Environment(\.verticalSizeClass) private var verticalSizeClass
@@ -102,7 +104,11 @@ struct SetlistListView: View {
                 rowView(row)
             }
             .onMove(perform: onMove)
-            .onInsert(of: [.plainText]) { index, providers in
+            .onInsert(of: [.plainText, .fileURL]) { index, providers in
+                if SongFolderDrop.containsFiles(providers) {
+                    onInsertFiles?(index, providers)
+                    return
+                }
                 guard let onInsertSongs else { return }
                 Task { @MainActor in
                     let ids = await SongDragPayload.songIDs(from: providers)
@@ -169,6 +175,11 @@ struct SetlistListView: View {
                 guard !isEditing else { return }
                 rowActions.play?()
             }
+            // Simultaneous so the first click still selects the song without waiting out the double-click interval.
+            .simultaneousGesture(TapGesture(count: 2).onEnded {
+                guard !isEditing else { return }
+                rowActions.edit?()
+            })
             .accessibilityAddTraits(.isButton)
             .accessibilityAction(named: "Play") { rowActions.play?() }
             .appLinkPointer()

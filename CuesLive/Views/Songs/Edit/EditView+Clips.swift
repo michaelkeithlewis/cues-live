@@ -14,13 +14,17 @@ extension EditView {
             canDeselect: !clipSelection.isEmpty,
             canAdjustGain: !clipSelection.isEmpty,
             canNudgeGain: !clipSelection.isEmpty,
+            canTrimSongStart: canTrimSongStart,
+            canTrimSongEnd: canTrimSongEnd,
             split: { splitSelectedClips(at: AudioEngineManager.shared.currentTime) },
             join: { joinSelectedClips() },
             duplicate: { duplicateSelectedClips() },
             deselectAll: { clipSelection.deselectAll() },
             adjustGain: { beginAdjustGain() },
             nudgeGainUp: { nudgeSelectedClipGain(by: 1) },
-            nudgeGainDown: { nudgeSelectedClipGain(by: -1) }
+            nudgeGainDown: { nudgeSelectedClipGain(by: -1) },
+            trimSongStart: trimSongStart,
+            trimSongEnd: trimSongEnd
         )
     }
 

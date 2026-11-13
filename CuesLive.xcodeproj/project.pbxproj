@@ -493,6 +493,8 @@
 		B9A9A3411448CB7D9D6B7AB0 /* LiveStretcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97947A53B488CFB5D9FA9D5 /* LiveStretcher.swift */; };
 		3E459F880BA5C5FB38B9D5CA /* LiveStretcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97947A53B488CFB5D9FA9D5 /* LiveStretcher.swift */; };
 		B62FCB804048FEFF5003FECD /* LiveStretcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7C8EBFD83E755AD91F893B /* LiveStretcherTests.swift */; };
+		71F17C7A76C8662CCDFF3E6B /* EditView+SongTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */; };
+		85C64084EEBE2F2F8B68FBE7 /* EditView+SongTrim.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -777,6 +779,7 @@
 		077108785CD6F811C00BC27A /* TrackClipTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackClipTests.swift; sourceTree = "<group>"; };
 		E97947A53B488CFB5D9FA9D5 /* LiveStretcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStretcher.swift; sourceTree = "<group>"; };
 		AA7C8EBFD83E755AD91F893B /* LiveStretcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStretcherTests.swift; sourceTree = "<group>"; };
+		87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+SongTrim.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1333,6 +1336,7 @@
 		AA00000500000000000EDI01 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				87A2549DE2190A11F9E29A3F /* EditView+SongTrim.swift */,
 				DC25BD6402D9BD88EE21B294 /* TempoChangePrompt.swift */,
 				E6712D5D85AAF092506750C1 /* EditView+LaneCanvas.swift */,
 				2502E9778299430BECC051F4 /* EditView+LaneHeights.swift */,
@@ -1489,6 +1493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F17C7A76C8662CCDFF3E6B /* EditView+SongTrim.swift in Sources */,
 				B9A9A3411448CB7D9D6B7AB0 /* LiveStretcher.swift in Sources */,
 				37D81FDCD140E9CFC150928E /* TempoChangePrompt.swift in Sources */,
 				BC752BA60D990A895645312E /* TempoTrackLock.swift in Sources */,
@@ -1759,6 +1764,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C64084EEBE2F2F8B68FBE7 /* EditView+SongTrim.swift in Sources */,
 				3E459F880BA5C5FB38B9D5CA /* LiveStretcher.swift in Sources */,
 				7722C0E1C231AFCCCD6E17F1 /* TempoChangePrompt.swift in Sources */,
 				8F5818F03F4BBB3E80737AAD /* TempoTrackLock.swift in Sources */,

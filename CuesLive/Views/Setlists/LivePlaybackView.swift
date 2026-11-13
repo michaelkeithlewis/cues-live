@@ -48,6 +48,10 @@ struct LivePlaybackView: View {
     @State var editHeaderTitle = ""
     @State var editHeaderTimeSeconds: TimeInterval = 0
     @State var overlapEditorContext: SetlistOverlapEditorContext?
+    /// Song folders dropped from Finder onto the setlist, waiting on the setup sheet.
+    @State var setlistFolderSetup: SongFolderSetupSession?
+    /// Visible setlist row the dropped folders go in front of.
+    @State var setlistFolderDropRow = 0
     @State var setlistRowMetrics = SetlistRowMetricsCache()
     @State private var showingMissingMediaAlert = false
     @State private var missingMediaSheet: MissingMediaSheetContext?
@@ -257,6 +261,13 @@ struct LivePlaybackView: View {
                         coordinator.updateTransitions(from: workingSetlist)
                     }
                 )
+            }
+            .sheet(item: $setlistFolderSetup) { session in
+                SongFolderSetupSheet(previews: session.previews) { requests in
+                    setlistFolderSetup = nil
+                    guard !requests.isEmpty else { return }
+                    importSongs(from: requests, insertingAtRow: setlistFolderDropRow)
+                }
             }
             .alert(item: $songImportFeedback) { feedback in
                 Alert(

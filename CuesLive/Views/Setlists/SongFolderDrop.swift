@@ -16,6 +16,33 @@ enum SongFolderDrop {
         return folderURLs
     }
 
+    /// True when the drag carries Finder files rather than a library song.
+    static func containsFiles(_ providers: [NSItemProvider]) -> Bool {
+        providers.contains { $0.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) }
+    }
+
+    /// Reads each folder for the setup sheet. A folder that cannot be read becomes a failure message.
+    @MainActor
+    static func previews(for folderURLs: [URL]) async -> (previews: [SongFolderImporter.Preview], failures: [String]) {
+        var previews: [SongFolderImporter.Preview] = []
+        var failures: [String] = []
+        for url in folderURLs {
+            do {
+                let preview = try await Task.detached(priority: .userInitiated) {
+                    try SongFolderImporter.previewFolder(at: url)
+                }.value
+                previews.append(preview)
+            } catch {
+                failures.append(
+                    folderURLs.count == 1
+                        ? error.localizedDescription
+                        : "\(url.lastPathComponent): \(error.localizedDescription)"
+                )
+            }
+        }
+        return (previews, failures)
+    }
+
     private static func loadFileURL(from provider: NSItemProvider) async -> URL? {
         await withCheckedContinuation { continuation in
             provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier, options: nil) { item, _ in
