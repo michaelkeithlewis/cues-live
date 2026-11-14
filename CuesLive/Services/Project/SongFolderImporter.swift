@@ -185,7 +185,7 @@ enum SongFolderImporter {
         return (result.trackCount, result.sectionCount, result.bpm)
     }
 
-    private static func sanitized(_ settings: ImportSettings, fallbackName: String) -> ImportSettings {
+    static func sanitized(_ settings: ImportSettings, fallbackName: String) -> ImportSettings {
         let trimmed = settings.name.trimmingCharacters(in: .whitespacesAndNewlines)
         let name = trimmed.isEmpty ? fallbackName : trimmed
         let bpm: Double
@@ -212,7 +212,7 @@ enum SongFolderImporter {
     }
 
     /// Writes the confirmed name, tempo, meter, and key over anything read from the folder.
-    private static func applyImportSettings(
+    static func applyImportSettings(
         _ settings: ImportSettings,
         to song: Song,
         context: ModelContext

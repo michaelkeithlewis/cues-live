@@ -12,7 +12,7 @@ extension SongLibraryPanel {
             VStack(spacing: AppSpacing.sm) {
                 ProgressView()
                     .tint(AppColors.accent)
-                Text(isPreparingFolderSetup ? "Reading song folder…" : "Importing song folder…")
+                Text(isPreparingFolderSetup ? "Reading song folder and tempo…" : "Importing song folder…")
                     .font(.headline)
                     .foregroundStyle(AppColors.textPrimary)
             }
@@ -22,7 +22,7 @@ extension SongLibraryPanel {
     }
 
     func presentFolderImporter() {
-        guard !isBusy, folderSetupSession == nil else { return }
+        guard !isBusy else { return }
         #if os(macOS)
         // SwiftUI `.fileImporter` often fails to present from a Menu. Use NSOpenPanel after
         // the menu finishes dismissing so Finder reliably appears.
@@ -68,7 +68,7 @@ extension SongLibraryPanel {
     /// Handles a Finder drag dropped onto the library: each dropped folder is imported as a new song.
     func performFolderDrop(_ providers: [NSItemProvider]) -> Bool {
         isTargetedForFolderDrop = false
-        guard !providers.isEmpty, !isBusy, folderSetupSession == nil else {
+        guard !providers.isEmpty, !isBusy else {
             return false
         }
 
@@ -85,7 +85,7 @@ extension SongLibraryPanel {
     #endif
 
     private func queueFolderImport(_ folderURLs: [URL]) {
-        guard !isBusy, folderSetupSession == nil, !folderURLs.isEmpty else { return }
+        guard !isBusy, !folderURLs.isEmpty else { return }
 
         isPreparingFolderSetup = true
         let urls = folderURLs
@@ -93,14 +93,14 @@ extension SongLibraryPanel {
             await Task.yield()
             defer { isPreparingFolderSetup = false }
 
-            var previews: [SongFolderImporter.Preview] = []
+            var requests: [SongFolderImporter.ImportRequest] = []
             var failures: [String] = []
             for url in urls {
                 do {
                     let preview = try await Task.detached(priority: .userInitiated) {
                         try SongFolderImporter.previewFolder(at: url)
                     }.value
-                    previews.append(preview)
+                    requests.append(await SongFolderAutoSetup.request(for: preview))
                 } catch {
                     failures.append(
                         urls.count == 1
@@ -113,8 +113,8 @@ extension SongLibraryPanel {
             if !failures.isEmpty {
                 songActionError = failures.joined(separator: "\n")
             }
-            guard !previews.isEmpty else { return }
-            folderSetupSession = SongFolderSetupSession(previews: previews)
+            guard !requests.isEmpty else { return }
+            onFoldersSelected(requests)
         }
     }
 }

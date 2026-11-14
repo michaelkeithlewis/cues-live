@@ -31,7 +31,7 @@ struct SongLibraryPanel: View {
     @State var editMode: EditMode = .inactive
     #endif
     @State var showingAddClickSheet = false
-    @State var folderSetupSession: SongFolderSetupSession?
+    @State var songPendingSetup: Song?
     @State var isPreparingFolderSetup = false
     @State var songPendingRename: Song?
     @State var renameSongName = ""

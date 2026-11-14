@@ -17,6 +17,9 @@ extension SongLibraryPanel {
                 songPendingRename = song
                 renameSongName = song.name
             }
+            Button("Song Setup…", systemImage: "slider.horizontal.3") {
+                songPendingSetup = song
+            }
             Button("Duplicate", systemImage: "plus.square.on.square") {
                 duplicateSong(song)
             }
@@ -129,11 +132,10 @@ extension SongLibraryPanel {
                     createClickSong(name: name, bpm: bpm, numerator: numerator, denominator: denominator)
                 }
             }
-            .sheet(item: $folderSetupSession) { session in
-                SongFolderSetupSheet(previews: session.previews) { requests in
-                    folderSetupSession = nil
-                    guard !requests.isEmpty else { return }
-                    onFoldersSelected(requests)
+            .sheet(item: $songPendingSetup) { song in
+                SongSetupSheet(song: song) { error in
+                    songPendingSetup = nil
+                    songActionError = error?.localizedDescription
                 }
             }
             #if os(iOS)
