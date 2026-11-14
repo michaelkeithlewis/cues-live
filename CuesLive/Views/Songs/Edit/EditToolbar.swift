@@ -77,9 +77,11 @@ struct EditSongToolbarContent: ToolbarContent {
     let arrangementActions: ArrangementSectionActions
     let loopSectionIDs: Set<UUID>
     let isDetectingSections: Bool
+    let isDetectingTempo: Bool
     let onChangeKey: () -> Void
     let onManageGroups: () -> Void
     let onDetectSections: () -> Void
+    let onDetectTempo: () -> Void
     let onImportAbleton: () -> Void
     let onAddMIDILane: () -> Void
     /// Nil hides the back button, as in the separate editor window.
@@ -208,6 +210,10 @@ struct EditSongToolbarContent: ToolbarContent {
                     onDetectSections()
                 }
                 .disabled(isDetectingSections || SongSectionDetector.analysisTracks(in: song).isEmpty)
+                Button(isDetectingTempo ? "Detecting Tempo…" : "Detect Tempo") {
+                    onDetectTempo()
+                }
+                .disabled(isDetectingTempo || SongSectionDetector.analysisTracks(in: song).isEmpty)
                 Divider()
             }
             Button("Manage Groups…", action: onManageGroups)

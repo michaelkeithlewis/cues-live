@@ -20,6 +20,10 @@ struct SongFolderSetupSheet: View {
     @State private var keySelection: String
     @State private var confirmed: [SongFolderImporter.ImportRequest] = []
     @State private var didFinish = false
+    @State private var detectedBPMs: [UUID: Double] = [:]
+    @State private var failedDetections: Set<UUID> = []
+    /// The tempo text as loaded, so a detected tempo never overwrites one the user typed.
+    @State private var loadedBPMText: String
 
     private struct MeterPreset: Hashable {
         let numerator: Int
@@ -44,7 +48,9 @@ struct SongFolderSetupSheet: View {
         let first = previews[0]
         _index = State(initialValue: 0)
         _songName = State(initialValue: first.suggestedName)
-        _bpmText = State(initialValue: Self.formatBPM(first.bpm ?? TempoChange.defaultBPM))
+        let firstBPMText = Self.formatBPM(first.bpm ?? TempoChange.defaultBPM)
+        _bpmText = State(initialValue: firstBPMText)
+        _loadedBPMText = State(initialValue: firstBPMText)
         _selectedPreset = State(initialValue: Self.preset(for: first))
         _keySelection = State(initialValue: "")
     }
@@ -71,6 +77,17 @@ struct SongFolderSetupSheet: View {
 
     private var canContinue: Bool {
         !songName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && parsedBPM != nil
+            && !(isDetectingCurrentTempo && bpmText == loadedBPMText)
+    }
+
+    private func needsTempoDetection(_ preview: SongFolderImporter.Preview) -> Bool {
+        preview.bpm == nil && SongTempoDetector.isAvailable
+            && !SongTempoDetector.analysisURLs(fromStems: preview.trackURLs).isEmpty
+    }
+
+    private var isDetectingCurrentTempo: Bool {
+        let id = currentPreview.id
+        return needsTempoDetection(currentPreview) && detectedBPMs[id] == nil && !failedDetections.contains(id)
     }
 
     private var parsedBPM: Double? {
@@ -131,8 +148,8 @@ struct SongFolderSetupSheet: View {
                         .labelsHidden()
                     }
 
-                    if currentPreview.bpm != nil || currentPreview.timeSignatureNumerator != nil {
-                        Text("Tempo and meter were read from the Ableton set.")
+                    if let sourceNote {
+                        Text(sourceNote)
                             .font(.caption)
                             .foregroundStyle(AppColors.textTertiary)
                     }
@@ -162,9 +179,49 @@ struct SongFolderSetupSheet: View {
                 .onAppear {
                     songNameFocused = true
                 }
+                .task {
+                    await detectTempos()
+                }
             }
         }
         .interactiveDismissDisabled(true)
+    }
+
+    private var sourceNote: String? {
+        let preview = currentPreview
+        if preview.bpm != nil || preview.timeSignatureNumerator != nil {
+            return "Tempo and meter were read from the Ableton set."
+        }
+        if detectedBPMs[preview.id] != nil {
+            return "Tempo was detected from the audio."
+        }
+        if failedDetections.contains(preview.id) {
+            return "Couldn't detect a tempo. Enter it by hand."
+        }
+        return isDetectingCurrentTempo ? "Detecting tempo from the audio…" : nil
+    }
+
+    /// Fills each song's tempo from its stems when the folder has no Ableton set to read it from.
+    /// Runs through every folder up front so later songs are ready by the time they're shown.
+    private func detectTempos() async {
+        for preview in previews where needsTempoDetection(preview) {
+            let didAccess = preview.folderURL.startAccessingSecurityScopedResource()
+            let bpm = try? await SongTempoDetector.detectBPM(
+                from: SongTempoDetector.analysisURLs(fromStems: preview.trackURLs)
+            )
+            if didAccess {
+                preview.folderURL.stopAccessingSecurityScopedResource()
+            }
+            guard !Task.isCancelled else { return }
+            guard let bpm else {
+                failedDetections.insert(preview.id)
+                continue
+            }
+            detectedBPMs[preview.id] = bpm
+            if preview.id == currentPreview.id, bpmText == loadedBPMText {
+                bpmText = Self.formatBPM(bpm)
+            }
+        }
     }
 
     private func labeledField<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
@@ -216,7 +273,8 @@ struct SongFolderSetupSheet: View {
 
     private func loadPreview(_ preview: SongFolderImporter.Preview) {
         songName = preview.suggestedName
-        bpmText = Self.formatBPM(preview.bpm ?? TempoChange.defaultBPM)
+        loadedBPMText = Self.formatBPM(preview.bpm ?? TempoChange.defaultBPM)
+        bpmText = detectedBPMs[preview.id].map(Self.formatBPM) ?? loadedBPMText
         selectedPreset = Self.preset(for: preview)
         keySelection = ""
     }

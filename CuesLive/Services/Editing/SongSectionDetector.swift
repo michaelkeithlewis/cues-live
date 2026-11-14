@@ -7,7 +7,6 @@ import MusicUnderstanding
 enum SongSectionDetectorError: LocalizedError {
     case unavailable
     case noAudio
-    case mixFailed
     case noSectionsFound
 
     var errorDescription: String? {
@@ -16,8 +15,6 @@ enum SongSectionDetectorError: LocalizedError {
             return "Section detection needs macOS 27 or iPadOS 27."
         case .noAudio:
             return "Add audio tracks before detecting sections."
-        case .mixFailed:
-            return "Couldn't prepare the song audio for analysis."
         case .noSectionsFound:
             return "No sections were found in this song."
         }
@@ -53,7 +50,7 @@ enum SongSectionDetector {
         guard #available(macOS 27, iOS 27, *) else { throw SongSectionDetectorError.unavailable }
         guard !urls.isEmpty else { throw SongSectionDetectorError.noAudio }
 
-        let mix = try await mixedAsset(from: urls)
+        let mix = try await SongAnalysisAudio.mixedAsset(from: urls)
         defer { if let cleanupURL = mix.cleanupURL { try? FileManager.default.removeItem(at: cleanupURL) } }
 
         let session = try await MusicUnderstandingSession(asset: mix.asset)
@@ -85,50 +82,5 @@ enum SongSectionDetector {
         return kept.enumerated().map { index, start in
             ArrangementMarker(name: "Section \(index + 1)", startSeconds: start, sortOrder: index)
         }
-    }
-
-    // MARK: - Private
-
-    private struct MixedAsset {
-        let asset: AVURLAsset
-        let cleanupURL: URL?
-    }
-
-    /// One track is analyzed in place; several are summed into a temporary file so the analysis hears the full mix.
-    private static func mixedAsset(from urls: [URL]) async throws -> MixedAsset {
-        let options = [AVURLAssetPreferPreciseDurationAndTimingKey: true]
-        if urls.count == 1 {
-            return MixedAsset(asset: AVURLAsset(url: urls[0], options: options), cleanupURL: nil)
-        }
-
-        let composition = AVMutableComposition()
-        for url in urls {
-            let source = AVURLAsset(url: url)
-            guard let sourceTrack = try await source.loadTracks(withMediaType: .audio).first,
-                  let compositionTrack = composition.addMutableTrack(
-                      withMediaType: .audio,
-                      preferredTrackID: kCMPersistentTrackID_Invalid
-                  ) else { continue }
-            let duration = try await source.load(.duration)
-            try compositionTrack.insertTimeRange(
-                CMTimeRange(start: .zero, duration: duration),
-                of: sourceTrack,
-                at: .zero
-            )
-        }
-        guard !composition.tracks(withMediaType: .audio).isEmpty,
-              let export = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else {
-            throw SongSectionDetectorError.mixFailed
-        }
-
-        let outputURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("cues-section-analysis-\(UUID().uuidString).m4a")
-        do {
-            try await export.export(to: outputURL, as: .m4a)
-        } catch {
-            try? FileManager.default.removeItem(at: outputURL)
-            throw SongSectionDetectorError.mixFailed
-        }
-        return MixedAsset(asset: AVURLAsset(url: outputURL, options: options), cleanupURL: outputURL)
     }
 }

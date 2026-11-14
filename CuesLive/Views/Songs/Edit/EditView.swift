@@ -52,6 +52,8 @@ struct EditView: View {
     @State var importError: String?
     @State var isDetectingSections = false
     @State var sectionDetectionError: String?
+    @State var isDetectingTempo = false
+    @State var tempoDetectionError: String?
     @State var showingDetectSectionsConfirm = false
     @State var abletonImportSummary: String?
     @State var timelineZoom: CGFloat = 1
@@ -97,6 +99,11 @@ struct EditView: View {
             }
             .modifier(addTrackFlowModifier)
             .modifier(detectSectionsModifier)
+            .alert("Couldn’t Detect Tempo", isPresented: tempoDetectionAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(tempoDetectionError ?? "")
+            }
             .alert("Rename Track", isPresented: isRenamingTrack) {
                 TextField("Track name", text: $renameTrackName)
                 Button("Rename", action: applyTrackRename)
@@ -231,9 +238,11 @@ struct EditView: View {
             arrangementActions: arrangementActions,
             loopSectionIDs: loopSectionIDs,
             isDetectingSections: isDetectingSections,
+            isDetectingTempo: isDetectingTempo,
             onChangeKey: { activeSheet = .changeKey },
             onManageGroups: { activeSheet = .groupEditor },
             onDetectSections: requestDetectSections,
+            onDetectTempo: detectTempo,
             onImportAbleton: presentAbletonImporter,
             onAddMIDILane: { activeSheet = .midiDevicePicker },
             onBack: viewModel.followsSetlist ? nil : onBack,

@@ -600,6 +600,13 @@
 		1A8922C612BBE0C78BE1D3F9 /* LiveSongFolderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78440C85B578AD11AEB8A577 /* LiveSongFolderList.swift */; };
 		E86395016C528AC91CE38A1F /* LiveSongBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEF538CFA79A0C5E9F1E62 /* LiveSongBrowser.swift */; };
 		8B17E0070A8AE682AA9E9B14 /* LiveSongBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEF538CFA79A0C5E9F1E62 /* LiveSongBrowser.swift */; };
+		745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
+		D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
+		1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
+		BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
+		673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
+		6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
+		8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -942,6 +949,10 @@
 		61E758B74E47E3A66760EECE /* AppSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSegmentedPicker.swift; sourceTree = "<group>"; };
 		78440C85B578AD11AEB8A577 /* LiveSongFolderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSongFolderList.swift; sourceTree = "<group>"; };
 		87DEF538CFA79A0C5E9F1E62 /* LiveSongBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSongBrowser.swift; sourceTree = "<group>"; };
+		E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongAnalysisAudio.swift; sourceTree = "<group>"; };
+		7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetector.swift; sourceTree = "<group>"; };
+		35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TempoDetection.swift"; sourceTree = "<group>"; };
+		57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetectorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1241,6 +1252,7 @@
 		AA0000050000000000000011 /* CuesLiveTests */ = {
 			isa = PBXGroup;
 			children = (
+				57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */,
 				C7B482B39F990ECB74D8E2AD /* ScreenPresenceTests.swift */,
 				4F5240158AA03DFF00891BE0 /* SetlistLibraryStoreTests.swift */,
 				0464C4851DE00254630722E2 /* SongFolderStoreTests.swift */,
@@ -1505,6 +1517,8 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */,
+				E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */,
 				B7A689E2E3CD1BE86914752E /* TempoTrackLock.swift */,
 				AA0000020000000000000021 /* ArrangementTimelineMapper.swift */,
 				AA0000F20000000000000002 /* ClipEditing.swift */,
@@ -1551,6 +1565,7 @@
 		AA00000500000000000EDI01 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */,
 				E7B1FCA47ECD5301F3E7EA17 /* EditView+Zoom.swift */,
 				E010D899E4ADC12AC64F3DCD /* EditView+Sheets.swift */,
 				136AAB24A152D2941FE3A4AD /* EditSheet.swift */,
@@ -1712,6 +1727,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */,
+				1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */,
+				745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */,
 				E86395016C528AC91CE38A1F /* LiveSongBrowser.swift in Sources */,
 				4ECE26CD392668D1A2F65BD5 /* LiveSongFolderList.swift in Sources */,
 				1D7672AD7B36C2F0DB194CD4 /* AppSegmentedPicker.swift in Sources */,
@@ -1983,6 +2001,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */,
 				DB989B1DC6C02991C1F3053A /* ScreenPresenceTests.swift in Sources */,
 				C2168D62A6C3F6654D4516C2 /* SetlistLibraryStoreTests.swift in Sources */,
 				E408F2BAA745CCD2CE0F1FEE /* SongFolderStoreTests.swift in Sources */,
@@ -2040,6 +2059,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */,
+				BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */,
+				D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */,
 				8B17E0070A8AE682AA9E9B14 /* LiveSongBrowser.swift in Sources */,
 				1A8922C612BBE0C78BE1D3F9 /* LiveSongFolderList.swift in Sources */,
 				17DF05C9181EF73D264521FE /* AppSegmentedPicker.swift in Sources */,

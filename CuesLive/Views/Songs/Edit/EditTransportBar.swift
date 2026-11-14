@@ -8,9 +8,11 @@ struct EditTransportBar<Chrome: View>: View {
     let arrangementActions: ArrangementSectionActions
     let loopSectionIDs: Set<UUID>
     let isDetectingSections: Bool
+    let isDetectingTempo: Bool
     let onChangeKey: () -> Void
     let onManageGroups: () -> Void
     let onDetectSections: () -> Void
+    let onDetectTempo: () -> Void
     let onImportAbleton: () -> Void
     let onAddMIDILane: () -> Void
     let onClearMarkerCue: () -> Void
@@ -158,6 +160,13 @@ struct EditTransportBar<Chrome: View>: View {
                     Label(isDetectingSections ? "Detecting Sections…" : "Detect Sections", systemImage: "wand.and.stars")
                 }
                 .disabled(isDetectingSections || SongSectionDetector.analysisTracks(in: song).isEmpty)
+
+                Button {
+                    onDetectTempo()
+                } label: {
+                    Label(isDetectingTempo ? "Detecting Tempo…" : "Detect Tempo", systemImage: "metronome")
+                }
+                .disabled(isDetectingTempo || SongSectionDetector.analysisTracks(in: song).isEmpty)
             }
 
             Button("Manage Groups…", action: onManageGroups)
