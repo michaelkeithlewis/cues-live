@@ -8,7 +8,10 @@ struct TrackLaneHeaderView: View {
     let groups: [TrackGroup]
     let onSelect: (PointerModifiers) -> Void
     let onMixChange: () -> Void
-    let onGroupChange: () -> Void
+    /// How many tracks a group assignment from this header moves: the whole selection when this
+    /// track is part of it, otherwise just this track.
+    let groupTargetCount: Int
+    let onAssignGroup: (TrackGroup?) -> Void
     let onManageGroups: () -> Void
     let onRename: () -> Void
     let onDelete: () -> Void
@@ -82,6 +85,9 @@ struct TrackLaneHeaderView: View {
             Button("Rename") {
                 onRename()
             }
+            Menu(groupTargetCount > 1 ? "Move \(groupTargetCount) Tracks to Group" : "Move to Group") {
+                groupOptions
+            }
             Button("Delete", role: .destructive) {
                 onDelete()
             }
@@ -99,25 +105,28 @@ struct TrackLaneHeaderView: View {
         audioEngine.applyLiveTrackMix(id: track.id, volume: Float(track.volume), pan: Float(track.pan))
     }
 
+    @ViewBuilder
+    private var groupOptions: some View {
+        Button("No Group") {
+            onAssignGroup(nil)
+        }
+
+        ForEach(groups) { group in
+            Button(group.name) {
+                onAssignGroup(group)
+            }
+        }
+
+        Divider()
+
+        Button("Manage Groups…") {
+            onManageGroups()
+        }
+    }
+
     private var groupPicker: some View {
         Menu {
-            Button("No Group") {
-                track.group = nil
-                onGroupChange()
-            }
-
-            ForEach(groups) { group in
-                Button(group.name) {
-                    track.group = group
-                    onGroupChange()
-                }
-            }
-
-            Divider()
-
-            Button("Manage Groups…") {
-                onManageGroups()
-            }
+            groupOptions
         } label: {
             HStack(spacing: 4) {
                 Text(track.group?.name ?? "No Group")

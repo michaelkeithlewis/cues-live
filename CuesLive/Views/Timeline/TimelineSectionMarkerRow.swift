@@ -5,7 +5,8 @@ import AppKit
 
 /// Sections on the marker ruler, drawn as square-cornered blocks. Click a block to select it.
 /// Dragging an edge of the selected block moves only that edge; dragging the boundary between two
-/// unselected blocks moves both. Right-click the row to add, rename, loop, or remove a marker.
+/// unselected blocks moves both. Double-click adds a marker; right-click the row to add, rename,
+/// loop, or remove one.
 struct TimelineSectionMarkerRowView: View {
     let sections: [SongSection]
     let duration: TimeInterval
@@ -145,10 +146,15 @@ struct TimelineSectionMarkerRowView: View {
             .contentShape(Rectangle())
             .modifier(SectionMarkerPointerTracker(x: $pointerX))
             .gesture(
-                SpatialTapGesture()
+                SpatialTapGesture(count: 2)
                     .onEnded { event in
-                        selectedSectionID = shown.section(atTimeline: timelineTime(at: event.location.x))?.id
+                        onAddSection(timelineTime(at: event.location.x))
                     }
+                    .exclusively(before: SpatialTapGesture()
+                        .onEnded { event in
+                            selectedSectionID = shown.section(atTimeline: timelineTime(at: event.location.x))?.id
+                        }
+                    )
             )
             .contextMenu {
                 Button("Add Section Marker") {

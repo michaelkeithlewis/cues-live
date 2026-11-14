@@ -315,4 +315,20 @@ extension EditView {
             viewModel.loadSong(context: modelContext)
         }
     }
+
+    /// The tracks a group change from `track`'s header applies to: the selection when `track` is in it.
+    func groupTargets(from track: AudioTrack) -> [AudioTrack] {
+        guard selectedTrackIDs.contains(track.id) else { return [track] }
+        return song.sortedTracks.filter { selectedTrackIDs.contains($0.id) }
+    }
+
+    func assignGroup(_ group: TrackGroup?, from track: AudioTrack) {
+        let targets = groupTargets(from: track)
+        performUndoableChange(targets.count > 1 ? "Assign Groups" : "Assign Group") {
+            for target in targets {
+                target.group = group
+            }
+            viewModel.updateGroup(for: track, context: modelContext)
+        }
+    }
 }

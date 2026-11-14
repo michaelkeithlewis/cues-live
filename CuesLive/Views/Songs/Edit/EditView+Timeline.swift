@@ -471,10 +471,9 @@ extension EditView {
                             viewModel.updateMix(for: track, context: modelContext)
                         }
                     },
-                    onGroupChange: {
-                        performUndoableChange("Assign Group") {
-                            viewModel.updateGroup(for: track, context: modelContext)
-                        }
+                    groupTargetCount: groupTargets(from: track).count,
+                    onAssignGroup: { group in
+                        assignGroup(group, from: track)
                     },
                     onManageGroups: {
                         activeSheet = .groupEditor
