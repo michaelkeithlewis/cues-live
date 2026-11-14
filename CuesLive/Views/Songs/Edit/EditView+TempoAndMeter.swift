@@ -25,7 +25,7 @@ extension EditView {
         tempoChanges.normalizedEnsuringInitialMarker(defaultBPM: song.bpm ?? TempoChange.defaultBPM)
     }
 
-    private func persistTempoChanges() {
+    func persistTempoChanges() {
         let normalized = normalizedTempoChanges
         tempoChanges = normalized
         if song.bpm != normalized.referenceBPM {
