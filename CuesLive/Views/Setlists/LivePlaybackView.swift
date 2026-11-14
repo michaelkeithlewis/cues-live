@@ -382,6 +382,9 @@ struct LivePlaybackView: View {
                 }
                 handleSongEditorDismissed(newValue)
             }
+            .onChange(of: allSongs.map(\.id)) { _, remainingIDs in
+                closeEditorIfSongDeleted(remainingIDs)
+            }
             .liveInputMappingSession(arePlaybackActionsEnabled: songToEditID == nil) { action in
                 handleMappedLiveAction(action)
             }
@@ -516,6 +519,17 @@ struct LivePlaybackView: View {
     private func songEditorDestinationContent(for setlist: Setlist) -> some View {
         if let songToEditID, let song = songForEditing(id: songToEditID) {
             SongDetailView(song: song)
+        }
+    }
+
+    /// Deleting the song being edited backs out to the setlist, and the editor window stops showing it.
+    private func closeEditorIfSongDeleted(_ remainingIDs: [UUID]) {
+        let remaining = Set(remainingIDs)
+        if let songToEditID, !remaining.contains(songToEditID) {
+            self.songToEditID = nil
+        }
+        if let pinnedSongID = SetlistEditorLink.shared.pinnedSongID, !remaining.contains(pinnedSongID) {
+            SetlistEditorLink.shared.followSetlist()
         }
     }
 
