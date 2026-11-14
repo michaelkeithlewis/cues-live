@@ -13,7 +13,6 @@ enum SongFolderImporter {
         let id: UUID
         let folderURL: URL
         let suggestedName: String
-        let trackURLs: [URL]
         let bpm: Double?
         let timeSignatureNumerator: Int?
         let timeSignatureDenominator: Int?
@@ -108,7 +107,6 @@ enum SongFolderImporter {
             id: UUID(),
             folderURL: folderURL,
             suggestedName: scan.suggestedName,
-            trackURLs: scan.trackURLs,
             bpm: bpm,
             timeSignatureNumerator: numerator,
             timeSignatureDenominator: denominator

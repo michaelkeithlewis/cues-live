@@ -14,6 +14,7 @@ extension LivePlaybackView {
             defer { isImportingSongFolder = false }
 
             var importedSongs: [Song] = []
+            var songsNeedingTempo: [Song] = []
             var summaries: [String] = []
             var failureMessages: [String] = []
 
@@ -25,6 +26,9 @@ extension LivePlaybackView {
                         context: modelContext
                     )
                     importedSongs.append(importResult.song)
+                    if importResult.bpm == nil {
+                        songsNeedingTempo.append(importResult.song)
+                    }
                     summaries.append(SongFolderImporter.summaryMessage(for: importResult))
                 } catch {
                     let label = request.settings.name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -35,6 +39,8 @@ extension LivePlaybackView {
                     )
                 }
             }
+
+            SongTempoAutoDetector.shared.enqueue(songsNeedingTempo, context: modelContext)
 
             if let folder {
                 do {

@@ -631,10 +631,10 @@
 		673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
 		6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
 		8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */; };
-		9F53AA7656596083A011C7FC /* SongFolderAutoSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA496D8DCFF5CE68A69211 /* SongFolderAutoSetup.swift */; };
-		B0B366C63FC46D3EAFF71CB3 /* SongFolderAutoSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA496D8DCFF5CE68A69211 /* SongFolderAutoSetup.swift */; };
 		DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
 		05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
+		2035D306E6F7DB0A020C604E /* SongTempoAutoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */; };
+		85D0CD463494EBB491377424 /* SongTempoAutoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -995,8 +995,8 @@
 		7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetector.swift; sourceTree = "<group>"; };
 		35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TempoDetection.swift"; sourceTree = "<group>"; };
 		57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetectorTests.swift; sourceTree = "<group>"; };
-		4EDA496D8DCFF5CE68A69211 /* SongFolderAutoSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFolderAutoSetup.swift; sourceTree = "<group>"; };
 		54195388B26C5A72B4B06186 /* SongSetupSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSetupSheet.swift; sourceTree = "<group>"; };
+		DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoAutoDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1541,7 +1541,6 @@
 		AA00000500000000000BB008 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				4EDA496D8DCFF5CE68A69211 /* SongFolderAutoSetup.swift */,
 				30CA041616C481DA95A3914E /* SetlistLibraryStore.swift */,
 				7D86991441CF2FD749424866 /* SongFolderStore.swift */,
 				98F541E8045623589A88CC1F /* SongLibraryStore.swift */,
@@ -1571,6 +1570,7 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */,
 				7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */,
 				E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */,
 				E6BE0AD74E302CEAF5DF9217 /* ClipEditing+Fades.swift */,
@@ -1787,8 +1787,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2035D306E6F7DB0A020C604E /* SongTempoAutoDetector.swift in Sources */,
 				DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */,
-				9F53AA7656596083A011C7FC /* SongFolderAutoSetup.swift in Sources */,
 				673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */,
 				1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */,
 				745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */,
@@ -2135,8 +2135,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85D0CD463494EBB491377424 /* SongTempoAutoDetector.swift in Sources */,
 				05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */,
-				B0B366C63FC46D3EAFF71CB3 /* SongFolderAutoSetup.swift in Sources */,
 				6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */,
 				BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */,
 				D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */,

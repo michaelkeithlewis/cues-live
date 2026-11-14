@@ -21,6 +21,17 @@ extension EditView {
         }
     }
 
+    /// Takes the tempo the background detector found for this song while it was open.
+    func adoptBackgroundTempo() {
+        let openingBPM = normalizedTempoChanges.first(where: \.isOrigin)?.bpm ?? normalizedTempoChanges.referenceBPM
+        guard let bpm = SongTempoAutoDetector.shared.takeEditorResult(for: song.id, currentOpeningBPM: openingBPM) else {
+            return
+        }
+        performUndoableChange("Detect Tempo") {
+            applyDetectedTempo(bpm)
+        }
+    }
+
     private func applyDetectedTempo(_ bpm: Double) {
         var changes = normalizedTempoChanges
         guard let index = changes.firstIndex(where: \.isOrigin) else { return }

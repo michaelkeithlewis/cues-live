@@ -12,7 +12,7 @@ extension SongLibraryPanel {
             VStack(spacing: AppSpacing.sm) {
                 ProgressView()
                     .tint(AppColors.accent)
-                Text(isPreparingFolderSetup ? "Reading song folder and tempo…" : "Importing song folder…")
+                Text(isPreparingFolderSetup ? "Reading song folder…" : "Importing song folder…")
                     .font(.headline)
                     .foregroundStyle(AppColors.textPrimary)
             }
@@ -84,6 +84,21 @@ extension SongLibraryPanel {
     }
     #endif
 
+    /// Imports take the folder's name and any Ableton tempo and meter as they are. Tempo detection
+    /// runs after the import, and "Song Setup…" changes any of it later.
+    private static func importRequest(for preview: SongFolderImporter.Preview) -> SongFolderImporter.ImportRequest {
+        SongFolderImporter.ImportRequest(
+            folderURL: preview.folderURL,
+            settings: SongFolderImporter.ImportSettings(
+                name: preview.suggestedName,
+                bpm: preview.bpm ?? TempoChange.defaultBPM,
+                timeSignatureNumerator: preview.timeSignatureNumerator ?? TimeSignatureChange.defaultNumerator,
+                timeSignatureDenominator: preview.timeSignatureDenominator ?? TimeSignatureChange.defaultDenominator,
+                baseKeyRaw: nil
+            )
+        )
+    }
+
     private func queueFolderImport(_ folderURLs: [URL]) {
         guard !isBusy, !folderURLs.isEmpty else { return }
 
@@ -100,7 +115,7 @@ extension SongLibraryPanel {
                     let preview = try await Task.detached(priority: .userInitiated) {
                         try SongFolderImporter.previewFolder(at: url)
                     }.value
-                    requests.append(await SongFolderAutoSetup.request(for: preview))
+                    requests.append(Self.importRequest(for: preview))
                 } catch {
                     failures.append(
                         urls.count == 1
