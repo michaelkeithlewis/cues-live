@@ -2,8 +2,14 @@ import XCTest
 @testable import CuesLive
 
 final class SongTempoDetectorTests: XCTestCase {
-    func testClickStemIsAnalyzedAlone() {
+    func testClickAndGuideStemsAreLeftOutOfTheMix() {
         let urls = ["Drums.wav", "Bass.wav", "Click.wav", "Guide.wav"].map { URL(fileURLWithPath: "/song/\($0)") }
+
+        XCTAssertEqual(SongTempoDetector.analysisURLs(fromStems: urls).map(\.lastPathComponent), ["Drums.wav", "Bass.wav"])
+    }
+
+    func testClickIsUsedWhenItIsTheOnlyAudio() {
+        let urls = [URL(fileURLWithPath: "/song/Click.wav")]
 
         XCTAssertEqual(SongTempoDetector.analysisURLs(fromStems: urls).map(\.lastPathComponent), ["Click.wav"])
     }

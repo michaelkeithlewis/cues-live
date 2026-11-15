@@ -25,14 +25,14 @@ enum SongTempoDetectorError: LocalizedError {
 enum SongTempoDetector {
     static var isAvailable: Bool { SongSectionDetector.canAnalyzeStructure }
 
-    /// Audio worth analyzing from an imported folder. A click stem states the tempo outright, so it is
-    /// analyzed alone; otherwise every stem but spoken guides goes into the mix.
+    /// Audio worth analyzing from an imported folder: the music, without click or spoken guide.
+    /// The analysis is trained on music, and a click on its own reads as a third of its tempo.
     static func analysisURLs(fromStems urls: [URL]) -> [URL] {
-        let named = urls.map { ($0, $0.deletingPathExtension().lastPathComponent.lowercased()) }
-        if let click = named.first(where: { $0.1.contains("click") }) {
-            return [click.0]
+        let music = urls.filter { url in
+            let name = url.deletingPathExtension().lastPathComponent.lowercased()
+            return !name.contains("click") && !name.contains("guide")
         }
-        return named.filter { !$0.1.contains("guide") }.map(\.0)
+        return music.isEmpty ? urls : music
     }
 
     static func detectBPM(from urls: [URL]) async throws -> Double {
