@@ -30,7 +30,8 @@ enum AudioTimelineMath {
 
 enum TimelineLayout {
     static let basePixelsPerSecond: CGFloat = 6
-    static let maxZoom: CGFloat = 8
+    /// 6,000 points a second, a handful of samples per point, deep enough to place edits on the waveform.
+    static let maxZoom: CGFloat = 1_000
     static let minimumContentWidth: CGFloat = 320
 
     /// Most zoomed-out level: entire timeline fits in the visible viewport when possible.

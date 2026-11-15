@@ -137,6 +137,7 @@ struct EditStemTimelineView<
                     ) {
                         timeRuler()
                             .frame(width: timelineDisplayWidth, height: TimelineLayout.rulerHeight)
+                            .environment(\.timelineScrollModel, scrollModel)
                     }
                 }
                 .overlay(alignment: .top) {
