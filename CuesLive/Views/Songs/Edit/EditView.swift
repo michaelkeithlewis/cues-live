@@ -107,13 +107,6 @@ struct EditView: View {
             } message: {
                 Text(tempoDetectionError ?? "")
             }
-            .alert("Rename Track", isPresented: isRenamingTrack) {
-                TextField("Track name", text: $renameTrackName)
-                Button("Rename", action: applyTrackRename)
-                Button("Cancel", role: .cancel) {
-                    trackPendingRename = nil
-                }
-            }
             #if os(macOS)
             .toolbar { editToolbar }
             .appLockToolbarDisplayMode()
@@ -189,13 +182,6 @@ struct EditView: View {
             .task(id: cuedSectionID) {
                 await flashCuedSection()
             }
-    }
-
-    private var isRenamingTrack: Binding<Bool> {
-        Binding(
-            get: { trackPendingRename != nil },
-            set: { if !$0 { trackPendingRename = nil } }
-        )
     }
 
     private func handleAppear() {

@@ -286,6 +286,10 @@ extension EditView {
             return
         }
 
+        guard trimmed != track.displayName else {
+            trackPendingRename = nil
+            return
+        }
         performUndoableChange("Rename Track") {
             track.displayName = trimmed
             try? modelContext.save()

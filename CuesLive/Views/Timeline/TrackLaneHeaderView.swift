@@ -14,11 +14,18 @@ struct TrackLaneHeaderView: View {
     let onAssignGroup: (TrackGroup?) -> Void
     let onManageGroups: () -> Void
     let onRename: () -> Void
+    /// While true the name is an editable field; Return or clicking away keeps the new name, Esc drops it.
+    let isRenaming: Bool
+    @Binding var renameText: String
+    let onCommitRename: () -> Void
+    let onCancelRename: () -> Void
     let onBatchRename: () -> Void
     let onDelete: () -> Void
     /// Drag distance downward from the press, in points.
     let onResize: (CGFloat) -> Void
     let onResizeEnded: () -> Void
+
+    @FocusState private var isNameFieldFocused: Bool
 
     private var trackColors: (header: Color, body: Color) {
         TrackGroupPalette.colors(for: track.group)
@@ -26,16 +33,7 @@ struct TrackLaneHeaderView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(track.displayName)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(isSelected ? AppColors.textPrimary : AppColors.textSecondary)
-                .lineLimit(1)
-                .truncationMode(.tail)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .contentShape(Rectangle())
-                .simultaneousGesture(TapGesture(count: 2).onEnded { onRename() })
+            nameLabel
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 6) {
@@ -106,6 +104,40 @@ struct TrackLaneHeaderView: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: 6)
                 .offset(y: 2)
+        }
+    }
+
+    @ViewBuilder
+    private var nameLabel: some View {
+        if isRenaming {
+            TextField("Track name", text: $renameText)
+                .textFieldStyle(.plain)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(AppColors.textPrimary)
+                .focused($isNameFieldFocused)
+                .onSubmit(onCommitRename)
+                .onKeyPress(.escape) {
+                    onCancelRename()
+                    return .handled
+                }
+                .onAppear { isNameFieldFocused = true }
+                .onChange(of: isNameFieldFocused) { _, focused in
+                    if !focused { onCommitRename() }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(Color.dawMixButtonBackground)
+        } else {
+            Text(track.displayName)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(isSelected ? AppColors.textPrimary : AppColors.textSecondary)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .contentShape(Rectangle())
+                .simultaneousGesture(TapGesture(count: 2).onEnded { onRename() })
         }
     }
 

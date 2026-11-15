@@ -481,6 +481,10 @@ extension EditView {
                     onRename: {
                         beginRenameTrack(track)
                     },
+                    isRenaming: trackPendingRename?.id == track.id,
+                    renameText: $renameTrackName,
+                    onCommitRename: applyTrackRename,
+                    onCancelRename: { trackPendingRename = nil },
                     onBatchRename: {
                         activeSheet = .batchRenameTracks(groupTargets(from: track).map(\.id))
                     },
