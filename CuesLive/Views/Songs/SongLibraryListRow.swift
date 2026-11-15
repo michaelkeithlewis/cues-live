@@ -9,8 +9,8 @@ struct SongLibraryListRow: View {
 
     private var details: String {
         var parts: [String] = []
-        if SongTempoAutoDetector.shared.pendingSongIDs.contains(song.id) {
-            parts.append("Detecting tempo…")
+        if SongImportAnalyzer.shared.pendingSongIDs.contains(song.id) {
+            parts.append("Analyzing…")
         } else if let bpm = song.bpm {
             parts.append("\(Int(bpm.rounded())) BPM")
         }

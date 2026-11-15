@@ -14,7 +14,6 @@ extension LivePlaybackView {
             defer { isImportingSongFolder = false }
 
             var importedSongs: [Song] = []
-            var songsNeedingTempo: [Song] = []
             var summaries: [String] = []
             var failureMessages: [String] = []
 
@@ -26,9 +25,11 @@ extension LivePlaybackView {
                         context: modelContext
                     )
                     importedSongs.append(importResult.song)
-                    if importResult.bpm == nil {
-                        songsNeedingTempo.append(importResult.song)
-                    }
+                    // An Ableton set already gave this song its tempo or sections.
+                    var needs: SongImportAnalyzer.Needs = []
+                    if importResult.bpm == nil { needs.insert(.tempo) }
+                    if importResult.sectionCount == 0 { needs.insert(.sections) }
+                    SongImportAnalyzer.shared.enqueue(importResult.song, needs: needs, context: modelContext)
                     summaries.append(SongFolderImporter.summaryMessage(for: importResult))
                 } catch {
                     let label = request.settings.name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -39,8 +40,6 @@ extension LivePlaybackView {
                     )
                 }
             }
-
-            SongTempoAutoDetector.shared.enqueue(songsNeedingTempo, context: modelContext)
 
             if let folder {
                 do {

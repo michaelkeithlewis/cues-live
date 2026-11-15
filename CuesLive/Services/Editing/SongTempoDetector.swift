@@ -23,7 +23,7 @@ enum SongTempoDetectorError: LocalizedError {
 
 /// Finds a song's tempo with Apple's Music Understanding framework.
 enum SongTempoDetector {
-    static var isAvailable: Bool { SongSectionDetector.isAvailable }
+    static var isAvailable: Bool { SongSectionDetector.canAnalyzeStructure }
 
     /// Audio worth analyzing from an imported folder. A click stem states the tempo outright, so it is
     /// analyzed alone; otherwise every stem but spoken guides goes into the mix.

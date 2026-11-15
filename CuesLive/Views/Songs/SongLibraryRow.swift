@@ -35,7 +35,7 @@ struct SongLibraryRow: View {
     }
 
     private var tempoText: String {
-        if SongTempoAutoDetector.shared.pendingSongIDs.contains(song.id) {
+        if SongImportAnalyzer.shared.pendingSongIDs.contains(song.id) {
             return "…"
         }
         return song.bpm.map { "\(Int($0.rounded()))" } ?? "—"

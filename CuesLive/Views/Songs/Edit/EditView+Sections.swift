@@ -142,17 +142,21 @@ extension EditView {
 
     private func detectSections() {
         guard !isDetectingSections else { return }
-        let urls = SongSectionDetector.analysisTracks(in: song)
-            .compactMap { FileStore.trackURL(for: song, track: $0) }
+        let sources = SongSectionDetector.sources(for: song)
         let duration = songDuration
+        let measureStarts = SongGuideCueReader.measureStarts(
+            tempoChanges: normalizedTempoChanges,
+            timeSignatureChanges: normalizedTimeSignatureChanges,
+            through: duration
+        )
         isDetectingSections = true
 
         Task {
             defer { isDetectingSections = false }
             do {
-                let starts = try await SongSectionDetector.detectSectionStarts(from: urls)
-                let detected = SongSectionDetector.markers(
-                    fromSectionStarts: starts,
+                let detected = try await SongSectionDetector.detectSections(
+                    sources,
+                    measureStarts: measureStarts,
                     songDuration: duration
                 )
                 guard detected.count > 1 else { throw SongSectionDetectorError.noSectionsFound }
@@ -166,7 +170,7 @@ extension EditView {
     }
 
     /// Replaces every marker. Clips are untouched.
-    private func applyDetectedSections(_ detected: [ArrangementMarker]) {
+    func applyDetectedSections(_ detected: [ArrangementMarker]) {
         clearMarkerCue()
         timeline.markers = detected
         persistProjectState()

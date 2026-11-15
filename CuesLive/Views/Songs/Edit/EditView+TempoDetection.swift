@@ -21,14 +21,20 @@ extension EditView {
         }
     }
 
-    /// Takes the tempo the background detector found for this song while it was open.
-    func adoptBackgroundTempo() {
+    /// Takes what the import analysis found for this song while it was open. A tempo or sections
+    /// changed by hand in the meantime are kept.
+    func adoptBackgroundAnalysis() {
+        guard let result = SongImportAnalyzer.shared.takeEditorResult(for: song.id) else { return }
         let openingBPM = normalizedTempoChanges.first(where: \.isOrigin)?.bpm ?? normalizedTempoChanges.referenceBPM
-        guard let bpm = SongTempoAutoDetector.shared.takeEditorResult(for: song.id, currentOpeningBPM: openingBPM) else {
-            return
+        if let bpm = result.bpm, openingBPM == result.importedBPM {
+            performUndoableChange("Detect Tempo") {
+                applyDetectedTempo(bpm)
+            }
         }
-        performUndoableChange("Detect Tempo") {
-            applyDetectedTempo(bpm)
+        if let sections = result.sections, timeline.markers.count <= 1 {
+            performUndoableChange("Detect Sections") {
+                applyDetectedSections(sections)
+            }
         }
     }
 

@@ -157,8 +157,10 @@ struct EditTransportBar<Chrome: View>: View {
                 } label: {
                     Label(isDetectingSections ? "Detecting Sections…" : "Detect Sections", systemImage: "wand.and.stars")
                 }
-                .disabled(isDetectingSections || SongSectionDetector.analysisTracks(in: song).isEmpty)
+                .disabled(isDetectingSections || !SongSectionDetector.canDetect(in: song))
+            }
 
+            if SongTempoDetector.isAvailable {
                 Button {
                     onDetectTempo()
                 } label: {

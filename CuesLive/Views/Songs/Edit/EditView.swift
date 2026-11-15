@@ -152,11 +152,11 @@ struct EditView: View {
         focusableEditor
             .onAppear(perform: handleAppear)
             .onDisappear {
-                SongTempoAutoDetector.shared.endEditing(song.id)
+                SongImportAnalyzer.shared.endEditing(song.id)
             }
-            .onChange(of: SongTempoAutoDetector.shared.editorResults[song.id]) { _, result in
+            .onChange(of: SongImportAnalyzer.shared.editorResults[song.id]) { _, result in
                 guard result != nil else { return }
-                adoptBackgroundTempo()
+                adoptBackgroundAnalysis()
             }
             .onReceive(NotificationCenter.default.publisher(for: .outputRoutingDidChange)) { _ in
                 viewModel.applyOutputRoutingChange()
@@ -197,8 +197,8 @@ struct EditView: View {
 
     private func handleAppear() {
         isTimelineFocused = true
-        SongTempoAutoDetector.shared.beginEditing(song.id)
-        adoptBackgroundTempo()
+        SongImportAnalyzer.shared.beginEditing(song.id)
+        adoptBackgroundAnalysis()
         tempoChanges = normalizedTempoChanges
         timeSignatureChanges = normalizedTimeSignatureChanges
         viewModel.syncTempoMap(tempoChanges, timeSignatureChanges: timeSignatureChanges)

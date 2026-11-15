@@ -209,11 +209,15 @@ struct EditSongToolbarContent: ToolbarContent {
                 Button(isDetectingSections ? "Detecting Sections…" : "Detect Sections") {
                     onDetectSections()
                 }
-                .disabled(isDetectingSections || SongSectionDetector.analysisTracks(in: song).isEmpty)
+                .disabled(isDetectingSections || !SongSectionDetector.canDetect(in: song))
+            }
+            if SongTempoDetector.isAvailable {
                 Button(isDetectingTempo ? "Detecting Tempo…" : "Detect Tempo") {
                     onDetectTempo()
                 }
                 .disabled(isDetectingTempo || SongSectionDetector.analysisTracks(in: song).isEmpty)
+            }
+            if SongSectionDetector.isAvailable {
                 Divider()
             }
             Button("Manage Groups…", action: onManageGroups)

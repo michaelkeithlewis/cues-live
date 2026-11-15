@@ -633,8 +633,18 @@
 		8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */; };
 		DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
 		05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
-		2035D306E6F7DB0A020C604E /* SongTempoAutoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */; };
-		85D0CD463494EBB491377424 /* SongTempoAutoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */; };
+		8B01DAFD97A218D4F248ED0B /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
+		4A594009640854AB943E58EC /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
+		438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
+		958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
+		8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */; };
+		2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */; };
+		D4276E8E44D65FE83C1EEF87 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */; };
+		B39B152AAB5FBD59743C1E68 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */; };
+		59BFE2CE68ACEA87FEF188EC /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */; };
+		CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */; };
+		18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */; };
+		3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -996,7 +1006,13 @@
 		35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TempoDetection.swift"; sourceTree = "<group>"; };
 		57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetectorTests.swift; sourceTree = "<group>"; };
 		54195388B26C5A72B4B06186 /* SongSetupSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSetupSheet.swift; sourceTree = "<group>"; };
-		DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoAutoDetector.swift; sourceTree = "<group>"; };
+		C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongImportAnalyzer.swift; sourceTree = "<group>"; };
+		8B09FA646039349AF005A979 /* SongGuideCueReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReader.swift; sourceTree = "<group>"; };
+		311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceTranscriber.swift; sourceTree = "<group>"; };
+		4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabeler.swift; sourceTree = "<group>"; };
+		FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionProfiler.swift; sourceTree = "<group>"; };
+		084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabelerTests.swift; sourceTree = "<group>"; };
+		F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReaderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1300,6 +1316,8 @@
 		AA0000050000000000000011 /* CuesLiveTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */,
+				084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */,
 				57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */,
 				6AF0B056D1FC70762C297535 /* SongTimelineTests.swift */,
 				9E53DE72A602EA0FA2BEE6B7 /* TimelineTrailingSpaceTests.swift */,
@@ -1570,7 +1588,11 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
-				DD0D42A9C94AA5CF8DD788B0 /* SongTempoAutoDetector.swift */,
+				FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */,
+				4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */,
+				311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */,
+				8B09FA646039349AF005A979 /* SongGuideCueReader.swift */,
+				C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */,
 				7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */,
 				E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */,
 				E6BE0AD74E302CEAF5DF9217 /* ClipEditing+Fades.swift */,
@@ -1787,7 +1809,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2035D306E6F7DB0A020C604E /* SongTempoAutoDetector.swift in Sources */,
+				59BFE2CE68ACEA87FEF188EC /* SongSectionProfiler.swift in Sources */,
+				D4276E8E44D65FE83C1EEF87 /* SongSectionLabeler.swift in Sources */,
+				8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */,
+				438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */,
+				8B01DAFD97A218D4F248ED0B /* SongImportAnalyzer.swift in Sources */,
 				DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */,
 				673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */,
 				1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */,
@@ -2073,6 +2099,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */,
+				18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */,
 				8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */,
 				ABF4108669D7E227F40F28E7 /* SongTimelineTests.swift in Sources */,
 				D3638EC6FE73FC0503AD6FC8 /* TimelineTrailingSpaceTests.swift in Sources */,
@@ -2135,7 +2163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D0CD463494EBB491377424 /* SongTempoAutoDetector.swift in Sources */,
+				CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */,
+				B39B152AAB5FBD59743C1E68 /* SongSectionLabeler.swift in Sources */,
+				2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */,
+				958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */,
+				4A594009640854AB943E58EC /* SongImportAnalyzer.swift in Sources */,
 				05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */,
 				6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */,
 				BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */,
