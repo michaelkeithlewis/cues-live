@@ -211,7 +211,7 @@ extension EditView {
             isPlaying: audioEngine.isPlaying,
             onCueSection: cueSection,
             onToggleLoopSection: toggleLoopSection,
-            onAddSection: addSection,
+            onAddSection: { addSection(at: $0) },
             onRenameSection: beginRenameSection,
             onRemoveMarker: removeMarker,
             previewSections: previewSections(_:),
