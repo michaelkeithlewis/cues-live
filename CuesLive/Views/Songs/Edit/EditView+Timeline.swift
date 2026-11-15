@@ -481,6 +481,9 @@ extension EditView {
                     onRename: {
                         beginRenameTrack(track)
                     },
+                    onBatchRename: {
+                        activeSheet = .batchRenameTracks(groupTargets(from: track).map(\.id))
+                    },
                     onDelete: {
                         deleteAudioTrack(track)
                     },

@@ -645,6 +645,17 @@
 		CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */; };
 		18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */; };
 		3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */; };
+		C04A326E195FB42815C1291D /* MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */; };
+		B83117A0EB0B5508E8560616 /* MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */; };
+		D1C30AD2936190D5EE2F37E1 /* MarkerQuickFindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */; };
+		9C3AC3070618E13A2083689F /* MarkerQuickFindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */; };
+		0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
+		BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
+		AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
+		FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
+		B911006680B80CFAAC9A3B03 /* TrackBatchRenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */; };
+		4B1D3707971288484D8EE121 /* TrackBatchRenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */; };
+		58F3A2353A36E045FCBACBBC /* TrackBatchRenameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1013,6 +1024,12 @@
 		FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionProfiler.swift; sourceTree = "<group>"; };
 		084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabelerTests.swift; sourceTree = "<group>"; };
 		F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReaderTests.swift; sourceTree = "<group>"; };
+		71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerQuickFind.swift; sourceTree = "<group>"; };
+		E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerQuickFindView.swift; sourceTree = "<group>"; };
+		3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+MarkerQuickFind.swift"; sourceTree = "<group>"; };
+		93EB56020014078F6A7845F6 /* TrackBatchRename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRename.swift; sourceTree = "<group>"; };
+		6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRenameSheet.swift; sourceTree = "<group>"; };
+		74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRenameTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1118,6 +1135,7 @@
 		AA0000050000000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				93EB56020014078F6A7845F6 /* TrackBatchRename.swift */,
 				02D223A4A564A9010DE83B56 /* SongTimeline+SectionEdges.swift */,
 				5CA344C61EB87CA08DBB1AAB /* ClipFadeShape.swift */,
 				01574BA9D3BCC2D207BF662B /* ClipFade.swift */,
@@ -1316,6 +1334,7 @@
 		AA0000050000000000000011 /* CuesLiveTests */ = {
 			isa = PBXGroup;
 			children = (
+				74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */,
 				F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */,
 				084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */,
 				57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */,
@@ -1646,6 +1665,10 @@
 		AA00000500000000000EDI01 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */,
+				3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */,
+				E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */,
+				71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */,
 				35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */,
 				86B4DF304397BD22CDE340B7 /* EditView+Fades.swift */,
 				E7B1FCA47ECD5301F3E7EA17 /* EditView+Zoom.swift */,
@@ -1809,6 +1832,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B911006680B80CFAAC9A3B03 /* TrackBatchRenameSheet.swift in Sources */,
+				AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */,
+				0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */,
+				D1C30AD2936190D5EE2F37E1 /* MarkerQuickFindView.swift in Sources */,
+				C04A326E195FB42815C1291D /* MarkerQuickFind.swift in Sources */,
 				59BFE2CE68ACEA87FEF188EC /* SongSectionProfiler.swift in Sources */,
 				D4276E8E44D65FE83C1EEF87 /* SongSectionLabeler.swift in Sources */,
 				8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */,
@@ -2099,6 +2127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58F3A2353A36E045FCBACBBC /* TrackBatchRenameTests.swift in Sources */,
 				3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */,
 				18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */,
 				8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */,
@@ -2163,6 +2192,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B1D3707971288484D8EE121 /* TrackBatchRenameSheet.swift in Sources */,
+				FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */,
+				BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */,
+				9C3AC3070618E13A2083689F /* MarkerQuickFindView.swift in Sources */,
+				B83117A0EB0B5508E8560616 /* MarkerQuickFind.swift in Sources */,
 				CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */,
 				B39B152AAB5FBD59743C1E68 /* SongSectionLabeler.swift in Sources */,
 				2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */,

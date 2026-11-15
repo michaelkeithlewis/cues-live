@@ -294,6 +294,17 @@ extension EditView {
         }
     }
 
+    func applyBatchRename(_ names: [String], to tracks: [AudioTrack]) {
+        activeSheet = nil
+        performUndoableChange(tracks.count == 1 ? "Rename Track" : "Rename Tracks") {
+            for (track, name) in zip(tracks, names) {
+                track.displayName = name
+            }
+            try? modelContext.save()
+            persistProjectState()
+        }
+    }
+
     func deleteAudioTrack(_ track: AudioTrack) {
         let trackID = track.id
 

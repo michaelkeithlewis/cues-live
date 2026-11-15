@@ -55,6 +55,13 @@ extension EditView {
                 onCancel: { activeSheet = nil },
                 onApply: applyClipGain
             )
+        case .batchRenameTracks(let trackIDs):
+            let tracks = song.sortedTracks.filter { trackIDs.contains($0.id) }
+            TrackBatchRenameSheet(
+                names: tracks.map(\.displayName),
+                onCancel: { activeSheet = nil },
+                onApply: { names in applyBatchRename(names, to: tracks) }
+            )
         }
     }
 

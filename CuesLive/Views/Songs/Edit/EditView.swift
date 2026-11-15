@@ -53,6 +53,7 @@ struct EditView: View {
     @State var isDetectingSections = false
     @State var sectionDetectionError: String?
     @State var isDetectingTempo = false
+    @State var markerQuickFind: MarkerQuickFind?
     @State var tempoDetectionError: String?
     @State var showingDetectSectionsConfirm = false
     @State var abletonImportSummary: String?
@@ -123,6 +124,7 @@ struct EditView: View {
     private var focusableEditor: some View {
         editorRoot
             .background(Color.dawTimelineBackground)
+            .overlay(alignment: .top) { markerQuickFindOverlay }
             .modifier(AudioFileDropModifier(
                 isTargeted: $isAudioDropTargeted,
                 onDrop: performAudioFileDrop
@@ -138,6 +140,7 @@ struct EditView: View {
             .focusedValue(\.trackHeightActions, trackHeightActions)
             .focusedValue(\.timelineZoomActions, timelineZoomActions)
             .onKeyPress(phases: .down, action: handleTrackHeightKeyPress)
+            .onKeyPress(phases: .down, action: handleMarkerQuickFindKeyPress)
             #if os(macOS)
             .onDeleteCommand(perform: removeClipSelection)
             .onCommand(#selector(NSResponder.selectAll(_:)), perform: selectAllClips)

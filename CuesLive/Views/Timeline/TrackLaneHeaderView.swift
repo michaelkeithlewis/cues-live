@@ -14,6 +14,7 @@ struct TrackLaneHeaderView: View {
     let onAssignGroup: (TrackGroup?) -> Void
     let onManageGroups: () -> Void
     let onRename: () -> Void
+    let onBatchRename: () -> Void
     let onDelete: () -> Void
     /// Drag distance downward from the press, in points.
     let onResize: (CGFloat) -> Void
@@ -33,6 +34,8 @@ struct TrackLaneHeaderView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
+                .contentShape(Rectangle())
+                .simultaneousGesture(TapGesture(count: 2).onEnded { onRename() })
 
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 6) {
@@ -84,6 +87,11 @@ struct TrackLaneHeaderView: View {
         .contextMenu {
             Button("Rename") {
                 onRename()
+            }
+            if groupTargetCount > 1 {
+                Button("Batch Rename \(groupTargetCount) Tracks…") {
+                    onBatchRename()
+                }
             }
             Menu(groupTargetCount > 1 ? "Move \(groupTargetCount) Tracks to Group" : "Move to Group") {
                 groupOptions

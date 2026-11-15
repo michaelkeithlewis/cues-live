@@ -108,7 +108,8 @@ extension EditView {
         }
     }
 
-    func addSection(at timelineTime: TimeInterval) {
+    /// Adds a section at the beat nearest `timelineTime`, asking for a name unless one is given.
+    func addSection(at timelineTime: TimeInterval, named name: String? = nil) {
         let snappedTime = MeasureTiming.snapToNearestBeat(
             max(0, timelineTime),
             tempoChanges: normalizedTempoChanges,
@@ -118,7 +119,7 @@ extension EditView {
         guard !markers.contains(where: { abs($0.startSeconds - start) < 0.02 }) else { return }
 
         let newMarker = ArrangementMarker(
-            name: "Section \(markers.count + 1)",
+            name: name ?? "Section \(markers.count + 1)",
             startSeconds: start,
             sortOrder: markers.count
         )
@@ -126,7 +127,7 @@ extension EditView {
             timeline.markers.append(newMarker)
         }
 
-        if let section = displaySections.first(where: { $0.id == newMarker.id }) {
+        if name == nil, let section = displaySections.first(where: { $0.id == newMarker.id }) {
             activeSheet = .renameSection(section, title: "Name Section")
         }
     }
