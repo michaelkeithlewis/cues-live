@@ -19,7 +19,6 @@ final class OverlapTransitionTimingTests: XCTestCase {
     func testStartOffsetCannotReachBeforeTheInPoint() {
         let offset = OverlapTransitionTiming.clampedStartOffset(
             9,
-            windowDuration: 10,
             outgoingDuration: 12,
             outgoingStart: 6
         )
@@ -37,7 +36,7 @@ final class OverlapTransitionTimingTests: XCTestCase {
         XCTAssertEqual(offset, 3)
     }
 
-    func testIncomingLaneOffsetRoundTripsThroughTheStartOffset() {
+    func testIncomingLaneOffsetStartsAtTheOverlap() {
         let laneOffset = OverlapTransitionTiming.incomingLaneOffset(
             outgoingDuration: 14,
             windowDuration: 10,
@@ -45,14 +44,10 @@ final class OverlapTransitionTimingTests: XCTestCase {
             outgoingStart: 6
         )
         XCTAssertEqual(laneOffset, 5, "The window runs 6–14 and the incoming song starts at 11.")
+    }
 
-        let offset = OverlapTransitionTiming.startOffset(
-            outgoingDuration: 14,
-            windowDuration: 10,
-            incomingLaneOffset: laneOffset,
-            outgoingStart: 6
-        )
-        XCTAssertEqual(offset, 3)
+    func testOverlapCanRunLongerThanTheEditorWindow() {
+        XCTAssertEqual(OverlapTransitionTiming.clampedStartOffset(25, outgoingDuration: 60), 25)
     }
 
     func testSongsWithoutAnInPointKeepTheirPlacement() {

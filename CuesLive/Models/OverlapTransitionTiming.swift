@@ -16,13 +16,16 @@ enum OverlapTransitionTiming {
         return max(0, min(defaultStartOffsetSeconds, windowDuration, outgoingDuration - outgoingStart))
     }
 
+    /// Seconds of outgoing audio the editor keeps visible before the incoming song starts.
+    static let editorLeadInSeconds: TimeInterval = 2
+
+    /// The overlap can run as long as the outgoing song. The editor widens its window to fit it.
     static func clampedStartOffset(
         _ offset: TimeInterval,
-        windowDuration: TimeInterval,
         outgoingDuration: TimeInterval,
         outgoingStart: TimeInterval = 0
     ) -> TimeInterval {
-        max(0, min(offset, min(windowDuration, outgoingDuration - outgoingStart)))
+        max(0, min(offset, outgoingDuration - outgoingStart))
     }
 
     /// Where the editor window begins on the outgoing song: one window before its out point,
@@ -62,24 +65,5 @@ enum OverlapTransitionTiming {
             outgoingStart: outgoingStart
         )
         return max(0, alignmentTime - windowStart)
-    }
-
-    static func startOffset(
-        outgoingDuration: TimeInterval,
-        windowDuration: TimeInterval,
-        incomingLaneOffset: TimeInterval,
-        outgoingStart: TimeInterval = 0
-    ) -> TimeInterval {
-        let windowStart = outgoingWindowStart(
-            outgoingDuration: outgoingDuration,
-            windowDuration: windowDuration,
-            outgoingStart: outgoingStart
-        )
-        return clampedStartOffset(
-            outgoingDuration - (windowStart + incomingLaneOffset),
-            windowDuration: windowDuration,
-            outgoingDuration: outgoingDuration,
-            outgoingStart: outgoingStart
-        )
     }
 }

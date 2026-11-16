@@ -212,6 +212,11 @@ struct SetlistListView: View {
                 guard !isEditing else { return }
                 rowActions.play?()
             }
+            // Simultaneous so the first click still selects the song without waiting out the double-click interval.
+            .simultaneousGesture(TapGesture(count: 2).onEnded {
+                guard !isEditing else { return }
+                rowActions.edit?()
+            })
             .accessibilityAddTraits(.isButton)
             .accessibilityAction(named: "Play") { rowActions.play?() }
             .appLinkPointer()
