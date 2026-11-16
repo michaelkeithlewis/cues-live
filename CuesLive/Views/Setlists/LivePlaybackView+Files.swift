@@ -5,8 +5,13 @@ import AppKit
 #endif
 
 extension LivePlaybackView {
-    /// Imports each folder as a song, filing the new songs into `folder` when one is given.
-    func importSongs(from requests: [SongFolderImporter.ImportRequest], into folder: SongFolder? = nil) {
+    /// Imports each folder as a song, filing the new songs into `folder` when one is given and
+    /// inserting them into the setlist at `setlistRowIndex` when one is given.
+    func importSongs(
+        from requests: [SongFolderImporter.ImportRequest],
+        into folder: SongFolder? = nil,
+        insertingIntoSetlistAt setlistRowIndex: Int? = nil
+    ) {
         guard !isImportingSongFolder, !requests.isEmpty else { return }
 
         isImportingSongFolder = true
@@ -29,6 +34,7 @@ extension LivePlaybackView {
                     var needs: SongImportAnalyzer.Needs = []
                     if importResult.bpm == nil { needs.insert(.tempo) }
                     if importResult.sectionCount == 0 { needs.insert(.sections) }
+                    if importResult.song.baseKeyRaw == nil { needs.insert(.key) }
                     SongImportAnalyzer.shared.enqueue(importResult.song, needs: needs, context: modelContext)
                     summaries.append(SongFolderImporter.summaryMessage(for: importResult))
                 } catch {
@@ -47,6 +53,10 @@ extension LivePlaybackView {
                 } catch {
                     failureMessages.append(error.localizedDescription)
                 }
+            }
+
+            if let setlistRowIndex {
+                insertDroppedSongs(at: setlistRowIndex, songIDs: importedSongs.map(\.id))
             }
 
             if !failureMessages.isEmpty {

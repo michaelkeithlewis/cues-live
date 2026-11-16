@@ -38,6 +38,8 @@ struct LivePlaybackMonitorSupport: View {
 }
 
 struct LiveRemoteHostSyncModifier: ViewModifier {
+    private static let statusPillHorizontalPadding: CGFloat = 10
+
     let setlist: Setlist
     let librarySignature: String
     let coordinator: PlaybackCoordinator
@@ -108,11 +110,11 @@ struct LiveRemoteHostSyncModifier: ViewModifier {
             .overlay(alignment: .top) {
                 if isClientAuthenticated {
                     Text("Remote control connected")
-                        .font(.caption2.weight(.semibold))
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 4)
-                        .background(AppColors.accent.opacity(0.85), in: Capsule())
-                        .padding(.top, 4)
+                        .font(AppTypography.caption2Emphasized)
+                        .padding(.horizontal, Self.statusPillHorizontalPadding)
+                        .padding(.vertical, AppSpacing.xxs)
+                        .background(AppColors.accentFill, in: Capsule())
+                        .padding(.top, AppSpacing.xxs)
                         .allowsHitTesting(false)
                 }
             }
@@ -139,14 +141,15 @@ final class SetlistRowMetricsCache {
         return missing
     }
 
-    func timelineDuration(for song: Song, snapshot: TimeInterval?) -> TimeInterval {
+    /// How long the song plays, from its in point to its out point.
+    func playedDuration(for song: Song, snapshot: TimeInterval?) -> TimeInterval {
         if let snapshot {
             return snapshot
         }
         if let cached = durationBySongID[song.id] {
             return cached
         }
-        let duration = TimecodePlaybackSupport.timelineDuration(for: song)
+        let duration = SongTrackLoader.playedDuration(for: song)
         durationBySongID[song.id] = duration
         return duration
     }

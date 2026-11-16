@@ -25,10 +25,11 @@ extension EditView {
         return max(sourceDuration, finiteEngineDuration, 1)
     }
 
-    /// Length the editor lays out, including empty measures after the song's end.
+    /// Length the editor lays out, including empty measures after the song's end. A video that
+    /// runs past the audio extends it, so the whole clip can be seen and moved.
     var timelineDuration: TimeInterval {
         TimelineTrailingSpace.displayDuration(
-            songDuration: songDuration,
+            songDuration: max(songDuration, videoEndSeconds),
             tempoChanges: normalizedTempoChanges,
             timeSignatureChanges: normalizedTimeSignatureChanges
         )
@@ -48,12 +49,13 @@ extension EditView {
     }
 
     /// Fills the scroll viewport when song content is narrower than the editor area.
-    private var timelineDisplayWidth: CGFloat {
+    var timelineDisplayWidth: CGFloat {
         max(timelineContentWidth, timelineViewportWidth)
     }
 
     private var hasTimelineContent: Bool {
         !song.sortedTracks.isEmpty || !displaySections.isEmpty || !song.midiTracks.isEmpty
+            || song.videoTrack != nil
     }
 
     private var timelineLoadingPlaceholder: some View {
@@ -64,7 +66,7 @@ extension EditView {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.dawTimelineBackground)
+        .background(AppColors.Timeline.background)
     }
 
     /// Where Play begins: the range start while a selection is showing, otherwise the insertion.
@@ -132,6 +134,7 @@ extension EditView {
             onDetectTempo: detectTempo,
             onImportAbleton: presentAbletonImporter,
             onAddMIDILane: { activeSheet = .midiDevicePicker },
+            onAddVideo: presentVideoImporter,
             onClearMarkerCue: { clearMarkerCue() },
             captureSnapshot: captureSnapshot,
             currentSectionAtTime: { time in
@@ -144,7 +147,6 @@ extension EditView {
             onPlay: playFromInsertion,
             stoppedDisplayTime: playbackStart,
             registerUndo: registerSnapshotChange(_:before:after:),
-            onClickTrackGenerated: reloadTimelineFromProject,
             onBack: onBack,
             undoController: undoController,
             content: content()
@@ -161,6 +163,8 @@ extension EditView {
             timelineContentWidth: timelineContentWidth,
             timelineDisplayWidth: timelineDisplayWidth,
             sectionTimes: sectionMarkerTimes,
+            playRange: timeline.playbackRange,
+            playRangePreview: playRangePreview,
             laneHeights: laneFrames.rows.map(\.height),
             showsPlayhead: viewModel.isActiveSetlistSong,
             timelineViewportWidth: $timelineViewportWidth,
@@ -175,80 +179,6 @@ extension EditView {
             headers: { trackHeaderList }
         )
         .simultaneousGesture(timelinePinchGesture)
-    }
-
-    private var timelineRulerStack: some View {
-        timelineRulerSection
-            .background(Color.dawStickyRulerBackground)
-            .frame(width: timelineDisplayWidth, height: TimelineLayout.topRulerHeight, alignment: .leading)
-    }
-
-    private var timelineTimeRuler: some View {
-        TimelineTimeRulerView(
-            duration: timelineDuration,
-            contentWidth: timelineContentWidth,
-            displayWidth: timelineDisplayWidth,
-            height: TimelineLayout.rulerHeight
-        )
-        .frame(width: timelineDisplayWidth, height: TimelineLayout.rulerHeight, alignment: .leading)
-        .allowsHitTesting(false)
-    }
-
-    private var timelineRulerSection: some View {
-        TimelineRulerView(
-            duration: timelineDuration,
-            contentWidth: timelineContentWidth,
-            displayWidth: timelineDisplayWidth,
-            sections: displaySections,
-            tempoChanges: normalizedTempoChanges,
-            timeSignatureChanges: normalizedTimeSignatureChanges,
-            cuedSectionID: cuedSectionID,
-            cueFlashPhase: cueFlashPhase,
-            loopSectionIDs: loopSectionIDs,
-            sectionMarkerHeight: TimelineLayout.sectionMarkerHeight,
-            timeSignatureRulerHeight: TimelineLayout.timeSignatureRulerHeight,
-            tempoRulerHeight: TimelineLayout.tempoRulerHeight,
-            isPlaying: audioEngine.isPlaying,
-            onCueSection: cueSection,
-            onToggleLoopSection: toggleLoopSection,
-            onAddSection: { addSection(at: $0) },
-            onRenameSection: beginRenameSection,
-            onRemoveMarker: removeMarker,
-            previewSections: previewSections(_:),
-            onEditSectionEdge: applySectionEdge(_:),
-            onTimeSignatureRulerTap: handleTimeSignatureRulerTap,
-            onEditTimeSignatureMarker: { marker in
-                activeSheet = .timeSignatureChange(TimeSignatureLanePrompt(
-                    measure: marker.startMeasure,
-                    numerator: marker.numerator,
-                    denominator: marker.denominator,
-                    markerID: marker.id
-                ))
-            },
-            onDeleteTimeSignatureMarker: deleteTimeSignatureMarker,
-            onMoveTimeSignatureMarker: moveTimeSignatureMarker,
-            onTempoRulerTap: handleTempoRulerTap,
-            onEditTempoMarker: { marker in
-                activeSheet = .tempoChange(TempoLanePrompt(
-                    measure: marker.startMeasure,
-                    bpm: marker.bpm,
-                    markerID: marker.id
-                ))
-            },
-            onDeleteTempoMarker: deleteTempoMarker,
-            onMoveTempoMarker: moveTempoMarker,
-            onTempoOperations: { showingTempoOperations = true }
-        )
-        .frame(height: TimelineLayout.topRulerHeight)
-        .id("\(displaySections.map(\.id))|\(timelineContentWidth)|\(normalizedTempoChanges.map(\.id))|\(normalizedTimeSignatureChanges.map(\.id))")
-        .popover(isPresented: $showingTempoOperations, arrowEdge: .bottom) {
-            TempoOperationsMenu(
-                tempoChanges: normalizedTempoChanges,
-                timeSignatureChanges: normalizedTimeSignatureChanges,
-                playhead: audioEngine.currentTime,
-                onApply: applyTempoOperation
-            )
-        }
     }
 
     private var trackTimelineScrollContent: some View {
@@ -278,15 +208,22 @@ extension EditView {
     }
 
     private var trackLanesContent: some View {
-        let frames = laneFrames
+        // Rows are looked up by track ID from one snapshot. The lazy stack builds rows after this
+        // body runs, so an index offset read then (a video or MIDI lane just added) could point
+        // past the end of these frames.
+        let rowByID = laneRowsByTrackID
         return LazyVStack(spacing: TimelineLayout.laneSpacing) {
-            ForEach(Array(midiTracks.enumerated()), id: \.element.id) { index, track in
+            if let video = song.videoTrack, let row = rowByID[video.id] {
+                videoLane(video, height: row.height, originY: row.originY)
+            }
+
+            ForEach(midiTracks, id: \.id) { track in
                 MIDILaneView(
                     track: track,
                     device: track.device,
                     timelineDuration: timelineDuration,
                     timelineContentWidth: timelineContentWidth,
-                    laneHeight: frames.rows[index].height,
+                    laneHeight: rowByID[track.id]?.height ?? TrackLaneHeight.resolved(track.laneHeight),
                     events: $midiEvents,
                     tempoChanges: normalizedTempoChanges,
                     timeSignatureChanges: normalizedTimeSignatureChanges,
@@ -295,9 +232,8 @@ extension EditView {
                 .frame(width: timelineContentWidth, alignment: .leading)
             }
 
-            ForEach(Array(song.sortedTracks.enumerated()), id: \.element.id) { index, track in
-                if FileStore.trackURL(for: song, track: track) != nil {
-                let row = frames.rows[midiTracks.count + index]
+            ForEach(song.sortedTracks, id: \.id) { track in
+                if FileStore.cachedTrackURL(for: song, track: track) != nil, let row = rowByID[track.id] {
                 WaveformLaneView(
                     track: track,
                     fileDuration: viewModel.fileDuration(for: track),
@@ -307,7 +243,7 @@ extension EditView {
                     sections: displaySections,
                     selection: clipSelection,
                     clipDrag: clipDrag,
-                    hoveredClipID: hoveredClipID,
+                    hover: clipHover,
                     actions: clipLaneActions,
                     tempoChanges: normalizedTempoChanges,
                     timeSignatureChanges: normalizedTimeSignatureChanges,
@@ -343,10 +279,11 @@ extension EditView {
             )
             let frames = laneFrames
             ZStack(alignment: .topLeading) {
-                ForEach(drag.firstRow...drag.lastRow, id: \.self) { row in
+                // The selection keeps row numbers from before a lane was added or removed.
+                ForEach(selectionRows(drag, in: frames), id: \.self) { row in
                     let lane = frames.rows[row]
                     Rectangle()
-                        .fill(Color.soundcraftSelection)
+                        .fill(AppColors.Timeline.selection)
                         .frame(width: max(x1 - x0, 1), height: lane.height)
                         .offset(x: x0, y: lane.originY)
                 }
@@ -383,9 +320,9 @@ extension EditView {
         }
     }
 
-    /// MIDI lanes first, then audio, matching the header and lane order.
+    /// The video lane first, then MIDI, then audio, matching the header and lane order.
     var displayedTrackIDs: [UUID] {
-        midiTracks.map(\.id) + song.sortedTracks.map(\.id)
+        (song.videoTrack.map { [$0.id] } ?? []) + midiTracks.map(\.id) + song.sortedTracks.map(\.id)
     }
 
     /// Clips as drawn, including an in-progress move, trim or fade.
@@ -426,125 +363,5 @@ extension EditView {
                 height: TimelineLayout.clipHeaderHeight
             )
         }
-    }
-
-    private var trackHeaderList: some View {
-        LazyVStack(spacing: TimelineLayout.laneSpacing) {
-            ForEach(midiTracks, id: \.id) { track in
-                MIDITrackHeaderView(
-                    track: track,
-                    laneHeight: TrackLaneHeight.resolved(track.laneHeight),
-                    isSelected: selectedTrackIDs.contains(track.id),
-                    onSelect: { modifiers in
-                        selectedTrackIDs = TrackSelection.click(
-                            id: track.id,
-                            in: selectedTrackIDs,
-                            order: displayedTrackIDs,
-                            modifiers: modifiers
-                        )
-                    },
-                    onConfigChange: commitMIDIConfig,
-                    onSendTest: { sendMIDITest(for: track) },
-                    onEditDevice: { editDevice(for: track) },
-                    onDelete: { deleteMIDITrack(track) },
-                    onResize: { resizeLane(track.id, by: $0) },
-                    onResizeEnded: finishLaneResize
-                )
-            }
-
-            ForEach(song.sortedTracks, id: \.id) { track in
-                TrackLaneHeaderView(
-                    track: track,
-                    laneHeight: TrackLaneHeight.resolved(track.laneHeight),
-                    isSelected: selectedTrackIDs.contains(track.id),
-                    groups: trackGroups,
-                    onSelect: { modifiers in
-                        selectedTrackIDs = TrackSelection.click(
-                            id: track.id,
-                            in: selectedTrackIDs,
-                            order: displayedTrackIDs,
-                            modifiers: modifiers
-                        )
-                    },
-                    onMixChange: {
-                        performUndoableChange("Mix Track") {
-                            viewModel.updateMix(for: track, context: modelContext)
-                        }
-                    },
-                    groupTargetCount: groupTargets(from: track).count,
-                    onAssignGroup: { group in
-                        assignGroup(group, from: track)
-                    },
-                    onManageGroups: {
-                        activeSheet = .groupEditor
-                    },
-                    onRename: {
-                        beginRenameTrack(track)
-                    },
-                    isRenaming: trackPendingRename?.id == track.id,
-                    renameText: $renameTrackName,
-                    onCommitRename: applyTrackRename,
-                    onCancelRename: { trackPendingRename = nil },
-                    onBatchRename: {
-                        activeSheet = .batchRenameTracks(groupTargets(from: track).map(\.id))
-                    },
-                    onDelete: {
-                        deleteAudioTrack(track)
-                    },
-                    onResize: { resizeLane(track.id, by: $0) },
-                    onResizeEnded: finishLaneResize
-                )
-            }
-        }
-        .frame(width: TimelineLayout.trackHeaderWidth)
-        .background(Color.dawTrackHeaderColumnBackground)
-        .onReceive(Timer.publish(every: 1.0 / 30.0, on: .main, in: .common).autoconnect()) { _ in
-            guard audioEngine.isPlaying || audioEngine.hasVisibleMeterLevel else { return }
-            audioEngine.refreshGroupMeters()
-        }
-        .overlay(alignment: .trailing) {
-            Rectangle()
-                .fill(Color.dawTimelineDivider)
-                .frame(width: 1)
-        }
-    }
-
-    private func rulerLaneLabel(_ title: String, height: CGFloat) -> some View {
-        Text(title)
-            .font(.system(size: 9, weight: .semibold))
-            .foregroundStyle(.secondary)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-            .padding(.horizontal, 8)
-            .frame(height: height)
-    }
-
-    private var rulerLaneDivider: some View {
-        Rectangle()
-            .fill(Color.dawTimelineDivider)
-            .frame(height: 1)
-            .allowsHitTesting(false)
-    }
-
-    private var trackHeaderRulerCorner: some View {
-        VStack(spacing: 0) {
-            rulerLaneLabel("Meter", height: TimelineLayout.timeSignatureRulerHeight)
-            rulerLaneLabel("Tempo", height: TimelineLayout.tempoRulerHeight)
-            rulerLaneLabel("Markers", height: TimelineLayout.sectionMarkerHeight)
-        }
-        .frame(width: TimelineLayout.trackHeaderWidth, height: TimelineLayout.topRulerHeight)
-        .background(Color.dawTrackHeaderBackground)
-        .overlay(alignment: .bottom) { rulerLaneDivider }
-        .overlay(alignment: .trailing) {
-            Rectangle()
-                .fill(Color.dawTimelineDivider)
-                .frame(width: 1)
-        }
-    }
-
-    private var trackHeaderTimeRulerCorner: some View {
-        Rectangle()
-            .fill(Color.dawStickyRulerBackground)
-            .frame(width: TimelineLayout.trackHeaderWidth, height: TimelineLayout.rulerHeight)
-            .allowsHitTesting(false)
     }
 }

@@ -2,12 +2,12 @@ import Foundation
 import Observation
 import SwiftData
 
-/// Works out the tempo and sections of newly imported songs one at a time in the background, so
+/// Works out the tempo, key and sections of newly imported songs one at a time in the background, so
 /// imports finish straight away and the songs can be edited while they are analyzed.
 ///
 /// A detected tempo only replaces the opening tempo the song was imported with, and detected
-/// sections only fill a song that still has none. Anything changed by hand in the meantime is
-/// kept. An editor showing the song applies the results itself so its own copy stays current.
+/// sections and a detected key only fill a song that still has none. Anything changed by hand in
+/// the meantime is kept. An editor showing the song applies the results itself so its own copy stays current.
 @MainActor
 @Observable
 final class SongImportAnalyzer {
@@ -18,6 +18,7 @@ final class SongImportAnalyzer {
         let rawValue: Int
         static let tempo = Needs(rawValue: 1 << 0)
         static let sections = Needs(rawValue: 1 << 1)
+        static let key = Needs(rawValue: 1 << 2)
     }
 
     /// Results waiting for the editor showing the song to apply them.
@@ -48,6 +49,7 @@ final class SongImportAnalyzer {
         var needs = needs
         if !SongTempoDetector.isAvailable { needs.remove(.tempo) }
         if !SongSectionDetector.canDetect(in: song) { needs.remove(.sections) }
+        if !SongKeyDetector.isSupported { needs.remove(.key) }
         guard !needs.isEmpty, !pendingSongIDs.contains(song.id) else { return }
         modelContext = context
         queue.append(Job(songID: song.id, importedBPM: song.bpm ?? TempoChange.defaultBPM, needs: needs))
@@ -121,6 +123,13 @@ final class SongImportAnalyzer {
             }
         }
 
+        if job.needs.contains(.key), let song = self.song(for: job.songID) {
+            let urls = SongSectionDetector.analysisTracks(in: song).compactMap { FileStore.trackURL(for: song, track: $0) }
+            if let detected = try? await SongKeyDetector.detectKey(trackURLs: urls) {
+                applyKey(detected, to: job.songID)
+            }
+        }
+
         guard result.bpm != nil || result.sections != nil else { return }
         if editingSongIDs.contains(job.songID) {
             editorResults[job.songID] = result
@@ -146,6 +155,23 @@ final class SongImportAnalyzer {
             context: modelContext,
             timeline: timeline,
             tempoChanges: tempo,
+            timeSignatureChanges: state.timeSignatureChanges,
+            midiEvents: state.midiEvents
+        )
+        try? modelContext.save()
+    }
+
+    /// The key lives on the song rather than in the editor's state, so it is applied straight away.
+    private func applyKey(_ detected: SongKeyDetector.DetectedKey, to songID: UUID) {
+        guard let modelContext, let song = song(for: songID), song.baseKeyRaw == nil else { return }
+        song.baseKeyRaw = detected.key.rawValue
+        song.keyModeRaw = detected.mode.storedRaw
+        let state = SongProjectBridge.projectStateOrDefaults(for: song)
+        try? SongProjectBridge.syncProjectFile(
+            for: song,
+            context: modelContext,
+            timeline: state.timeline,
+            tempoChanges: state.tempoChanges,
             timeSignatureChanges: state.timeSignatureChanges,
             midiEvents: state.midiEvents
         )

@@ -6,16 +6,21 @@ struct SongProjectMetadata: Codable, Hashable {
     var timeSignatureNumerator: Int?
     var timeSignatureDenominator: Int?
     var baseKeyRaw: String?
+    var keyModeRaw: String?
     var transposeSemitones: Int
     var smartGuideEnabled: Bool
+    /// Missing from files written before the generated click.
+    var click: ClickSettings
 
     enum CodingKeys: String, CodingKey {
         case bpm
         case timeSignatureNumerator
         case timeSignatureDenominator
         case baseKeyRaw
+        case keyModeRaw
         case transposeSemitones
         case smartGuideEnabled
+        case click
     }
 
     init(from song: Song) {
@@ -23,8 +28,10 @@ struct SongProjectMetadata: Codable, Hashable {
         timeSignatureNumerator = song.timeSignatureNumerator
         timeSignatureDenominator = song.timeSignatureDenominator
         baseKeyRaw = song.baseKeyRaw
+        keyModeRaw = song.keyModeRaw
         transposeSemitones = song.transposeSemitones
         smartGuideEnabled = song.smartGuideEnabled
+        click = song.clickSettings
     }
 
     init(from decoder: Decoder) throws {
@@ -33,8 +40,10 @@ struct SongProjectMetadata: Codable, Hashable {
         timeSignatureNumerator = try container.decodeIfPresent(Int.self, forKey: .timeSignatureNumerator)
         timeSignatureDenominator = try container.decodeIfPresent(Int.self, forKey: .timeSignatureDenominator)
         baseKeyRaw = try container.decodeIfPresent(String.self, forKey: .baseKeyRaw)
+        keyModeRaw = try container.decodeIfPresent(String.self, forKey: .keyModeRaw)
         transposeSemitones = try container.decodeIfPresent(Int.self, forKey: .transposeSemitones) ?? 0
         smartGuideEnabled = try container.decodeIfPresent(Bool.self, forKey: .smartGuideEnabled) ?? false
+        click = try container.decodeIfPresent(ClickSettings.self, forKey: .click) ?? ClickSettings()
     }
 
     func encode(to encoder: Encoder) throws {
@@ -43,8 +52,10 @@ struct SongProjectMetadata: Codable, Hashable {
         try container.encodeIfPresent(timeSignatureNumerator, forKey: .timeSignatureNumerator)
         try container.encodeIfPresent(timeSignatureDenominator, forKey: .timeSignatureDenominator)
         try container.encodeIfPresent(baseKeyRaw, forKey: .baseKeyRaw)
+        try container.encodeIfPresent(keyModeRaw, forKey: .keyModeRaw)
         try container.encode(transposeSemitones, forKey: .transposeSemitones)
         try container.encode(smartGuideEnabled, forKey: .smartGuideEnabled)
+        try container.encode(click, forKey: .click)
     }
 
     func apply(to song: Song) {
@@ -52,8 +63,10 @@ struct SongProjectMetadata: Codable, Hashable {
         song.timeSignatureNumerator = timeSignatureNumerator
         song.timeSignatureDenominator = timeSignatureDenominator
         song.baseKeyRaw = baseKeyRaw
+        song.keyModeRaw = keyModeRaw
         song.transposeSemitones = transposeSemitones
         song.smartGuideEnabled = smartGuideEnabled
+        song.clickSettings = click
     }
 }
 
@@ -218,25 +231,30 @@ struct ProjectMIDITrack: Codable, Hashable, Identifiable {
 struct SongProjectArrangement: Codable {
     var markers: [ArrangementMarker]
     var clips: [TrackClip]
+    /// Missing from files written before in and out points, which play the whole song.
+    var playRange: SongPlayRange
 
     init(timeline: SongTimeline) {
         markers = timeline.markers
         clips = timeline.clips
+        playRange = timeline.playRange
     }
 
     enum CodingKeys: String, CodingKey {
         case markers
         case clips
+        case playRange
     }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         markers = try container.decodeIfPresent([ArrangementMarker].self, forKey: .markers) ?? []
         clips = try container.decodeIfPresent([TrackClip].self, forKey: .clips) ?? []
+        playRange = try container.decodeIfPresent(SongPlayRange.self, forKey: .playRange) ?? SongPlayRange()
     }
 
     var timeline: SongTimeline {
-        SongTimeline(markers: markers, clips: clips)
+        SongTimeline(markers: markers, clips: clips, playRange: playRange)
     }
 }
 
@@ -255,6 +273,8 @@ struct SongProjectDocument: Codable, Identifiable {
     var tempo: [TempoChange]
     var timeSignatures: [TimeSignatureChange]
     var midiEvents: [MIDIEvent]
+    /// Optional, so files written before video support still decode.
+    var video: ProjectVideoTrack?
 
     init(
         id: UUID,
@@ -267,7 +287,8 @@ struct SongProjectDocument: Codable, Identifiable {
         arrangement: SongProjectArrangement,
         tempo: [TempoChange] = [],
         timeSignatures: [TimeSignatureChange] = [],
-        midiEvents: [MIDIEvent] = []
+        midiEvents: [MIDIEvent] = [],
+        video: ProjectVideoTrack? = nil
     ) {
         formatVersion = Self.currentFormatVersion
         self.id = id
@@ -281,5 +302,6 @@ struct SongProjectDocument: Codable, Identifiable {
         self.tempo = tempo
         self.timeSignatures = timeSignatures
         self.midiEvents = midiEvents
+        self.video = video
     }
 }

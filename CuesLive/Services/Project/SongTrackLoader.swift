@@ -28,12 +28,13 @@ enum SongTrackLoader {
     }
 
     /// Live and setlist playback payloads. Missing files are skipped. When none are
-    /// left, load an empty song so the timeline, cues, and MIDI still run.
+    /// left, or a song with a set length has no tracks at all, load an empty song so the
+    /// timeline, click, cues, and MIDI still run.
     static func playbackPayloads(
         for song: Song
     ) throws -> [AudioEngineManager.PreparedTrackPayload] {
         let trackInputs = try trackInputs(for: song)
-        if trackInputs.isEmpty, !song.sortedTracks.isEmpty {
+        if trackInputs.isEmpty, !song.sortedTracks.isEmpty || playsWithoutAudio(song) {
             return []
         }
         return try streamingPayloads(trackInputs: trackInputs)
@@ -64,7 +65,20 @@ enum SongTrackLoader {
         }
     }
 
+    /// A song with no tracks, such as a click song, plays once its out point gives it a length.
+    static func playsWithoutAudio(_ song: Song) -> Bool {
+        song.sortedTracks.isEmpty
+            && SongProjectBridge.projectStateOrDefaults(for: song).timeline.playRange.endSeconds != nil
+    }
+
+    /// Where the song stops: its out point, on the timeline.
     static func timelineDuration(for song: Song) -> TimeInterval {
-        SongProjectBridge.projectStateOrDefaults(for: song).timeline.duration
+        SongProjectBridge.projectStateOrDefaults(for: song).timeline.playbackRange.upperBound
+    }
+
+    /// How long the song plays: from its in point to its out point.
+    static func playedDuration(for song: Song) -> TimeInterval {
+        let range = SongProjectBridge.projectStateOrDefaults(for: song).timeline.playbackRange
+        return range.upperBound - range.lowerBound
     }
 }

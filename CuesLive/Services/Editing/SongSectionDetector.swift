@@ -55,7 +55,7 @@ enum SongSectionDetector {
     static func analysisTracks(in song: Song) -> [AudioTrack] {
         let guideIDs = Set(SongGuideCueReader.guideTracks(in: song).map(\.id))
         return song.sortedTracks.filter { track in
-            let isClick = track.displayName.caseInsensitiveCompare(ClickTrackFileGenerator.trackDisplayName) == .orderedSame
+            let isClick = track.displayName.caseInsensitiveCompare(TrackGroupStore.clickGroupName) == .orderedSame
             let isNonMusicGroup = track.group.map { nonMusicGroupNames.contains($0.name.lowercased()) } ?? false
             return !isClick && !isNonMusicGroup && !guideIDs.contains(track.id)
         }

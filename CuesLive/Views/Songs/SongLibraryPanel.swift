@@ -141,11 +141,11 @@ struct SongLibraryPanel: View {
             #if os(macOS)
             HStack(alignment: .firstTextBaseline, spacing: AppSpacing.xs) {
                 Text(scope.title)
-                    .font(.headline)
+                    .font(AppTypography.headline)
                     .foregroundStyle(AppColors.textPrimary)
                     .lineLimit(1)
                 Text("\(scopedSongs.count)")
-                    .font(.subheadline.monospacedDigit())
+                    .font(AppTypography.subheadline.monospacedDigit())
                     .foregroundStyle(AppColors.textTertiary)
                 Spacer(minLength: 0)
                 addSongMenu
@@ -275,7 +275,8 @@ struct SongLibraryPanel: View {
                     .draggable(SongDragPayload.string(for: song.id))
             }
         }
-        .listStyle(.inset)
+        .listStyle(.plain)
+        .alternatingRowBackgrounds()
         .onDeleteCommand(perform: requestDeleteSelection)
         .onExitCommand { selection.removeAll() }
         #else
@@ -369,7 +370,7 @@ private struct SongLibraryHeaderIcon: View {
 
     var body: some View {
         Image(systemName: systemName)
-            .font(.callout.weight(.semibold))
+            .font(AppTypography.calloutEmphasized)
             .foregroundStyle(AppColors.textSecondary)
             .frame(width: 26, height: 26)
             .contentShape(Rectangle())
@@ -390,7 +391,7 @@ private struct SongLibraryColumnHeader: View {
             Color.clear
                 .frame(width: SongLibraryRow.addButtonWidth, height: 1)
         }
-        .font(.caption2.weight(.semibold))
+        .font(AppTypography.caption2Emphasized)
         .textCase(.uppercase)
         .foregroundStyle(AppColors.textTertiary)
         .accessibilityHidden(true)

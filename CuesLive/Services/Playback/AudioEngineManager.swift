@@ -28,7 +28,7 @@ final class AudioEngineManager {
         let groupID: UUID?
     }
 
-    private struct TrackState {
+    struct TrackState {
         let trackID: UUID
         let memoryPlayer: TrackMemoryPlayer
         let timePitchNode: AVAudioUnitTimePitch
@@ -48,14 +48,14 @@ final class AudioEngineManager {
     private var isAnnouncementPlayerWired = false
     private let transport = AudioPlaybackTransport()
     private let midiScheduler: MIDIScheduler
-    private var tracks: [UUID: TrackState] = [:]
+    private(set) var tracks: [UUID: TrackState] = [:]
     private var scheduledOverlapStartTime: TimeInterval?
     private var overlapStartHandler: (() -> Void)?
     private var didNotifyPlaybackFinished = false
     private var suppressAutoStopOnPlaybackFinished = false
     private var playbackTimer: Timer?
     /// Nil until the song's timeline is applied; tracks then play their trimmed files linearly.
-    private var playbackLayout: SongPlaybackLayout?
+    private(set) var playbackLayout: SongPlaybackLayout?
     private var routingSnapshot: OutputRoutingSnapshot?
     private var groupMixSnapshot = GroupMixSnapshot.default
     private var tempoChanges: [TempoChange] = []
@@ -367,8 +367,9 @@ final class AudioEngineManager {
         cancelScheduledOverlapStart()
         didNotifyPlaybackFinished = false
         transport.stop()
+        transport.setPausedTimeline(startTime)
         isPlaying = false
-        currentTime = 0
+        currentTime = startTime
         stopTimer()
         midiScheduler.stop()
         setStreamingReadersActive(false)

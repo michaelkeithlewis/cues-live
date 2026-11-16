@@ -103,13 +103,22 @@ struct SetlistListView: View {
     let actions: (SetlistRowModel) -> SetlistRowActions
     let onMove: (IndexSet, Int) -> Void
     var onAddHeader: (() -> Void)? = nil
-    /// Called with the row index to insert at when a library song is dropped on the list.
-    var onInsertSongs: ((Int, [UUID]) -> Void)? = nil
+    /// Called with the row index to insert at when library songs or Finder folders are dropped on the list.
+    var onDropItems: ((Int, [NSItemProvider]) -> Void)? = nil
     /// Enables expandable section lists under song rows.
     var sectionPlayback: SetlistSectionPlayback? = nil
     /// Inset of row content from the list's edges. Rows are padded rather than the list,
     /// so the scroller stays at the edge.
     var rowHorizontalPadding: CGFloat = 0
+
+    /// Library song drags, plus Finder folders on macOS, which are imported as new songs.
+    static var dropTypes: [UTType] {
+        #if os(macOS)
+        [.plainText, .fileURL]
+        #else
+        [.plainText]
+        #endif
+    }
 
     /// Rows the user expanded or collapsed by hand; others follow the current song.
     @State private var expansionOverrides: [AnyHashable: Bool] = [:]
@@ -124,12 +133,8 @@ struct SetlistListView: View {
                 rowView(row)
             }
             .onMove(perform: onMove)
-            .onInsert(of: [.plainText]) { index, providers in
-                guard let onInsertSongs else { return }
-                Task { @MainActor in
-                    let ids = await SongDragPayload.songIDs(from: providers)
-                    if !ids.isEmpty { onInsertSongs(index, ids) }
-                }
+            .onInsert(of: onDropItems == nil ? [] : Self.dropTypes) { index, providers in
+                onDropItems?(index, providers)
             }
         }
         .listStyle(.plain)
@@ -264,7 +269,7 @@ private extension View {
                     Button(action: edit) {
                         Label("Edit", systemImage: "pencil")
                     }
-                    .tint(.blue)
+                    .tint(AppColors.info)
                 }
             }
         #else
@@ -346,7 +351,7 @@ struct SetlistRowMenuButton<MenuContent: View>: View {
             menu()
         } label: {
             Image(systemName: "ellipsis")
-                .font(.body.weight(.semibold))
+                .font(AppTypography.bodyEmphasized)
                 .foregroundStyle(AppColors.textSecondary)
                 .frame(width: 32, height: 32)
                 .contentShape(Rectangle())
@@ -372,7 +377,7 @@ private struct SetlistHeaderRowView<MenuContent: View>: View {
     var body: some View {
         HStack(spacing: AppSpacing.sm) {
             Text(title)
-                .font(.caption.weight(.semibold))
+                .font(AppTypography.captionEmphasized)
                 .tracking(0.6)
                 .textCase(.uppercase)
                 .foregroundStyle(AppColors.textTertiary)
@@ -380,7 +385,7 @@ private struct SetlistHeaderRowView<MenuContent: View>: View {
 
             if let timeText {
                 Text(timeText)
-                    .font(.subheadline.monospacedDigit())
+                    .font(AppTypography.subheadline.monospacedDigit())
                     .foregroundStyle(AppColors.textTertiary)
                     .accessibilityLabel("Time \(timeText)")
             }
@@ -397,7 +402,7 @@ private struct SetlistHeaderRowView<MenuContent: View>: View {
 struct SmartGuideBadge: View {
     var body: some View {
         Image(systemName: "person.wave.2.fill")
-            .font(.caption)
+            .font(AppTypography.caption)
             .foregroundStyle(AppColors.accent)
             .accessibilityLabel("Smart Guide on")
             .help("Smart Guide on")

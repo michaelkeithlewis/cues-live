@@ -11,9 +11,16 @@ final class Song {
     var timeSignatureDenominator: Int?
     /// User-selected root pitch class (`SongMusicalKey.rawValue`). Displayed key applies `transposeSemitones`.
     var baseKeyRaw: String?
+    /// `SongKeyMode.rawValue`; nil means major.
+    var keyModeRaw: String?
     /// Semitone offset baked into included stems. Zero plays the original files.
     var transposeSemitones: Int = 0
     var smartGuideEnabled: Bool = false
+    var clickEnabled: Bool = false
+    /// `ClickRhythm.rawValue`; nil means auto.
+    var clickRhythmRaw: String?
+    /// `ClickSound.rawValue`; nil means the default sound.
+    var clickSoundRaw: String?
     var projectFilePath: String?
     /// Library folder; nil keeps the song only in All Songs.
     var folder: SongFolder?
@@ -24,6 +31,10 @@ final class Song {
     @Relationship(deleteRule: .cascade, inverse: \MIDITrack.song)
     var midiTracks: [MIDITrack]
 
+    /// The movie shown in the Video window while this song plays.
+    @Relationship(deleteRule: .cascade, inverse: \VideoTrack.song)
+    var videoTrack: VideoTrack?
+
     init(name: String) {
         id = UUID()
         self.name = name
@@ -32,12 +43,14 @@ final class Song {
         timeSignatureNumerator = nil
         timeSignatureDenominator = nil
         baseKeyRaw = nil
+        keyModeRaw = nil
         transposeSemitones = 0
         smartGuideEnabled = false
         projectFilePath = nil
         folder = nil
         tracks = []
         midiTracks = []
+        videoTrack = nil
     }
 
     var timeSignatureDisplay: String? {
@@ -48,6 +61,21 @@ final class Song {
             return nil
         }
         return "\(numerator)/\(denominator)"
+    }
+
+    var clickSettings: ClickSettings {
+        get {
+            ClickSettings(
+                isEnabled: clickEnabled,
+                rhythm: clickRhythmRaw.flatMap(ClickRhythm.init(rawValue:)) ?? .auto,
+                sound: clickSoundRaw.flatMap(ClickSound.init(rawValue:)) ?? .standard
+            )
+        }
+        set {
+            clickEnabled = newValue.isEnabled
+            clickRhythmRaw = newValue.rhythm.rawValue
+            clickSoundRaw = newValue.sound.rawValue
+        }
     }
 
     var sortedTracks: [AudioTrack] {

@@ -15,6 +15,7 @@ struct EditTransportBar<Chrome: View>: View {
     let onDetectTempo: () -> Void
     let onImportAbleton: () -> Void
     let onAddMIDILane: () -> Void
+    let onAddVideo: () -> Void
     let onClearMarkerCue: () -> Void
     let captureSnapshot: () -> SongEditSnapshot
     let currentSectionAtTime: (TimeInterval) -> SongSection?
@@ -27,7 +28,6 @@ struct EditTransportBar<Chrome: View>: View {
     /// Time used for the loop button while stopped. Playback leaves this where the insertion is.
     let stoppedDisplayTime: TimeInterval
     let registerUndo: (_ actionName: String, _ before: SongEditSnapshot, _ after: SongEditSnapshot) -> Void
-    let onClickTrackGenerated: () -> Void
     let onBack: () -> Void
     let undoController: SongUndoController
     let content: Chrome
@@ -39,11 +39,11 @@ struct EditTransportBar<Chrome: View>: View {
         VStack(spacing: 0) {
             if let loadError = viewModel.loadError {
                 Text(loadError)
-                    .font(.caption)
+                    .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textTertiary)
                     .frame(maxWidth: .infinity)
                     .padding(.horizontal)
-                    .padding(.vertical, 6)
+                    .padding(.vertical, AppSpacing.compact)
                     .background(AppColors.surfaceElevated)
             }
             content
@@ -54,22 +54,19 @@ struct EditTransportBar<Chrome: View>: View {
         }
         #endif
         .sheet(isPresented: $showingClickEditor) {
-            ClickTrackEditorButton(
+            ClickSettingsSheet(
                 song: song,
                 viewModel: viewModel,
                 captureSnapshot: captureSnapshot,
-                registerUndo: registerUndo,
-                onClickTrackGenerated: onClickTrackGenerated,
-                chrome: .sheet
+                registerUndo: registerUndo
             )
         }
         .sheet(isPresented: $showingSmartGuideEditor) {
-            SmartGuideEditorButton(
+            SmartGuideEditorSheet(
                 song: song,
                 viewModel: viewModel,
                 captureSnapshot: captureSnapshot,
-                registerUndo: registerUndo,
-                chrome: .sheet
+                registerUndo: registerUndo
             )
         }
         .sheet(isPresented: $showingArrangementEditor) {
@@ -126,19 +123,25 @@ struct EditTransportBar<Chrome: View>: View {
             Button {
                 showingClickEditor = true
             } label: {
-                Label("Generate Click", systemImage: "metronome")
+                Label("Click", systemImage: "metronome")
             }
 
             Button {
                 showingSmartGuideEditor = true
             } label: {
-                Label("Smart Cues", systemImage: "person.wave.2")
+                Label("Smart Guide", systemImage: "person.wave.2")
             }
 
             Button {
                 onImportAbleton()
             } label: {
                 Label("Add Ableton File…", systemImage: "doc")
+            }
+
+            Button {
+                onAddVideo()
+            } label: {
+                Label(song.videoTrack == nil ? "Add Video…" : "Replace Video…", systemImage: "film")
             }
 
             if !arrangementActions.sections.isEmpty {

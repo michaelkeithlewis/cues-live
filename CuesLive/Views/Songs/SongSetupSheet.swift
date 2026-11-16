@@ -1,18 +1,22 @@
 import SwiftData
 import SwiftUI
 
-/// Name, opening tempo, meter and key for a song in the library. Imports fill these in on their own;
-/// this is where they get corrected.
+/// Name, opening tempo, time signature and key for a song in the library. Imports fill these in
+/// on their own; this is where they get corrected.
 struct SongSetupSheet: View {
     let song: Song
     let onFinish: (Error?) -> Void
 
     @Environment(\.modelContext) private var modelContext
+    @FocusState private var songNameFocused: Bool
 
     @State private var songName: String
     @State private var bpmText: String
     @State private var selectedPreset: MeterPreset
-    @State private var keySelection: String
+    @State var keySelection: String
+    @State var keyMode: SongKeyMode
+    @State var keyDetection: KeyDetectionState = .idle
+    @State var keyDetectionTask: Task<Void, Never>?
     @State private var isDetectingTempo = false
     @State private var tempoNote: String?
 
@@ -33,6 +37,8 @@ struct SongSetupSheet: View {
         MeterPreset(numerator: 12, denominator: 8)
     ]
 
+    private static let tempoFieldWidth: CGFloat = 72
+
     init(song: Song, onFinish: @escaping (Error?) -> Void) {
         self.song = song
         self.onFinish = onFinish
@@ -51,6 +57,7 @@ struct SongSetupSheet: View {
             denominator: meter.referenceDenominator
         ))
         _keySelection = State(initialValue: song.baseKeyRaw ?? "")
+        _keyMode = State(initialValue: SongKeyMode(raw: song.keyModeRaw))
     }
 
     private var meterPresets: [MeterPreset] {
@@ -61,7 +68,8 @@ struct SongSetupSheet: View {
         return presets
     }
 
-    private var analysisURLs: [URL] {
+    /// The song's instrument audio, without click or guide tracks.
+    var analysisURLs: [URL] {
         SongSectionDetector.analysisTracks(in: song).compactMap { FileStore.trackURL(for: song, track: $0) }
     }
 
@@ -83,87 +91,82 @@ struct SongSetupSheet: View {
     }
 
     var body: some View {
-        AppSheetContainer {
-            NavigationStack {
-                VStack(alignment: .leading, spacing: AppSpacing.lg) {
-                    labeledField("Song name") {
-                        TextField("Song name", text: $songName)
-                            .textFieldStyle(.roundedBorder)
-                    }
-
-                    labeledField("Tempo (BPM)") {
-                        HStack(spacing: AppSpacing.sm) {
-                            TextField("120", text: $bpmText)
-                                .textFieldStyle(.roundedBorder)
-                                #if os(iOS)
-                                .keyboardType(.decimalPad)
-                                #endif
-                            if SongTempoDetector.isAvailable {
-                                Button(isDetectingTempo ? "Detecting…" : "Detect") {
-                                    detectTempo()
-                                }
-                                .disabled(isDetectingTempo || analysisURLs.isEmpty)
-                            }
-                        }
-                    }
-
-                    labeledField("Meter") {
-                        Picker("Meter", selection: $selectedPreset) {
-                            ForEach(meterPresets, id: \.self) { preset in
-                                Text(preset.label).tag(preset)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                        .labelsHidden()
-                    }
-
-                    labeledField("Key") {
-                        Picker("Key", selection: $keySelection) {
-                            Text("None").tag("")
-                            ForEach(SongMusicalKey.chromaticOrder, id: \.rawValue) { key in
-                                Text(key.displayName).tag(key.rawValue)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                        .labelsHidden()
-                    }
-
-                    if let tempoNote {
-                        Text(tempoNote)
-                            .font(.caption)
-                            .foregroundStyle(AppColors.textTertiary)
+        NavigationStack {
+            Form {
+                songSection
+                timingSection
+                keySection
+            }
+            .formStyle(.grouped)
+            .navigationTitle("Song Setup")
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.inline)
+            #endif
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel) {
+                        onFinish(nil)
                     }
                 }
-                .padding(AppSpacing.lg)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .formSheetFrame(minWidth: 380, minHeight: 360)
-                .navigationTitle("Song Setup")
-                #if os(iOS)
-                .navigationBarTitleDisplayMode(.inline)
-                #endif
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            onFinish(nil)
-                        }
-                        .foregroundStyle(AppColors.textSecondary)
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save", action: save)
-                            .foregroundStyle(canSave ? AppColors.accent : AppColors.textTertiary)
-                            .disabled(!canSave)
-                    }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save", action: save)
+                        .disabled(!canSave)
                 }
             }
+            .onAppear {
+                songNameFocused = true
+            }
+        }
+        .standardDialogToolbar()
+        .formSheetFrame(minWidth: 420, minHeight: 440)
+        .onDisappear(perform: cancelKeyDetection)
+    }
+
+    private var songSection: some View {
+        Section {
+            TextField("Name", text: $songName, prompt: Text("Song name"))
+                .focused($songNameFocused)
         }
     }
 
-    private func labeledField<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
-        VStack(alignment: .leading, spacing: AppSpacing.sm) {
-            Text(title)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(AppColors.textSecondary)
-            content()
+    private var timingSection: some View {
+        Section {
+            LabeledContent("Tempo") {
+                HStack(spacing: AppSpacing.xs) {
+                    TextField("Tempo", text: $bpmText, prompt: Text("120"))
+                        .labelsHidden()
+                        .multilineTextAlignment(.trailing)
+                        .monospacedDigit()
+                        .frame(maxWidth: Self.tempoFieldWidth)
+                        #if os(iOS)
+                        .keyboardType(.decimalPad)
+                        #endif
+                    Text("BPM")
+                        .foregroundStyle(.secondary)
+                }
+            }
+            if SongTempoDetector.isAvailable {
+                HStack {
+                    Button(action: detectTempo) {
+                        Label("Detect Tempo", systemImage: "metronome")
+                    }
+                    .disabled(isDetectingTempo || analysisURLs.isEmpty)
+                    Spacer()
+                    if isDetectingTempo {
+                        ProgressView()
+                            .controlSize(.small)
+                    }
+                }
+            }
+            Picker("Time Signature", selection: $selectedPreset) {
+                ForEach(meterPresets, id: \.self) { preset in
+                    Text(preset.label).tag(preset)
+                }
+            }
+        } footer: {
+            if let tempoNote {
+                Text(tempoNote)
+            }
         }
     }
 
@@ -175,7 +178,7 @@ struct SongSetupSheet: View {
             defer { isDetectingTempo = false }
             do {
                 bpmText = Self.formatBPM(try await SongTempoDetector.detectBPM(from: urls))
-                tempoNote = "Tempo was detected from the audio."
+                tempoNote = "Detected from the stems. You can still change it."
             } catch {
                 tempoNote = error.localizedDescription
             }
@@ -184,13 +187,15 @@ struct SongSetupSheet: View {
 
     private func save() {
         guard let bpm = parsedBPM else { return }
+        cancelKeyDetection()
         let settings = SongFolderImporter.sanitized(
             SongFolderImporter.ImportSettings(
                 name: songName,
                 bpm: bpm,
                 timeSignatureNumerator: selectedPreset.numerator,
                 timeSignatureDenominator: selectedPreset.denominator,
-                baseKeyRaw: keySelection.isEmpty ? nil : keySelection
+                baseKeyRaw: keySelection.isEmpty ? nil : keySelection,
+                keyModeRaw: keySelection.isEmpty ? nil : keyMode.storedRaw
             ),
             fallbackName: song.name
         )

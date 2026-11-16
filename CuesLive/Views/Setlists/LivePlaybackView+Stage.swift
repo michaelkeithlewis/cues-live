@@ -59,6 +59,10 @@ extension LivePlaybackView {
     }
     #endif
 
+    func toggleWaveform() {
+        withAnimation { isWaveformVisible.toggle() }
+    }
+
     func toggleMixer() {
         mixerDetent = mixerDetent == .hidden ? .visible : .hidden
     }
@@ -108,7 +112,7 @@ extension LivePlaybackView {
 
     private var playbackMainSection: some View {
         VStack(spacing: 0) {
-            if setlistHasSongs {
+            if setlistHasSongs && isWaveformVisible {
                 currentSongSection
                     .background(AppColors.backgroundPrimary)
             }
@@ -141,8 +145,8 @@ extension LivePlaybackView {
         if let loadError = coordinator.loadError,
            !(coordinator.currentSong.map(songHasMissingMedia) ?? false) {
             Label(loadError, systemImage: "exclamationmark.triangle.fill")
-                .font(.caption)
-                .foregroundStyle(.red)
+                .font(AppTypography.caption)
+                .foregroundStyle(AppColors.error)
                 .lineLimit(2)
                 .padding(.horizontal, AppSpacing.sm)
                 .padding(.vertical, AppSpacing.xs)
@@ -207,10 +211,10 @@ extension LivePlaybackView {
 
     private var loadingOverlay: some View {
         ZStack {
-            Color.black.opacity(0.12)
+            AppColors.scrimLight
             ProgressView("Loading audio…")
-                .padding(12)
-                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                .padding(AppSpacing.sm)
+                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: AppRadius.xs))
         }
     }
 }

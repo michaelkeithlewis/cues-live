@@ -6,14 +6,14 @@ import AppKit
 extension SongLibraryPanel {
     var importProgressOverlay: some View {
         ZStack {
-            Color.black.opacity(0.35)
+            AppColors.scrim
                 .ignoresSafeArea()
 
             VStack(spacing: AppSpacing.sm) {
                 ProgressView()
                     .tint(AppColors.accent)
                 Text(isPreparingFolderSetup ? "Reading song folder…" : "Importing song folder…")
-                    .font(.headline)
+                    .font(AppTypography.headline)
                     .foregroundStyle(AppColors.textPrimary)
             }
             .padding(AppSpacing.xl)
@@ -58,7 +58,7 @@ extension SongLibraryPanel {
     @ViewBuilder
     var folderDropHighlight: some View {
         if isTargetedForFolderDrop {
-            RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
+            Rectangle()
                 .stroke(AppColors.accent, lineWidth: 2)
                 .padding(AppSpacing.xs)
                 .allowsHitTesting(false)
@@ -84,21 +84,6 @@ extension SongLibraryPanel {
     }
     #endif
 
-    /// Imports take the folder's name and any Ableton tempo and meter as they are. Tempo detection
-    /// runs after the import, and "Song Setup…" changes any of it later.
-    private static func importRequest(for preview: SongFolderImporter.Preview) -> SongFolderImporter.ImportRequest {
-        SongFolderImporter.ImportRequest(
-            folderURL: preview.folderURL,
-            settings: SongFolderImporter.ImportSettings(
-                name: preview.suggestedName,
-                bpm: preview.bpm ?? TempoChange.defaultBPM,
-                timeSignatureNumerator: preview.timeSignatureNumerator ?? TimeSignatureChange.defaultNumerator,
-                timeSignatureDenominator: preview.timeSignatureDenominator ?? TimeSignatureChange.defaultDenominator,
-                baseKeyRaw: nil
-            )
-        )
-    }
-
     private func queueFolderImport(_ folderURLs: [URL]) {
         guard !isBusy, !folderURLs.isEmpty else { return }
 
@@ -108,22 +93,8 @@ extension SongLibraryPanel {
             await Task.yield()
             defer { isPreparingFolderSetup = false }
 
-            var requests: [SongFolderImporter.ImportRequest] = []
-            var failures: [String] = []
-            for url in urls {
-                do {
-                    let preview = try await Task.detached(priority: .userInitiated) {
-                        try SongFolderImporter.previewFolder(at: url)
-                    }.value
-                    requests.append(Self.importRequest(for: preview))
-                } catch {
-                    failures.append(
-                        urls.count == 1
-                            ? error.localizedDescription
-                            : "\(url.lastPathComponent): \(error.localizedDescription)"
-                    )
-                }
-            }
+            let (previews, failures) = await SongFolderDrop.previews(for: urls)
+            let requests = previews.map(SongFolderDrop.importRequest(for:))
 
             if !failures.isEmpty {
                 songActionError = failures.joined(separator: "\n")

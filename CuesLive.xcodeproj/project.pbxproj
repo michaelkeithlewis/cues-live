@@ -12,7 +12,6 @@
 		AA0000F10000000000000004 /* ClipEditingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000F20000000000000004 /* ClipEditingTests.swift */; };
 		AA0000F30000000000000001 /* SongTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000F20000000000000001 /* SongTimeline.swift */; };
 		AA0000F30000000000000002 /* ClipEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000F20000000000000002 /* ClipEditing.swift */; };
-		00E40C95FB92FD9F2EDC5AD3 /* ClickTrackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000043 /* ClickTrackGenerator.swift */; };
 		0491D0CB258BB532C4D262E8 /* TimecodeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000110 /* TimecodeSettings.swift */; };
 		055A7DD4FF49A64810EC90F1 /* InputMappingSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000328 /* InputMappingSettingsView.swift */; };
 		060975E7911FF7D5A6DFA990 /* SongFolderImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000034 /* SongFolderImporter.swift */; };
@@ -25,7 +24,6 @@
 		13D4374B5B93FA1763683C62 /* AppSheetContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000008C /* AppSheetContainer.swift */; };
 		187CB1E89C8812E06A404CFB /* TrackGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000002A /* TrackGroup.swift */; };
 		1B2C5D6E41F0EE9CA2CAE114 /* RemoteSessionSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000303 /* RemoteSessionSettingsStore.swift */; };
-		1C67899A8054E132507425D9 /* ClickTrackScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000004E /* ClickTrackScheduler.swift */; };
 		1D561974C2CFF90227DC21A4 /* OutputDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000002D /* OutputDestination.swift */; };
 		1E74E25D07E83CE83DBCDC73 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000400 /* AppIcon.icon */; };
 		1F9544513938F3D69E5FA41F /* MIDIDeviceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000067 /* MIDIDeviceStore.swift */; };
@@ -48,7 +46,6 @@
 		429ED83386A4DFAA235EFD97 /* SongSectionNameNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F4 /* SongSectionNameNormalizer.swift */; };
 		441249A9D52307B5C8382556 /* OutputRoutingConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000002E /* OutputRoutingConfig.swift */; };
 		448064EE42E8399691EC85BD /* DocsWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000033C /* DocsWindowView.swift */; };
-		44E1F5758574E69D7A0983E6 /* ClickTrackSubdivision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000047 /* ClickTrackSubdivision.swift */; };
 		4926CEE83BB294F3E6CD4DCC /* MediaReferenceResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000075 /* MediaReferenceResolver.swift */; };
 		4C41DD9AEDCFAE6113E7E89F /* CuesLiveApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000001 /* CuesLiveApp.swift */; };
 		4C73EDBD3D31E2979C49EE21 /* ArrangementEditorMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000020 /* ArrangementEditorMenu.swift */; };
@@ -78,7 +75,6 @@
 		79EC3821EFF35D7A1FB3BBEE /* click-normal.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000045 /* click-normal.wav */; };
 		7A71235334CE0DD935D64451 /* ArrangementTimelineMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000021 /* ArrangementTimelineMapper.swift */; };
 		7B0B0B631AF53DE1C5C98D2A /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000000F /* EditView.swift */; };
-		7D412A866B68E52B871B8246 /* DAWColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000018 /* DAWColors.swift */; };
 		7E1007493D2F275F94D7A49B /* SongSectionPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F3 /* SongSectionPresets.swift */; };
 		7F74D91A2A30D76DE139D15C /* SongDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000000D /* SongDetailView.swift */; };
 		804846CAC3A1D70D00F981EA /* InputMappingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000032B /* InputMappingPanel.swift */; };
@@ -135,7 +131,6 @@
 		AA0000010000000000000015 /* WaveformLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000016 /* WaveformLoader.swift */; };
 		AA0000010000000000000C21 /* WaveformOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000C21 /* WaveformOverview.swift */; };
 		AA0000010000000000000016 /* WaveformLaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000017 /* WaveformLaneView.swift */; };
-		AA0000010000000000000017 /* DAWColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000018 /* DAWColors.swift */; };
 		AA0000010000000000000018 /* ArrangementMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000019 /* ArrangementMarker.swift */; };
 		AA0000010000000000000019 /* AbletonProjectImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000001A /* AbletonProjectImporter.swift */; };
 		AA000001000000000000001A /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000001B /* PersistenceController.swift */; };
@@ -166,15 +161,10 @@
 		B10000010000000000000B20 /* TempoTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000B20 /* TempoTimeline.swift */; };
 		B10000010000000000000B21 /* TempoOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000B21 /* TempoOperations.swift */; };
 		AA0000010000000000000041 /* SongTrackLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000041 /* SongTrackLoader.swift */; };
-		AA0000010000000000000043 /* ClickTrackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000043 /* ClickTrackGenerator.swift */; };
 		AA0000010000000000000044 /* click-accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000044 /* click-accent.wav */; };
 		AA0000010000000000000045 /* click-normal.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000045 /* click-normal.wav */; };
-		AA0000010000000000000046 /* ClickTrackGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000046 /* ClickTrackGeneratorTests.swift */; };
-		AA0000010000000000000047 /* ClickTrackSubdivision.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000047 /* ClickTrackSubdivision.swift */; };
 		AA000001000000000000004C /* SectionLoopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000004C /* SectionLoopController.swift */; };
 		AA000001000000000000004D /* WaveformBarsCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000004D /* WaveformBarsCanvas.swift */; };
-		AA000001000000000000004E /* ClickTrackScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002000000000000004E /* ClickTrackScheduler.swift */; };
-		AA0000010000000000000050 /* ClickTrackSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000050 /* ClickTrackSchedulerTests.swift */; };
 		AA0000010000000000000060 /* MIDITrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000060 /* MIDITrack.swift */; };
 		AA0000010000000000000061 /* MIDIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000061 /* MIDIEvent.swift */; };
 		AA0000010000000000000063 /* MIDIOutputService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000063 /* MIDIOutputService.swift */; };
@@ -223,8 +213,6 @@
 		AA00000100000000000000E0 /* SetlistPackageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000E0 /* SetlistPackageStore.swift */; };
 		AA00000100000000000000E1 /* SongMediaHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000E1 /* SongMediaHealth.swift */; };
 		AA00000100000000000000E2 /* MissingMediaRelinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000E2 /* MissingMediaRelinkView.swift */; };
-		AA00000100000000000000F0 /* StemAudioWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F0 /* StemAudioWriter.swift */; };
-		AA00000100000000000000F1 /* ClickTrackFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F1 /* ClickTrackFileGenerator.swift */; };
 		AA00000100000000000000F2 /* SectionAnnouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F2 /* SectionAnnouncer.swift */; };
 		AA00000100000000000000F3 /* SongSectionPresets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F3 /* SongSectionPresets.swift */; };
 		AA00000100000000000000F4 /* SongSectionNameNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F4 /* SongSectionNameNormalizer.swift */; };
@@ -307,7 +295,6 @@
 		AA0000010000000000000B01 /* MeasureBoundaryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000B01 /* MeasureBoundaryTests.swift */; };
 		AA0000010000000000000B02 /* MeasureAnchoredChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000B02 /* MeasureAnchoredChange.swift */; };
 		AA00000100000000000ED001 /* AddTrackTypeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED001 /* AddTrackTypeSheet.swift */; };
-		AA00000100000000000ED002 /* EditGuideTrackMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED002 /* EditGuideTrackMenus.swift */; };
 		AA00000100000000000ED003 /* EditSongSettingsMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED003 /* EditSongSettingsMenus.swift */; };
 		AA00000100000000000ED004 /* EditToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED004 /* EditToolbar.swift */; };
 		AA00000100000000000ED005 /* EditTransportBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED005 /* EditTransportBar.swift */; };
@@ -321,7 +308,6 @@
 		AA00000100000000000F1001 /* LiveSetlistSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000F1001 /* LiveSetlistSnapshots.swift */; };
 		AA00000100000000000F1002 /* PlaybackCoordinatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000F1002 /* PlaybackCoordinatorError.swift */; };
 		AA23A43494FFA381B9E728DC /* LivePlaybackSupportViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000F0002 /* LivePlaybackSupportViews.swift */; };
-		AA5CF1E506F6A4FAE6BC123E /* EditGuideTrackMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED002 /* EditGuideTrackMenus.swift */; };
 		ADCDDC8F0A7A835FBB10CB49 /* click-accent.wav in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000044 /* click-accent.wav */; };
 		AEE3B433DC0DA4EAC3BCE6FC /* LiveSetlistToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000F0001 /* LiveSetlistToolbar.swift */; };
 		AF9B8BC70EDE7352FC6BE3DC /* TimelineRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED007 /* TimelineRulerView.swift */; };
@@ -352,7 +338,6 @@
 		CE890C8FE3E35DB47ED860FF /* SetlistEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000005 /* SetlistEntry.swift */; };
 		CF4AB6A28318E141013C18B9 /* SongSections in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000100 /* SongSections */; };
 		D09825BE9A7B7991E4D60748 /* MappableLiveAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000320 /* MappableLiveAction.swift */; };
-		D647644C01187801B0AD4DA8 /* StemAudioWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F0 /* StemAudioWriter.swift */; };
 		D746F9EA63BC3169EC8BB5F3 /* RemoteSessionCommandBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000307 /* RemoteSessionCommandBridge.swift */; };
 		D8FA453DE863FD80936D5150 /* TimelineSectionMarkerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED008 /* TimelineSectionMarkerRow.swift */; };
 		DD0883626704CF5E3E575EA5 /* SetlistTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000029 /* SetlistTransition.swift */; };
@@ -378,7 +363,6 @@
 		F61FC1B209F0DA22A085A044 /* AppTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000081 /* AppTypography.swift */; };
 		F6CA20BD88E6F35CD3BD5773 /* EditTransportBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000ED005 /* EditTransportBar.swift */; };
 		F7BCB858706383EA368E569F /* AppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000085 /* AppButtons.swift */; };
-		F8A0670D0FA3E9DD3D013F8D /* ClickTrackFileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000200000000000000F1 /* ClickTrackFileGenerator.swift */; };
 		F9D4CA76FF6F90A58CEB2DED /* TimecodePlaybackSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000115 /* TimecodePlaybackSupport.swift */; };
 		FE240D938D9768F049D4540A /* InputMappingStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000322 /* InputMappingStore.swift */; };
 		FF2FFB7A15E804182473C592 /* RemoteSessionHostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000304 /* RemoteSessionHostService.swift */; };
@@ -624,38 +608,186 @@
 		ABF4108669D7E227F40F28E7 /* SongTimelineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF0B056D1FC70762C297535 /* SongTimelineTests.swift */; };
 		745CF3078ABCF7980BC662C5 /* SongTimeline+SectionEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D223A4A564A9010DE83B56 /* SongTimeline+SectionEdges.swift */; };
 		59A25C650C7EF4EC56429EB4 /* SongTimeline+SectionEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D223A4A564A9010DE83B56 /* SongTimeline+SectionEdges.swift */; };
-		745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
-		D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
-		1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
-		BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
-		673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
-		6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
-		8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */; };
-		DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
-		05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
-		8B01DAFD97A218D4F248ED0B /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
-		4A594009640854AB943E58EC /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
-		438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
-		958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
+		664CE976AD88030535272BAE /* LivePlaybackSidebarMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187A8952F67BCD866AC9AE4 /* LivePlaybackSidebarMetrics.swift */; };
+		C5E1DA8E725EF0F8CAEF8269 /* LivePlaybackSidebarMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2187A8952F67BCD866AC9AE4 /* LivePlaybackSidebarMetrics.swift */; };
+		5D762E220BAFC1145AE76D94 /* LivePlaybackSidebarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1DAAFE599F6387221E441 /* LivePlaybackSidebarLayout.swift */; };
+		AE082424725A9188390EF3F2 /* LivePlaybackSidebarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1DAAFE599F6387221E441 /* LivePlaybackSidebarLayout.swift */; };
+		E006E7B89B383DA950846882 /* AppHairline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26521F80D7EDA0426AF224F /* AppHairline.swift */; };
+		DDCFE3246BC271AFEE39E397 /* AppHairline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B26521F80D7EDA0426AF224F /* AppHairline.swift */; };
+		7E09A36F23B1762715D93F88 /* Color+SRGBAdjustments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D006794B02767B66AD7F1 /* Color+SRGBAdjustments.swift */; };
+		7244A7EACFAF21EE7BC4CA55 /* Color+SRGBAdjustments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339D006794B02767B66AD7F1 /* Color+SRGBAdjustments.swift */; };
+		069B6F59691212441E4B84FA /* TrackGroupPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A801E8B63989C3C863F23A /* TrackGroupPalette.swift */; };
+		1A6D4FFEF76E7A320C445836 /* TrackGroupPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A801E8B63989C3C863F23A /* TrackGroupPalette.swift */; };
+		EE03E0F80D1AB4B771CF4E9F /* AppColors+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AF299723838DA113E87603 /* AppColors+Timeline.swift */; };
+		D299C1CF39D874723A90C48F /* AppColors+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AF299723838DA113E87603 /* AppColors+Timeline.swift */; };
+		9FFFEDBE534E4FE635B0FC53 /* AppColors+LiveWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C378415BF4BC4410612B4 /* AppColors+LiveWaveform.swift */; };
+		B539C2F9B4574FBCDFAD5EB7 /* AppColors+LiveWaveform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885C378415BF4BC4410612B4 /* AppColors+LiveWaveform.swift */; };
+		C8B83B0B644C13CBB25AAD78 /* ArrangementSectionPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463570CF270EB70A8DD4682 /* ArrangementSectionPalette.swift */; };
+		BDC57E7C6A4C07D8E28AA7DC /* ArrangementSectionPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1463570CF270EB70A8DD4682 /* ArrangementSectionPalette.swift */; };
+		433BCA6F5C0954266DF52226 /* SetlistTransitionBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C977E01A012170398E97A /* SetlistTransitionBadge.swift */; };
+		F8FA21081E2154D73551E5C6 /* SetlistTransitionBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41C977E01A012170398E97A /* SetlistTransitionBadge.swift */; };
+		84BF509F0605A98C438245CD /* AppColors+Mixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4B38890522C607F5B620B /* AppColors+Mixer.swift */; };
+		D7BF9D23A78AE1881E10EA10 /* AppColors+Mixer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E4B38890522C607F5B620B /* AppColors+Mixer.swift */; };
+		D59F10A108840582FD060945 /* AppColors+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5A7821DBB8DB4B8FDDE34 /* AppColors+Live.swift */; };
+		967A23B223029AB2EC538EA3 /* AppColors+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B5A7821DBB8DB4B8FDDE34 /* AppColors+Live.swift */; };
+		F95EBE6DA863F3B9DE7BBB1A /* AppTypography+Compact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455865CBAE698C6DA6E0B79 /* AppTypography+Compact.swift */; };
+		51229AA695B438A31AD83FED /* AppTypography+Compact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4455865CBAE698C6DA6E0B79 /* AppTypography+Compact.swift */; };
+		78A732FF5C6B6F6D623B4E5A /* AppRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A0D86A5773AC271AE3CCF /* AppRadius.swift */; };
+		4F8A750B51A6C16D0E72A871 /* AppRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464A0D86A5773AC271AE3CCF /* AppRadius.swift */; };
+		8C395D51F243AA5A32888C65 /* AppOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3164CD37C653775A3FFA1711 /* AppOpacity.swift */; };
+		C57E215E29EBF7C8D3FAE264 /* AppOpacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3164CD37C653775A3FFA1711 /* AppOpacity.swift */; };
+		2554E80261FE0B9F8E000B10 /* AppTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D35AB082F8D64BD945D19B5 /* AppTag.swift */; };
+		73E1CBF549A9172ADB425B3A /* AppTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D35AB082F8D64BD945D19B5 /* AppTag.swift */; };
+		EA6DD42276ABE31DBBBF1C8A /* TestAllOutputsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EE507A9F907EDB201EEA1F /* TestAllOutputsSheet.swift */; };
+		00F2410934454B67BB28D4DD /* TestAllOutputsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EE507A9F907EDB201EEA1F /* TestAllOutputsSheet.swift */; };
+		F3FF5D457EA4D5320E0299E3 /* OutputTestPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11EDD065F726476AB86A46C /* OutputTestPlan.swift */; };
+		15FD469E01DF82F5E7E30261 /* OutputTestPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11EDD065F726476AB86A46C /* OutputTestPlan.swift */; };
+		1A6ACE1C4188379239E0EAAB /* OutputTestSignalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4564FDDB479E195A6DCF39F /* OutputTestSignalBuilder.swift */; };
+		2167501026B21200EEE9DBB4 /* OutputTestSignalBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4564FDDB479E195A6DCF39F /* OutputTestSignalBuilder.swift */; };
+		DFD6D6E7E68BAE21AC8BDD60 /* OutputTestSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E64CBA924E46791971692 /* OutputTestSpeech.swift */; };
+		714F36F09015226F4DD7FC18 /* OutputTestSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E64CBA924E46791971692 /* OutputTestSpeech.swift */; };
+		95F0377C469B77FF4FB85BAE /* OutputChannelTestPlayer+AllOutputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BADE4E9136A066B6C12F0 /* OutputChannelTestPlayer+AllOutputs.swift */; };
+		C728275A926A3607B129322D /* OutputChannelTestPlayer+AllOutputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2BADE4E9136A066B6C12F0 /* OutputChannelTestPlayer+AllOutputs.swift */; };
+		9812E82EFB5A7227D81AEFA1 /* OutputTestPlanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6972006F012B4AAE4B88270 /* OutputTestPlanTests.swift */; };
+		1BAB9C5627198031D3927AA9 /* OutputTestSignalBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3AA89D69553D07D105005F /* OutputTestSignalBuilderTests.swift */; };
+		E42C3FB3FCE268DF411C120C /* OutputTestRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889AD81AD8513578C9F710FC /* OutputTestRun.swift */; };
+		B44018689886DEB36B98D097 /* OutputTestRun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889AD81AD8513578C9F710FC /* OutputTestRun.swift */; };
+		B234B2D75EEAB48CBB5A5EE5 /* OutputTestRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB44129F74D4C70FDED72E6E /* OutputTestRunTests.swift */; };
+		2436436419FD4718D2A5DBE0 /* LivePlaybackView+SetlistDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40B2AF19E607B46BFE3031 /* LivePlaybackView+SetlistDrop.swift */; };
+		7840E5ABE439D03850290F20 /* LivePlaybackView+SetlistDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF40B2AF19E607B46BFE3031 /* LivePlaybackView+SetlistDrop.swift */; };
+		008657657136CCE1FC2A0F6A /* VideoTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF3A80F695756724A9E439 /* VideoTrack.swift */; };
+		FE8501EE821A745D9DFC2FCA /* VideoTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDF3A80F695756724A9E439 /* VideoTrack.swift */; };
+		5F951B637DCD940F03A5C9A4 /* VideoPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4BCB4A750895AFC2AD0A8F /* VideoPlacement.swift */; };
+		5B88D4B1CFA3041C29F9323B /* VideoPlacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4BCB4A750895AFC2AD0A8F /* VideoPlacement.swift */; };
+		111BEF9F74D3CA358044CDF8 /* ProjectVideoTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40F27A796BB98B93BE75C0F /* ProjectVideoTrack.swift */; };
+		1234AB17641F6644295E042B /* ProjectVideoTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40F27A796BB98B93BE75C0F /* ProjectVideoTrack.swift */; };
+		DAC6A9BA81E4ECE215AA8CFD /* VideoTrackEditSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA27CA5B402AF4AFD584E6F3 /* VideoTrackEditSnapshot.swift */; };
+		A4B8F80BFE071C59310C6BA9 /* VideoTrackEditSnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA27CA5B402AF4AFD584E6F3 /* VideoTrackEditSnapshot.swift */; };
+		05B258465EF67AFBF592FDB0 /* SongProjectBridge+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4726A8231C0E15FFCEE0F7D5 /* SongProjectBridge+Video.swift */; };
+		48322C9B71C601E60C50605F /* SongProjectBridge+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4726A8231C0E15FFCEE0F7D5 /* SongProjectBridge+Video.swift */; };
+		64D48FE1709842AA49381118 /* FileStore+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE55BD2DC061496CCF97D1F4 /* FileStore+Video.swift */; };
+		8FF4E15F470E91D51063A6B9 /* FileStore+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE55BD2DC061496CCF97D1F4 /* FileStore+Video.swift */; };
+		B6B2FA6F6C01E0F1E9AE6191 /* VideoThumbnailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30452F2CDA668C0DDA6D8CE0 /* VideoThumbnailStore.swift */; };
+		7E84431A3E0D8088ABF14807 /* VideoThumbnailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30452F2CDA668C0DDA6D8CE0 /* VideoThumbnailStore.swift */; };
+		9F3D1C3B302F85BEBFF34DD3 /* VideoSyncPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C48C54EFDFD410B184743 /* VideoSyncPolicy.swift */; };
+		51DEE931F732E481B42AD8B8 /* VideoSyncPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742C48C54EFDFD410B184743 /* VideoSyncPolicy.swift */; };
+		645307E6E18240FACBFB2EA4 /* VideoOutputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872CF4CF04F6F2FBF469D43 /* VideoOutputController.swift */; };
+		A0556C26A5BB7BC87909A6E1 /* VideoOutputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F872CF4CF04F6F2FBF469D43 /* VideoOutputController.swift */; };
+		EF459A5D345E0F65CCEA6798 /* AppColors+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6ED5E2B194918FF2CD2EAE /* AppColors+Video.swift */; };
+		AC50603DF4D9C9E0379C7EDB /* AppColors+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6ED5E2B194918FF2CD2EAE /* AppColors+Video.swift */; };
+		74259C4E5053898A2D78A60B /* VideoPlayerSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C329F937527553C1882D2F /* VideoPlayerSurface.swift */; };
+		C1CC5EA8A2421D388DC6A615 /* VideoPlayerSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C329F937527553C1882D2F /* VideoPlayerSurface.swift */; };
+		B3EDBB50B16EC85FC36320B9 /* VideoOutputWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243B5ED5BF692D74EA95C51E /* VideoOutputWindowView.swift */; };
+		59E1422F9C16EB82A32AB631 /* VideoOutputWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 243B5ED5BF692D74EA95C51E /* VideoOutputWindowView.swift */; };
+		31B36B8C26F768EBDAEB4AFB /* VideoOutputClaimModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCAEEBBE74F75BCBAFA843 /* VideoOutputClaimModifier.swift */; };
+		1FC57E76BEFF168A87F4749F /* VideoOutputClaimModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCAEEBBE74F75BCBAFA843 /* VideoOutputClaimModifier.swift */; };
+		029AD60DEEF583FA9626917B /* VideoLaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD19901A0010169E5C0454 /* VideoLaneView.swift */; };
+		B846FB66B9ADCFA328AAF62B /* VideoLaneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD19901A0010169E5C0454 /* VideoLaneView.swift */; };
+		40BF6F3CBBC9FCD6B344020E /* VideoTrackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C3A6B15E47BEFDE3F4F97 /* VideoTrackHeaderView.swift */; };
+		387E7D5DF360DE858AD55AA1 /* VideoTrackHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20C3A6B15E47BEFDE3F4F97 /* VideoTrackHeaderView.swift */; };
+		BC8C4FBDAFB870203F2B036F /* EditView+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254259056AEF8B216903DEE /* EditView+Video.swift */; };
+		EFE04071933C1FCF4113F0C4 /* EditView+Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = C254259056AEF8B216903DEE /* EditView+Video.swift */; };
+		5CF60AD3FACCFBFF8EF43976 /* VideoSyncPolicyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949A1389040435D7447F711C /* VideoSyncPolicyTests.swift */; };
+		F3D705B279F65450C2D567D9 /* VideoPlacementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D1F02B9CC2D20EFBED7481 /* VideoPlacementTests.swift */; };
+		5B98E2DA02753CFAD687ED2A /* VideoWindowFullScreenSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E931872A9B2B3F989A062D0 /* VideoWindowFullScreenSupport.swift */; };
+		75BF4337BEC27524F755CBF6 /* VideoWindowFullScreenSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E931872A9B2B3F989A062D0 /* VideoWindowFullScreenSupport.swift */; };
+		5C5118E8D4A666A4586F6F65 /* WindowMenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6BB2BE539E21205748F8FA /* WindowMenuCommands.swift */; };
+		7D191048737C9EEA7E429EC7 /* WindowMenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F6BB2BE539E21205748F8FA /* WindowMenuCommands.swift */; };
+		FAC469E396E8D8DAFDCC97A4 /* SongKeyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F330701A11C89DEA6A7DE56 /* SongKeyDetector.swift */; };
+		1977A413A5998DE168D1D3CF /* SongKeyDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F330701A11C89DEA6A7DE56 /* SongKeyDetector.swift */; };
+		C842043008B69D1A0D964759 /* SongKeyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52FA891E9DD9A90C557DEE0 /* SongKeyMode.swift */; };
+		E5E1C51D2AAB1C496C872EE9 /* SongKeyMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C52FA891E9DD9A90C557DEE0 /* SongKeyMode.swift */; };
+		BDD1EA6E94499AA95724DB09 /* SongKeyModeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10477D72C69FDFD1E870433 /* SongKeyModeTests.swift */; };
+		C763C52F3F895705015AA3AC /* TrackURLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D60A703FEE7007CBD75B7 /* TrackURLCache.swift */; };
+		526B358BD019D1F924FFBF08 /* TrackURLCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44D60A703FEE7007CBD75B7 /* TrackURLCache.swift */; };
+		BE4D7853BD4C77C3ADEF15BD /* TimelineClipHoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777432B38CBC780DCB0A90 /* TimelineClipHoverModel.swift */; };
+		FAD2FFC3485D25C4A11447FD /* TimelineClipHoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6777432B38CBC780DCB0A90 /* TimelineClipHoverModel.swift */; };
+		E0C1D885FA7C719FD2A64238 /* TrackURLCacheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E62824B2ADA0352D6EEC462 /* TrackURLCacheTests.swift */; };
+		4E900151A8FF848CF2FD6919 /* TimelineClipHoverModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D39CA4CFF851931C41318E /* TimelineClipHoverModelTests.swift */; };
+		F6518C706720262DA24EAB38 /* SongPlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2224F7FD7A64B3533939B5 /* SongPlayRange.swift */; };
+		5722C3BA5B85FFDC5C3E48D3 /* SongPlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2224F7FD7A64B3533939B5 /* SongPlayRange.swift */; };
+		F9E744CF6628AC1869446A21 /* EditView+Rulers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6DD9CA45739E5A46134ED7 /* EditView+Rulers.swift */; };
+		D841811A2F9B080AD3694043 /* EditView+Rulers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6DD9CA45739E5A46134ED7 /* EditView+Rulers.swift */; };
+		EA848F4B279AEB4115F95AA9 /* EditView+TrackHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC71CE7CE72BE05E1053BDC /* EditView+TrackHeaders.swift */; };
+		D05E6C3E96648600403257E3 /* EditView+TrackHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC71CE7CE72BE05E1053BDC /* EditView+TrackHeaders.swift */; };
+		C15D86A0759BF2E6B2359420 /* TimelineTimeRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F691C039FC903B3B261E2 /* TimelineTimeRulerView.swift */; };
+		EFE28075ED9005AF436EC4BA /* TimelineTimeRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F691C039FC903B3B261E2 /* TimelineTimeRulerView.swift */; };
+		690915D10AA27B53797A64FB /* TimelineScrollEdgeClamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3379C4A6ABB2AE23A4A1DD /* TimelineScrollEdgeClamp.swift */; };
+		05E47D6780FD4B323B6AF612 /* TimelineScrollEdgeClamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3379C4A6ABB2AE23A4A1DD /* TimelineScrollEdgeClamp.swift */; };
+		1CBC8FBC7E398BAC6C89A7CE /* TimelinePlayRangePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109487CCF264D86E0738D6C1 /* TimelinePlayRangePreview.swift */; };
+		243B302FE0C7FACCB1826AF9 /* TimelinePlayRangePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 109487CCF264D86E0738D6C1 /* TimelinePlayRangePreview.swift */; };
+		852C1CE402A8C95D23176C65 /* TimelinePlayRangeFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4326B13A65B74E32C0DA54A /* TimelinePlayRangeFlags.swift */; };
+		7D18143C8F4EA2CE18DCD87E /* TimelinePlayRangeFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4326B13A65B74E32C0DA54A /* TimelinePlayRangeFlags.swift */; };
+		20C61995623C73CB06121955 /* TimelinePlayRangeShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E9441AA46DEBA95770A536 /* TimelinePlayRangeShade.swift */; };
+		B337EFADAA0D6F4A85255296 /* TimelinePlayRangeShade.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E9441AA46DEBA95770A536 /* TimelinePlayRangeShade.swift */; };
+		D3037F93B95D1924250356AC /* EditView+PlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6294143EABD69374CF7B54EE /* EditView+PlayRange.swift */; };
+		F9F8349AD5350F5F79A79B45 /* EditView+PlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6294143EABD69374CF7B54EE /* EditView+PlayRange.swift */; };
+		C45C6F114451BCFFF6FF6FFE /* SongPlayRangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE941B5AFA04A2E94AAAAC91 /* SongPlayRangeTests.swift */; };
+		26E9AB0269C9A35403D40106 /* LiveLaneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0FAED3FE79FDE07EDE345 /* LiveLaneWindow.swift */; };
+		A5AD6B5C9F62CF822765CC94 /* LiveLaneWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0FAED3FE79FDE07EDE345 /* LiveLaneWindow.swift */; };
+		738EE18766B5A80818027003 /* LiveLaneWindowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E52F0D9B8726FE12EDD0EAD /* LiveLaneWindowTests.swift */; };
+		0DD7C34337DCA6FF70E635F0 /* OverlapTransitionTimingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903C8798CEC934A79E317A0F /* OverlapTransitionTimingTests.swift */; };
+		B0AB38CFC2A33FE37923C072 /* AudioEngineManager+PlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F31346CBDF0BBA0C71DCB /* AudioEngineManager+PlayRange.swift */; };
+		97C68C3E9BBE0BE33266CAAB /* AudioEngineManager+PlayRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898F31346CBDF0BBA0C71DCB /* AudioEngineManager+PlayRange.swift */; };
+		9A93485444844CB041F387B6 /* TimelinePlayRangeEdgeShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907D3D32BD203EC40DB0AB81 /* TimelinePlayRangeEdgeShadow.swift */; };
+		C174DBD68F4695498EEB9F59 /* TimelinePlayRangeEdgeShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907D3D32BD203EC40DB0AB81 /* TimelinePlayRangeEdgeShadow.swift */; };
+		0A5E91ABFB502BE4EBCCF2A2 /* ClickSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45301C3D6553506A02E27DB6 /* ClickSound.swift */; };
+		78514FAEFB3C4DE16564E70A /* ClickSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45301C3D6553506A02E27DB6 /* ClickSound.swift */; };
+		E44FC13B37175CD58600C315 /* ClickSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4749514E70DA5A2C9EDAAB27 /* ClickSettings.swift */; };
+		8256444B13C7824B82D466B6 /* ClickSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4749514E70DA5A2C9EDAAB27 /* ClickSettings.swift */; };
+		03FB13318F2C8EF7F29CE1FB /* ClickRhythm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7814A8135DD33FC680F6EC /* ClickRhythm.swift */; };
+		0B8AC37369B703F07F6C597C /* ClickRhythm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7814A8135DD33FC680F6EC /* ClickRhythm.swift */; };
+		369268DB0704219ED219EB1E /* AudioEngineManager+Click.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E3FAE364CA8B92C0202D1 /* AudioEngineManager+Click.swift */; };
+		EA23740CBCDBAC312368561C /* AudioEngineManager+Click.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4E3FAE364CA8B92C0202D1 /* AudioEngineManager+Click.swift */; };
+		157EE918BABD67CF5C8BD6EB /* ClickPlaybackSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8FECE40E67F6D5A632A03 /* ClickPlaybackSupport.swift */; };
+		CB95C0D2C9CAE8BF8ABFE910 /* ClickPlaybackSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8FECE40E67F6D5A632A03 /* ClickPlaybackSupport.swift */; };
+		0A634681388DE6066E197CAB /* ProceduralClickSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22222A205D27EDD695721D2F /* ProceduralClickSource.swift */; };
+		33CDD78A4FB239A062AE1CFE /* ProceduralClickSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22222A205D27EDD695721D2F /* ProceduralClickSource.swift */; };
+		7D9FAE3C692610CA8D977841 /* PlaybackCoordinator+GeneratedPayloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78DC1BE7EFE5F9DBB5AFDA8 /* PlaybackCoordinator+GeneratedPayloads.swift */; };
+		1D9F0E39A044053A4239FA45 /* PlaybackCoordinator+GeneratedPayloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78DC1BE7EFE5F9DBB5AFDA8 /* PlaybackCoordinator+GeneratedPayloads.swift */; };
+		DD7E6302DACD3BFAFF586D22 /* ClickSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD984B4EC7F13690AFA17081 /* ClickSettingsSheet.swift */; };
+		E8E685A81246FE2D6C5AC97E /* ClickSettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD984B4EC7F13690AFA17081 /* ClickSettingsSheet.swift */; };
+		460A55DAC0787F3E7BF6FEA7 /* ProceduralClickSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73483B517E83B90D462518F5 /* ProceduralClickSourceTests.swift */; };
+		F312E9D035555008C0B8C8EC /* ClickSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70346C78EADD8BD0182B1D66 /* ClickSettingsTests.swift */; };
+		AAB5DB242501F1607B004089 /* SmartGuideEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */; };
+		5B83909C90BCDAF5794683E1 /* SmartGuideEditorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */; };
+		8D7564AC88777BD8D1B0DD7F /* ClickScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */; };
+		F61C5914308C87261BE1B009 /* ClickScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */; };
+		9C21A7661F02F69FD520F5DA /* ClickSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D63E0040BD9E28899BD348 /* ClickSchedulerTests.swift */; };
+		AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
+		FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
 		8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */; };
 		2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */; };
+		745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
+		D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */; };
+		438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
+		958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B09FA646039349AF005A979 /* SongGuideCueReader.swift */; };
+		8B01DAFD97A218D4F248ED0B /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
+		4A594009640854AB943E58EC /* SongImportAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */; };
 		D4276E8E44D65FE83C1EEF87 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */; };
 		B39B152AAB5FBD59743C1E68 /* SongSectionLabeler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */; };
 		59BFE2CE68ACEA87FEF188EC /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */; };
 		CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */; };
-		18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */; };
-		3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */; };
+		1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
+		BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */; };
+		0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
+		BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
+		673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
+		6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */; };
 		C04A326E195FB42815C1291D /* MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */; };
 		B83117A0EB0B5508E8560616 /* MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */; };
 		D1C30AD2936190D5EE2F37E1 /* MarkerQuickFindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */; };
 		9C3AC3070618E13A2083689F /* MarkerQuickFindView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */; };
-		0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
-		BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */; };
-		AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
-		FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EB56020014078F6A7845F6 /* TrackBatchRename.swift */; };
 		B911006680B80CFAAC9A3B03 /* TrackBatchRenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */; };
 		4B1D3707971288484D8EE121 /* TrackBatchRenameSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */; };
+		3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */; };
+		18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */; };
+		8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */; };
 		58F3A2353A36E045FCBACBBC /* TrackBatchRenameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */; };
+		5787070DEADDC8F213844DC1 /* SongSetupSheet+Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C49C2097AD1A8AAEEFA27 /* SongSetupSheet+Key.swift */; };
+		1F2F4EC3AEE322FB2501B3C4 /* SongSetupSheet+Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70C49C2097AD1A8AAEEFA27 /* SongSetupSheet+Key.swift */; };
+		DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
+		05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54195388B26C5A72B4B06186 /* SongSetupSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -695,7 +827,6 @@
 		AA0000020000000000000016 /* WaveformLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformLoader.swift; sourceTree = "<group>"; };
 		AA0000020000000000000C21 /* WaveformOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformOverview.swift; sourceTree = "<group>"; };
 		AA0000020000000000000017 /* WaveformLaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformLaneView.swift; sourceTree = "<group>"; };
-		AA0000020000000000000018 /* DAWColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAWColors.swift; sourceTree = "<group>"; };
 		AA0000020000000000000019 /* ArrangementMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrangementMarker.swift; sourceTree = "<group>"; };
 		AA000002000000000000001A /* AbletonProjectImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbletonProjectImporter.swift; sourceTree = "<group>"; };
 		AA000002000000000000001B /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
@@ -724,15 +855,10 @@
 		AA0000020000000000000B21 /* TempoOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoOperations.swift; sourceTree = "<group>"; };
 		AA0000020000000000000B22 /* TempoOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempoOperationsTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000041 /* SongTrackLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTrackLoader.swift; sourceTree = "<group>"; };
-		AA0000020000000000000043 /* ClickTrackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackGenerator.swift; sourceTree = "<group>"; };
 		AA0000020000000000000044 /* click-accent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "click-accent.wav"; sourceTree = "<group>"; };
 		AA0000020000000000000045 /* click-normal.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "click-normal.wav"; sourceTree = "<group>"; };
-		AA0000020000000000000046 /* ClickTrackGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackGeneratorTests.swift; sourceTree = "<group>"; };
-		AA0000020000000000000047 /* ClickTrackSubdivision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackSubdivision.swift; sourceTree = "<group>"; };
 		AA000002000000000000004C /* SectionLoopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLoopController.swift; sourceTree = "<group>"; };
 		AA000002000000000000004D /* WaveformBarsCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformBarsCanvas.swift; sourceTree = "<group>"; };
-		AA000002000000000000004E /* ClickTrackScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackScheduler.swift; sourceTree = "<group>"; };
-		AA0000020000000000000050 /* ClickTrackSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackSchedulerTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000060 /* MIDITrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDITrack.swift; sourceTree = "<group>"; };
 		AA0000020000000000000061 /* MIDIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIEvent.swift; sourceTree = "<group>"; };
 		AA0000020000000000000063 /* MIDIOutputService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIOutputService.swift; sourceTree = "<group>"; };
@@ -781,8 +907,6 @@
 		AA00000200000000000000E0 /* SetlistPackageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistPackageStore.swift; sourceTree = "<group>"; };
 		AA00000200000000000000E1 /* SongMediaHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongMediaHealth.swift; sourceTree = "<group>"; };
 		AA00000200000000000000E2 /* MissingMediaRelinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingMediaRelinkView.swift; sourceTree = "<group>"; };
-		AA00000200000000000000F0 /* StemAudioWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StemAudioWriter.swift; sourceTree = "<group>"; };
-		AA00000200000000000000F1 /* ClickTrackFileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickTrackFileGenerator.swift; sourceTree = "<group>"; };
 		AA00000200000000000000F2 /* SectionAnnouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionAnnouncer.swift; sourceTree = "<group>"; };
 		AA00000200000000000000F3 /* SongSectionPresets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionPresets.swift; sourceTree = "<group>"; };
 		AA00000200000000000000F4 /* SongSectionNameNormalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionNameNormalizer.swift; sourceTree = "<group>"; };
@@ -865,7 +989,6 @@
 		AA0000020000000000000B01 /* MeasureBoundaryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureBoundaryTests.swift; sourceTree = "<group>"; };
 		AA0000020000000000000B02 /* MeasureAnchoredChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureAnchoredChange.swift; sourceTree = "<group>"; };
 		AA00000200000000000ED001 /* AddTrackTypeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTrackTypeSheet.swift; sourceTree = "<group>"; };
-		AA00000200000000000ED002 /* EditGuideTrackMenus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGuideTrackMenus.swift; sourceTree = "<group>"; };
 		AA00000200000000000ED003 /* EditSongSettingsMenus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSongSettingsMenus.swift; sourceTree = "<group>"; };
 		AA00000200000000000ED004 /* EditToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditToolbar.swift; sourceTree = "<group>"; };
 		AA00000200000000000ED005 /* EditTransportBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransportBar.swift; sourceTree = "<group>"; };
@@ -1012,24 +1135,105 @@
 		917C777E1F02A61F01047BAB /* ToolbarTransportControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTransportControls.swift; sourceTree = "<group>"; };
 		6AF0B056D1FC70762C297535 /* SongTimelineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTimelineTests.swift; sourceTree = "<group>"; };
 		02D223A4A564A9010DE83B56 /* SongTimeline+SectionEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SongTimeline+SectionEdges.swift"; sourceTree = "<group>"; };
-		E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongAnalysisAudio.swift; sourceTree = "<group>"; };
-		7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetector.swift; sourceTree = "<group>"; };
-		35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TempoDetection.swift"; sourceTree = "<group>"; };
-		57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetectorTests.swift; sourceTree = "<group>"; };
-		54195388B26C5A72B4B06186 /* SongSetupSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSetupSheet.swift; sourceTree = "<group>"; };
-		C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongImportAnalyzer.swift; sourceTree = "<group>"; };
-		8B09FA646039349AF005A979 /* SongGuideCueReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReader.swift; sourceTree = "<group>"; };
+		2187A8952F67BCD866AC9AE4 /* LivePlaybackSidebarMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaybackSidebarMetrics.swift; sourceTree = "<group>"; };
+		B3B1DAAFE599F6387221E441 /* LivePlaybackSidebarLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePlaybackSidebarLayout.swift; sourceTree = "<group>"; };
+		B26521F80D7EDA0426AF224F /* AppHairline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHairline.swift; sourceTree = "<group>"; };
+		339D006794B02767B66AD7F1 /* Color+SRGBAdjustments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+SRGBAdjustments.swift"; sourceTree = "<group>"; };
+		92A801E8B63989C3C863F23A /* TrackGroupPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackGroupPalette.swift; sourceTree = "<group>"; };
+		D8AF299723838DA113E87603 /* AppColors+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppColors+Timeline.swift"; sourceTree = "<group>"; };
+		885C378415BF4BC4410612B4 /* AppColors+LiveWaveform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppColors+LiveWaveform.swift"; sourceTree = "<group>"; };
+		1463570CF270EB70A8DD4682 /* ArrangementSectionPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrangementSectionPalette.swift; sourceTree = "<group>"; };
+		B41C977E01A012170398E97A /* SetlistTransitionBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetlistTransitionBadge.swift; sourceTree = "<group>"; };
+		56E4B38890522C607F5B620B /* AppColors+Mixer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppColors+Mixer.swift"; sourceTree = "<group>"; };
+		C2B5A7821DBB8DB4B8FDDE34 /* AppColors+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppColors+Live.swift"; sourceTree = "<group>"; };
+		4455865CBAE698C6DA6E0B79 /* AppTypography+Compact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppTypography+Compact.swift"; sourceTree = "<group>"; };
+		464A0D86A5773AC271AE3CCF /* AppRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRadius.swift; sourceTree = "<group>"; };
+		3164CD37C653775A3FFA1711 /* AppOpacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpacity.swift; sourceTree = "<group>"; };
+		5D35AB082F8D64BD945D19B5 /* AppTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTag.swift; sourceTree = "<group>"; };
+		64EE507A9F907EDB201EEA1F /* TestAllOutputsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAllOutputsSheet.swift; sourceTree = "<group>"; };
+		C11EDD065F726476AB86A46C /* OutputTestPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestPlan.swift; sourceTree = "<group>"; };
+		D4564FDDB479E195A6DCF39F /* OutputTestSignalBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestSignalBuilder.swift; sourceTree = "<group>"; };
+		9A3E64CBA924E46791971692 /* OutputTestSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestSpeech.swift; sourceTree = "<group>"; };
+		3D2BADE4E9136A066B6C12F0 /* OutputChannelTestPlayer+AllOutputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OutputChannelTestPlayer+AllOutputs.swift"; sourceTree = "<group>"; };
+		F6972006F012B4AAE4B88270 /* OutputTestPlanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestPlanTests.swift; sourceTree = "<group>"; };
+		EF3AA89D69553D07D105005F /* OutputTestSignalBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestSignalBuilderTests.swift; sourceTree = "<group>"; };
+		889AD81AD8513578C9F710FC /* OutputTestRun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestRun.swift; sourceTree = "<group>"; };
+		AB44129F74D4C70FDED72E6E /* OutputTestRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTestRunTests.swift; sourceTree = "<group>"; };
+		EF40B2AF19E607B46BFE3031 /* LivePlaybackView+SetlistDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LivePlaybackView+SetlistDrop.swift"; sourceTree = "<group>"; };
+		5EDF3A80F695756724A9E439 /* VideoTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrack.swift; sourceTree = "<group>"; };
+		4C4BCB4A750895AFC2AD0A8F /* VideoPlacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlacement.swift; sourceTree = "<group>"; };
+		D40F27A796BB98B93BE75C0F /* ProjectVideoTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectVideoTrack.swift; sourceTree = "<group>"; };
+		EA27CA5B402AF4AFD584E6F3 /* VideoTrackEditSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrackEditSnapshot.swift; sourceTree = "<group>"; };
+		4726A8231C0E15FFCEE0F7D5 /* SongProjectBridge+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SongProjectBridge+Video.swift"; sourceTree = "<group>"; };
+		AE55BD2DC061496CCF97D1F4 /* FileStore+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileStore+Video.swift"; sourceTree = "<group>"; };
+		30452F2CDA668C0DDA6D8CE0 /* VideoThumbnailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoThumbnailStore.swift; sourceTree = "<group>"; };
+		742C48C54EFDFD410B184743 /* VideoSyncPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncPolicy.swift; sourceTree = "<group>"; };
+		F872CF4CF04F6F2FBF469D43 /* VideoOutputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputController.swift; sourceTree = "<group>"; };
+		3D6ED5E2B194918FF2CD2EAE /* AppColors+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppColors+Video.swift"; sourceTree = "<group>"; };
+		73C329F937527553C1882D2F /* VideoPlayerSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerSurface.swift; sourceTree = "<group>"; };
+		243B5ED5BF692D74EA95C51E /* VideoOutputWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputWindowView.swift; sourceTree = "<group>"; };
+		2ACCAEEBBE74F75BCBAFA843 /* VideoOutputClaimModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoOutputClaimModifier.swift; sourceTree = "<group>"; };
+		CAFD19901A0010169E5C0454 /* VideoLaneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoLaneView.swift; sourceTree = "<group>"; };
+		B20C3A6B15E47BEFDE3F4F97 /* VideoTrackHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrackHeaderView.swift; sourceTree = "<group>"; };
+		C254259056AEF8B216903DEE /* EditView+Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+Video.swift"; sourceTree = "<group>"; };
+		949A1389040435D7447F711C /* VideoSyncPolicyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSyncPolicyTests.swift; sourceTree = "<group>"; };
+		49D1F02B9CC2D20EFBED7481 /* VideoPlacementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlacementTests.swift; sourceTree = "<group>"; };
+		5E931872A9B2B3F989A062D0 /* VideoWindowFullScreenSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoWindowFullScreenSupport.swift; sourceTree = "<group>"; };
+		2F6BB2BE539E21205748F8FA /* WindowMenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowMenuCommands.swift; sourceTree = "<group>"; };
+		9F330701A11C89DEA6A7DE56 /* SongKeyDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongKeyDetector.swift; sourceTree = "<group>"; };
+		C52FA891E9DD9A90C557DEE0 /* SongKeyMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongKeyMode.swift; sourceTree = "<group>"; };
+		A10477D72C69FDFD1E870433 /* SongKeyModeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongKeyModeTests.swift; sourceTree = "<group>"; };
+		B44D60A703FEE7007CBD75B7 /* TrackURLCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackURLCache.swift; sourceTree = "<group>"; };
+		E6777432B38CBC780DCB0A90 /* TimelineClipHoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineClipHoverModel.swift; sourceTree = "<group>"; };
+		0E62824B2ADA0352D6EEC462 /* TrackURLCacheTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackURLCacheTests.swift; sourceTree = "<group>"; };
+		F4D39CA4CFF851931C41318E /* TimelineClipHoverModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineClipHoverModelTests.swift; sourceTree = "<group>"; };
+		9D2224F7FD7A64B3533939B5 /* SongPlayRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayRange.swift; sourceTree = "<group>"; };
+		AF6DD9CA45739E5A46134ED7 /* EditView+Rulers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+Rulers.swift"; sourceTree = "<group>"; };
+		1FC71CE7CE72BE05E1053BDC /* EditView+TrackHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TrackHeaders.swift"; sourceTree = "<group>"; };
+		330F691C039FC903B3B261E2 /* TimelineTimeRulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTimeRulerView.swift; sourceTree = "<group>"; };
+		DA3379C4A6ABB2AE23A4A1DD /* TimelineScrollEdgeClamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScrollEdgeClamp.swift; sourceTree = "<group>"; };
+		109487CCF264D86E0738D6C1 /* TimelinePlayRangePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePlayRangePreview.swift; sourceTree = "<group>"; };
+		A4326B13A65B74E32C0DA54A /* TimelinePlayRangeFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePlayRangeFlags.swift; sourceTree = "<group>"; };
+		C3E9441AA46DEBA95770A536 /* TimelinePlayRangeShade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePlayRangeShade.swift; sourceTree = "<group>"; };
+		6294143EABD69374CF7B54EE /* EditView+PlayRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+PlayRange.swift"; sourceTree = "<group>"; };
+		BE941B5AFA04A2E94AAAAC91 /* SongPlayRangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayRangeTests.swift; sourceTree = "<group>"; };
+		63E0FAED3FE79FDE07EDE345 /* LiveLaneWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveLaneWindow.swift; sourceTree = "<group>"; };
+		8E52F0D9B8726FE12EDD0EAD /* LiveLaneWindowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveLaneWindowTests.swift; sourceTree = "<group>"; };
+		903C8798CEC934A79E317A0F /* OverlapTransitionTimingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlapTransitionTimingTests.swift; sourceTree = "<group>"; };
+		898F31346CBDF0BBA0C71DCB /* AudioEngineManager+PlayRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioEngineManager+PlayRange.swift"; sourceTree = "<group>"; };
+		907D3D32BD203EC40DB0AB81 /* TimelinePlayRangeEdgeShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePlayRangeEdgeShadow.swift; sourceTree = "<group>"; };
+		45301C3D6553506A02E27DB6 /* ClickSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSound.swift; sourceTree = "<group>"; };
+		4749514E70DA5A2C9EDAAB27 /* ClickSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSettings.swift; sourceTree = "<group>"; };
+		0A7814A8135DD33FC680F6EC /* ClickRhythm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickRhythm.swift; sourceTree = "<group>"; };
+		BA4E3FAE364CA8B92C0202D1 /* AudioEngineManager+Click.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AudioEngineManager+Click.swift"; sourceTree = "<group>"; };
+		05E8FECE40E67F6D5A632A03 /* ClickPlaybackSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickPlaybackSupport.swift; sourceTree = "<group>"; };
+		22222A205D27EDD695721D2F /* ProceduralClickSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralClickSource.swift; sourceTree = "<group>"; };
+		E78DC1BE7EFE5F9DBB5AFDA8 /* PlaybackCoordinator+GeneratedPayloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlaybackCoordinator+GeneratedPayloads.swift"; sourceTree = "<group>"; };
+		DD984B4EC7F13690AFA17081 /* ClickSettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSettingsSheet.swift; sourceTree = "<group>"; };
+		73483B517E83B90D462518F5 /* ProceduralClickSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProceduralClickSourceTests.swift; sourceTree = "<group>"; };
+		70346C78EADD8BD0182B1D66 /* ClickSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSettingsTests.swift; sourceTree = "<group>"; };
+		1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartGuideEditorSheet.swift; sourceTree = "<group>"; };
+		B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickScheduler.swift; sourceTree = "<group>"; };
+		61D63E0040BD9E28899BD348 /* ClickSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSchedulerTests.swift; sourceTree = "<group>"; };
+		93EB56020014078F6A7845F6 /* TrackBatchRename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRename.swift; sourceTree = "<group>"; };
 		311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceTranscriber.swift; sourceTree = "<group>"; };
+		E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongAnalysisAudio.swift; sourceTree = "<group>"; };
+		8B09FA646039349AF005A979 /* SongGuideCueReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReader.swift; sourceTree = "<group>"; };
+		C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongImportAnalyzer.swift; sourceTree = "<group>"; };
 		4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabeler.swift; sourceTree = "<group>"; };
 		FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionProfiler.swift; sourceTree = "<group>"; };
-		084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabelerTests.swift; sourceTree = "<group>"; };
-		F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReaderTests.swift; sourceTree = "<group>"; };
+		7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetector.swift; sourceTree = "<group>"; };
+		3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+MarkerQuickFind.swift"; sourceTree = "<group>"; };
+		35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+TempoDetection.swift"; sourceTree = "<group>"; };
 		71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerQuickFind.swift; sourceTree = "<group>"; };
 		E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerQuickFindView.swift; sourceTree = "<group>"; };
-		3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+MarkerQuickFind.swift"; sourceTree = "<group>"; };
-		93EB56020014078F6A7845F6 /* TrackBatchRename.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRename.swift; sourceTree = "<group>"; };
 		6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRenameSheet.swift; sourceTree = "<group>"; };
+		F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongGuideCueReaderTests.swift; sourceTree = "<group>"; };
+		084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSectionLabelerTests.swift; sourceTree = "<group>"; };
+		57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongTempoDetectorTests.swift; sourceTree = "<group>"; };
 		74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackBatchRenameTests.swift; sourceTree = "<group>"; };
+		F70C49C2097AD1A8AAEEFA27 /* SongSetupSheet+Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SongSetupSheet+Key.swift"; sourceTree = "<group>"; };
+		54195388B26C5A72B4B06186 /* SongSetupSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSetupSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1096,6 +1300,7 @@
 		AA0000050000000000000A02 /* Pitch */ = {
 			isa = PBXGroup;
 			children = (
+				9F330701A11C89DEA6A7DE56 /* SongKeyDetector.swift */,
 				AA0000020000000000000A14 /* KeyChangeTrackSelection.swift */,
 			);
 			path = Pitch;
@@ -1104,6 +1309,7 @@
 		AA0000050000000000000002 /* CuesLive */ = {
 			isa = PBXGroup;
 			children = (
+				2F6BB2BE539E21205748F8FA /* WindowMenuCommands.swift */,
 				F48F18E04FF412EFE99CFD01 /* TimelineZoomCommands.swift */,
 				AA0000050000000000000A01 /* Audio */,
 				AA0000020000000000000A16 /* CuesLive-Bridging-Header.h */,
@@ -1136,6 +1342,13 @@
 			isa = PBXGroup;
 			children = (
 				93EB56020014078F6A7845F6 /* TrackBatchRename.swift */,
+				0A7814A8135DD33FC680F6EC /* ClickRhythm.swift */,
+				4749514E70DA5A2C9EDAAB27 /* ClickSettings.swift */,
+				45301C3D6553506A02E27DB6 /* ClickSound.swift */,
+				9D2224F7FD7A64B3533939B5 /* SongPlayRange.swift */,
+				C52FA891E9DD9A90C557DEE0 /* SongKeyMode.swift */,
+				4C4BCB4A750895AFC2AD0A8F /* VideoPlacement.swift */,
+				5EDF3A80F695756724A9E439 /* VideoTrack.swift */,
 				02D223A4A564A9010DE83B56 /* SongTimeline+SectionEdges.swift */,
 				5CA344C61EB87CA08DBB1AAB /* ClipFadeShape.swift */,
 				01574BA9D3BCC2D207BF662B /* ClipFade.swift */,
@@ -1160,7 +1373,6 @@
 				AA0000020000000000000B02 /* MeasureAnchoredChange.swift */,
 				AA000002000000000000003E /* TempoChange.swift */,
 				AA0000020000000000000B20 /* TempoTimeline.swift */,
-				AA0000020000000000000047 /* ClickTrackSubdivision.swift */,
 				AA0000F20000000000000001 /* SongTimeline.swift */,
 				AA0000020000000000000004 /* Setlist.swift */,
 				AA0000020000000000000005 /* SetlistEntry.swift */,
@@ -1221,6 +1433,7 @@
 			isa = PBXGroup;
 			children = (
 				54195388B26C5A72B4B06186 /* SongSetupSheet.swift */,
+				F70C49C2097AD1A8AAEEFA27 /* SongSetupSheet+Key.swift */,
 				F577A5573101FE058A5B9300 /* SongLibraryListRow.swift */,
 				C762E0B034AE61A3FAA536AE /* SongLibraryPanel+EmptyState.swift */,
 				20B249536120A634E3D9D5CF /* SongLibraryScope.swift */,
@@ -1245,6 +1458,11 @@
 		AA0000050000000000000009 /* Setlists */ = {
 			isa = PBXGroup;
 			children = (
+				EF40B2AF19E607B46BFE3031 /* LivePlaybackView+SetlistDrop.swift */,
+				B3B1DAAFE599F6387221E441 /* LivePlaybackSidebarLayout.swift */,
+				2187A8952F67BCD866AC9AE4 /* LivePlaybackSidebarMetrics.swift */,
+				B41C977E01A012170398E97A /* SetlistTransitionBadge.swift */,
+				1463570CF270EB70A8DD4682 /* ArrangementSectionPalette.swift */,
 				AB04BD545A9B2DC5379FC45E /* SetlistSectionGridView.swift */,
 				87DEF538CFA79A0C5E9F1E62 /* LiveSongBrowser.swift */,
 				78440C85B578AD11AEB8A577 /* LiveSongFolderList.swift */,
@@ -1297,6 +1515,10 @@
 		AA000005000000000000000A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5E931872A9B2B3F989A062D0 /* VideoWindowFullScreenSupport.swift */,
+				2ACCAEEBBE74F75BCBAFA843 /* VideoOutputClaimModifier.swift */,
+				243B5ED5BF692D74EA95C51E /* VideoOutputWindowView.swift */,
+				73C329F937527553C1882D2F /* VideoPlayerSurface.swift */,
 				917C777E1F02A61F01047BAB /* ToolbarTransportControls.swift */,
 				3898B25385B5F60DD7015E64 /* InputMappingInspectorModifier.swift */,
 				3F3429ABA541B95100BEB31B /* InputMappingToolbarButton.swift */,
@@ -1335,9 +1557,23 @@
 			isa = PBXGroup;
 			children = (
 				74F17F989A0150062055BA98 /* TrackBatchRenameTests.swift */,
-				F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */,
-				084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */,
 				57F7792811AC2CD80B0E16D8 /* SongTempoDetectorTests.swift */,
+				084CBD23B3C31B6792B4A2D8 /* SongSectionLabelerTests.swift */,
+				F4E51F86E6C29D8B8EADDD7B /* SongGuideCueReaderTests.swift */,
+				61D63E0040BD9E28899BD348 /* ClickSchedulerTests.swift */,
+				70346C78EADD8BD0182B1D66 /* ClickSettingsTests.swift */,
+				73483B517E83B90D462518F5 /* ProceduralClickSourceTests.swift */,
+				903C8798CEC934A79E317A0F /* OverlapTransitionTimingTests.swift */,
+				8E52F0D9B8726FE12EDD0EAD /* LiveLaneWindowTests.swift */,
+				F4D39CA4CFF851931C41318E /* TimelineClipHoverModelTests.swift */,
+				0E62824B2ADA0352D6EEC462 /* TrackURLCacheTests.swift */,
+				BE941B5AFA04A2E94AAAAC91 /* SongPlayRangeTests.swift */,
+				A10477D72C69FDFD1E870433 /* SongKeyModeTests.swift */,
+				49D1F02B9CC2D20EFBED7481 /* VideoPlacementTests.swift */,
+				949A1389040435D7447F711C /* VideoSyncPolicyTests.swift */,
+				AB44129F74D4C70FDED72E6E /* OutputTestRunTests.swift */,
+				EF3AA89D69553D07D105005F /* OutputTestSignalBuilderTests.swift */,
+				F6972006F012B4AAE4B88270 /* OutputTestPlanTests.swift */,
 				6AF0B056D1FC70762C297535 /* SongTimelineTests.swift */,
 				9E53DE72A602EA0FA2BEE6B7 /* TimelineTrailingSpaceTests.swift */,
 				7B023B5FAB1D098DC1B77531 /* ClipFadeRendererTests.swift */,
@@ -1356,12 +1592,10 @@
 				AA7C8EBFD83E755AD91F893B /* LiveStretcherTests.swift */,
 				077108785CD6F811C00BC27A /* TrackClipTests.swift */,
 				7BC20D375A74F91F6CD35446 /* TempoTrackLockTests.swift */,
-				AA0000020000000000000046 /* ClickTrackGeneratorTests.swift */,
 				AA0000020000000000000116 /* TimecodeStartCalculatorTests.swift */,
 				AA0000020000000000000117 /* LTCFrameEncoderTests.swift */,
 				AA0000020000000000000118 /* LTCGeneratorTests.swift */,
 				AA0000020000000000000119 /* OutputRoutingManagerTests.swift */,
-				AA0000020000000000000050 /* ClickTrackSchedulerTests.swift */,
 				AA00000200000000000000FE /* ClickSongCreatorTests.swift */,
 				AA0000020000000000000103 /* SectionLoopTimingTests.swift */,
 				AA00000200000000000001FF /* SectionTransitionRenderTests.swift */,
@@ -1399,6 +1633,7 @@
 		AA0000050000000000000012 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				D40F27A796BB98B93BE75C0F /* ProjectVideoTrack.swift */,
 				AA0000020000000000000071 /* MediaReference.swift */,
 				AA0000020000000000000072 /* SongProjectDocument.swift */,
 				AA0000020000000000000073 /* ShowProjectDocument.swift */,
@@ -1409,6 +1644,15 @@
 		AA00000500000000000000A2 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
+				3D6ED5E2B194918FF2CD2EAE /* AppColors+Video.swift */,
+				3164CD37C653775A3FFA1711 /* AppOpacity.swift */,
+				464A0D86A5773AC271AE3CCF /* AppRadius.swift */,
+				4455865CBAE698C6DA6E0B79 /* AppTypography+Compact.swift */,
+				C2B5A7821DBB8DB4B8FDDE34 /* AppColors+Live.swift */,
+				56E4B38890522C607F5B620B /* AppColors+Mixer.swift */,
+				885C378415BF4BC4410612B4 /* AppColors+LiveWaveform.swift */,
+				D8AF299723838DA113E87603 /* AppColors+Timeline.swift */,
+				339D006794B02767B66AD7F1 /* Color+SRGBAdjustments.swift */,
 				AA0000020000000000000080 /* AppColors.swift */,
 				AA0000020000000000000081 /* AppTypography.swift */,
 				AA0000020000000000000082 /* AppSpacing.swift */,
@@ -1423,6 +1667,8 @@
 		AA00000500000000000000A3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B26521F80D7EDA0426AF224F /* AppHairline.swift */,
+				5D35AB082F8D64BD945D19B5 /* AppTag.swift */,
 				61E758B74E47E3A66760EECE /* AppSegmentedPicker.swift */,
 				C060BEFEB2367BFFF59BDF3C /* AppIconToggle.swift */,
 				9F76F1E7B6160E946B266D9A /* AppIconButtonStyle.swift */,
@@ -1440,6 +1686,7 @@
 		AA00000500000000000000D6 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				EA27CA5B402AF4AFD584E6F3 /* VideoTrackEditSnapshot.swift */,
 				AA00000200000000000000D6 /* SongEditSnapshot.swift */,
 			);
 			path = Editing;
@@ -1456,6 +1703,7 @@
 		AA0000050000000000000210 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				64EE507A9F907EDB201EEA1F /* TestAllOutputsSheet.swift */,
 				AA0000020000000000000210 /* OutputRoutingSettingsForm.swift */,
 				AA0000020000000000000211 /* AppSettingsView.swift */,
 				AA0000020000000000000309 /* RemoteSessionSettingsView.swift */,
@@ -1493,6 +1741,12 @@
 		AA00000500000000000BB001 /* Playback */ = {
 			isa = PBXGroup;
 			children = (
+				E78DC1BE7EFE5F9DBB5AFDA8 /* PlaybackCoordinator+GeneratedPayloads.swift */,
+				BA4E3FAE364CA8B92C0202D1 /* AudioEngineManager+Click.swift */,
+				898F31346CBDF0BBA0C71DCB /* AudioEngineManager+PlayRange.swift */,
+				63E0FAED3FE79FDE07EDE345 /* LiveLaneWindow.swift */,
+				F872CF4CF04F6F2FBF469D43 /* VideoOutputController.swift */,
+				742C48C54EFDFD410B184743 /* VideoSyncPolicy.swift */,
 				4B39B60ED2E3836B62122795 /* ClipFadeRenderer.swift */,
 				2325E5195BD9D225D659527C /* PlaybackCoordinator+LiveEdits.swift */,
 				053BFCF0850D3EBA91E18CB6 /* SetlistEditorLink.swift */,
@@ -1521,6 +1775,11 @@
 		AA00000500000000000BB002 /* Output */ = {
 			isa = PBXGroup;
 			children = (
+				889AD81AD8513578C9F710FC /* OutputTestRun.swift */,
+				3D2BADE4E9136A066B6C12F0 /* OutputChannelTestPlayer+AllOutputs.swift */,
+				9A3E64CBA924E46791971692 /* OutputTestSpeech.swift */,
+				D4564FDDB479E195A6DCF39F /* OutputTestSignalBuilder.swift */,
+				C11EDD065F726476AB86A46C /* OutputTestPlan.swift */,
 				AA0000020000000000000031 /* AudioOutputDeviceService.swift */,
 				AA00000200000000000003B2 /* OutputChannelTestPlayer.swift */,
 				AA00000200000000000004A3 /* OutputRecoveryBackoff.swift */,
@@ -1533,10 +1792,10 @@
 		AA00000500000000000BB003 /* GuideTracks */ = {
 			isa = PBXGroup;
 			children = (
+				B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */,
+				22222A205D27EDD695721D2F /* ProceduralClickSource.swift */,
+				05E8FECE40E67F6D5A632A03 /* ClickPlaybackSupport.swift */,
 				AA00000200000000000000FD /* ClickSongCreator.swift */,
-				AA00000200000000000000F1 /* ClickTrackFileGenerator.swift */,
-				AA0000020000000000000043 /* ClickTrackGenerator.swift */,
-				AA000002000000000000004E /* ClickTrackScheduler.swift */,
 				AA00000200000000000000F7 /* SpeechSampleRenderer.swift */,
 			);
 			path = GuideTracks;
@@ -1578,6 +1837,10 @@
 		AA00000500000000000BB008 /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				B44D60A703FEE7007CBD75B7 /* TrackURLCache.swift */,
+				30452F2CDA668C0DDA6D8CE0 /* VideoThumbnailStore.swift */,
+				AE55BD2DC061496CCF97D1F4 /* FileStore+Video.swift */,
+				4726A8231C0E15FFCEE0F7D5 /* SongProjectBridge+Video.swift */,
 				30CA041616C481DA95A3914E /* SetlistLibraryStore.swift */,
 				7D86991441CF2FD749424866 /* SongFolderStore.swift */,
 				98F541E8045623589A88CC1F /* SongLibraryStore.swift */,
@@ -1597,7 +1860,6 @@
 				AA00000200000000000000E1 /* SongMediaHealth.swift */,
 				AA0000020000000000000077 /* SongProjectBridge.swift */,
 				AA0000020000000000000041 /* SongTrackLoader.swift */,
-				AA00000200000000000000F0 /* StemAudioWriter.swift */,
 				AA0000020000000000000016 /* WaveformLoader.swift */,
 				AA0000020000000000000C21 /* WaveformOverview.swift */,
 			);
@@ -1607,13 +1869,13 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */,
 				FBAB226E6A2066A8A6B60D70 /* SongSectionProfiler.swift */,
 				4DD5F0AF4F4F5F0E4BCD4D31 /* SongSectionLabeler.swift */,
-				311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */,
-				8B09FA646039349AF005A979 /* SongGuideCueReader.swift */,
 				C1A1ACCB5AB8377510F54588 /* SongImportAnalyzer.swift */,
-				7A2814F3BD65BE8BB3CCE1AE /* SongTempoDetector.swift */,
+				8B09FA646039349AF005A979 /* SongGuideCueReader.swift */,
 				E373BEDDE91CA930106E3940 /* SongAnalysisAudio.swift */,
+				311D31D75204906CC186E119 /* OnDeviceTranscriber.swift */,
 				E6BE0AD74E302CEAF5DF9217 /* ClipEditing+Fades.swift */,
 				B7A689E2E3CD1BE86914752E /* TempoTrackLock.swift */,
 				AA0000020000000000000021 /* ArrangementTimelineMapper.swift */,
@@ -1631,6 +1893,16 @@
 		AA00000500000000000BB00A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				907D3D32BD203EC40DB0AB81 /* TimelinePlayRangeEdgeShadow.swift */,
+				E6777432B38CBC780DCB0A90 /* TimelineClipHoverModel.swift */,
+				C3E9441AA46DEBA95770A536 /* TimelinePlayRangeShade.swift */,
+				A4326B13A65B74E32C0DA54A /* TimelinePlayRangeFlags.swift */,
+				109487CCF264D86E0738D6C1 /* TimelinePlayRangePreview.swift */,
+				DA3379C4A6ABB2AE23A4A1DD /* TimelineScrollEdgeClamp.swift */,
+				330F691C039FC903B3B261E2 /* TimelineTimeRulerView.swift */,
+				B20C3A6B15E47BEFDE3F4F97 /* VideoTrackHeaderView.swift */,
+				CAFD19901A0010169E5C0454 /* VideoLaneView.swift */,
+				92A801E8B63989C3C863F23A /* TrackGroupPalette.swift */,
 				3CF73F9003EACCA86499BD71 /* TimelineTrailingSpace.swift */,
 				15C6A25E1FD0A92617E24864 /* ClipFadeHandles.swift */,
 				F516D3FEBE57AFC2756DD2D9 /* ClipFadeLayout.swift */,
@@ -1653,7 +1925,6 @@
 				AA0000020000000000000065 /* MIDILaneView.swift */,
 				AA000002000000000000004D /* WaveformBarsCanvas.swift */,
 				AA0000020000000000000024 /* TimelinePlayheadOverlay.swift */,
-				AA0000020000000000000018 /* DAWColors.swift */,
 				AA00000200000000000ED007 /* TimelineRulerView.swift */,
 				AA00000200000000000ED008 /* TimelineSectionMarkerRow.swift */,
 				AA00000200000000000ED009 /* TimelineSignatureAndTempoRulers.swift */,
@@ -1666,10 +1937,16 @@
 			isa = PBXGroup;
 			children = (
 				6E1E6A1980616266F6E467FA /* TrackBatchRenameSheet.swift */,
-				3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */,
 				E4C79A64A2688BACD2FFEB6B /* MarkerQuickFindView.swift */,
 				71AC0FD17E825F5A0DBF6005 /* MarkerQuickFind.swift */,
 				35DF4CF53A3C6BAD6E57A953 /* EditView+TempoDetection.swift */,
+				3497C613700F6989FFE8F273 /* EditView+MarkerQuickFind.swift */,
+				1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */,
+				DD984B4EC7F13690AFA17081 /* ClickSettingsSheet.swift */,
+				6294143EABD69374CF7B54EE /* EditView+PlayRange.swift */,
+				1FC71CE7CE72BE05E1053BDC /* EditView+TrackHeaders.swift */,
+				AF6DD9CA45739E5A46134ED7 /* EditView+Rulers.swift */,
+				C254259056AEF8B216903DEE /* EditView+Video.swift */,
 				86B4DF304397BD22CDE340B7 /* EditView+Fades.swift */,
 				E7B1FCA47ECD5301F3E7EA17 /* EditView+Zoom.swift */,
 				E010D899E4ADC12AC64F3DCD /* EditView+Sheets.swift */,
@@ -1687,7 +1964,6 @@
 				9FEAE8B3A915674B028B83B7 /* EditView+TempoAndMeter.swift */,
 				AA000002000000000000000F /* EditView.swift */,
 				AA00000200000000000ED001 /* AddTrackTypeSheet.swift */,
-				AA00000200000000000ED002 /* EditGuideTrackMenus.swift */,
 				AA00000200000000000ED003 /* EditSongSettingsMenus.swift */,
 				AA00000200000000000ED004 /* EditToolbar.swift */,
 				AA00000200000000000ED005 /* EditTransportBar.swift */,
@@ -1832,20 +2108,87 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */,
+				5787070DEADDC8F213844DC1 /* SongSetupSheet+Key.swift in Sources */,
 				B911006680B80CFAAC9A3B03 /* TrackBatchRenameSheet.swift in Sources */,
-				AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */,
-				0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */,
 				D1C30AD2936190D5EE2F37E1 /* MarkerQuickFindView.swift in Sources */,
 				C04A326E195FB42815C1291D /* MarkerQuickFind.swift in Sources */,
+				673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */,
+				0A3D57F4A30A290D3EDB2DA6 /* EditView+MarkerQuickFind.swift in Sources */,
+				1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */,
 				59BFE2CE68ACEA87FEF188EC /* SongSectionProfiler.swift in Sources */,
 				D4276E8E44D65FE83C1EEF87 /* SongSectionLabeler.swift in Sources */,
-				8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */,
-				438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */,
 				8B01DAFD97A218D4F248ED0B /* SongImportAnalyzer.swift in Sources */,
-				DA5CA411E338E2AAAE8C3C83 /* SongSetupSheet.swift in Sources */,
-				673939B94467DC43AF2B175D /* EditView+TempoDetection.swift in Sources */,
-				1DCC3482DD69B9B2671DC652 /* SongTempoDetector.swift in Sources */,
+				438377FA3521B765BBA24EC4 /* SongGuideCueReader.swift in Sources */,
 				745ADF8CBF02E3216E858B8A /* SongAnalysisAudio.swift in Sources */,
+				8523392B73A1EBF1186B0E90 /* OnDeviceTranscriber.swift in Sources */,
+				AC11B7FAB1A8F941C35EBD7E /* TrackBatchRename.swift in Sources */,
+				8D7564AC88777BD8D1B0DD7F /* ClickScheduler.swift in Sources */,
+				AAB5DB242501F1607B004089 /* SmartGuideEditorSheet.swift in Sources */,
+				DD7E6302DACD3BFAFF586D22 /* ClickSettingsSheet.swift in Sources */,
+				7D9FAE3C692610CA8D977841 /* PlaybackCoordinator+GeneratedPayloads.swift in Sources */,
+				0A634681388DE6066E197CAB /* ProceduralClickSource.swift in Sources */,
+				157EE918BABD67CF5C8BD6EB /* ClickPlaybackSupport.swift in Sources */,
+				369268DB0704219ED219EB1E /* AudioEngineManager+Click.swift in Sources */,
+				03FB13318F2C8EF7F29CE1FB /* ClickRhythm.swift in Sources */,
+				E44FC13B37175CD58600C315 /* ClickSettings.swift in Sources */,
+				0A5E91ABFB502BE4EBCCF2A2 /* ClickSound.swift in Sources */,
+				9A93485444844CB041F387B6 /* TimelinePlayRangeEdgeShadow.swift in Sources */,
+				B0AB38CFC2A33FE37923C072 /* AudioEngineManager+PlayRange.swift in Sources */,
+				26E9AB0269C9A35403D40106 /* LiveLaneWindow.swift in Sources */,
+				BE4D7853BD4C77C3ADEF15BD /* TimelineClipHoverModel.swift in Sources */,
+				C763C52F3F895705015AA3AC /* TrackURLCache.swift in Sources */,
+				D3037F93B95D1924250356AC /* EditView+PlayRange.swift in Sources */,
+				20C61995623C73CB06121955 /* TimelinePlayRangeShade.swift in Sources */,
+				852C1CE402A8C95D23176C65 /* TimelinePlayRangeFlags.swift in Sources */,
+				1CBC8FBC7E398BAC6C89A7CE /* TimelinePlayRangePreview.swift in Sources */,
+				690915D10AA27B53797A64FB /* TimelineScrollEdgeClamp.swift in Sources */,
+				C15D86A0759BF2E6B2359420 /* TimelineTimeRulerView.swift in Sources */,
+				EA848F4B279AEB4115F95AA9 /* EditView+TrackHeaders.swift in Sources */,
+				F9E744CF6628AC1869446A21 /* EditView+Rulers.swift in Sources */,
+				F6518C706720262DA24EAB38 /* SongPlayRange.swift in Sources */,
+				C842043008B69D1A0D964759 /* SongKeyMode.swift in Sources */,
+				FAC469E396E8D8DAFDCC97A4 /* SongKeyDetector.swift in Sources */,
+				5C5118E8D4A666A4586F6F65 /* WindowMenuCommands.swift in Sources */,
+				5B98E2DA02753CFAD687ED2A /* VideoWindowFullScreenSupport.swift in Sources */,
+				BC8C4FBDAFB870203F2B036F /* EditView+Video.swift in Sources */,
+				40BF6F3CBBC9FCD6B344020E /* VideoTrackHeaderView.swift in Sources */,
+				029AD60DEEF583FA9626917B /* VideoLaneView.swift in Sources */,
+				31B36B8C26F768EBDAEB4AFB /* VideoOutputClaimModifier.swift in Sources */,
+				B3EDBB50B16EC85FC36320B9 /* VideoOutputWindowView.swift in Sources */,
+				74259C4E5053898A2D78A60B /* VideoPlayerSurface.swift in Sources */,
+				EF459A5D345E0F65CCEA6798 /* AppColors+Video.swift in Sources */,
+				645307E6E18240FACBFB2EA4 /* VideoOutputController.swift in Sources */,
+				9F3D1C3B302F85BEBFF34DD3 /* VideoSyncPolicy.swift in Sources */,
+				B6B2FA6F6C01E0F1E9AE6191 /* VideoThumbnailStore.swift in Sources */,
+				64D48FE1709842AA49381118 /* FileStore+Video.swift in Sources */,
+				05B258465EF67AFBF592FDB0 /* SongProjectBridge+Video.swift in Sources */,
+				DAC6A9BA81E4ECE215AA8CFD /* VideoTrackEditSnapshot.swift in Sources */,
+				111BEF9F74D3CA358044CDF8 /* ProjectVideoTrack.swift in Sources */,
+				5F951B637DCD940F03A5C9A4 /* VideoPlacement.swift in Sources */,
+				008657657136CCE1FC2A0F6A /* VideoTrack.swift in Sources */,
+				2436436419FD4718D2A5DBE0 /* LivePlaybackView+SetlistDrop.swift in Sources */,
+				E42C3FB3FCE268DF411C120C /* OutputTestRun.swift in Sources */,
+				95F0377C469B77FF4FB85BAE /* OutputChannelTestPlayer+AllOutputs.swift in Sources */,
+				DFD6D6E7E68BAE21AC8BDD60 /* OutputTestSpeech.swift in Sources */,
+				1A6ACE1C4188379239E0EAAB /* OutputTestSignalBuilder.swift in Sources */,
+				F3FF5D457EA4D5320E0299E3 /* OutputTestPlan.swift in Sources */,
+				EA6DD42276ABE31DBBBF1C8A /* TestAllOutputsSheet.swift in Sources */,
+				E006E7B89B383DA950846882 /* AppHairline.swift in Sources */,
+				5D762E220BAFC1145AE76D94 /* LivePlaybackSidebarLayout.swift in Sources */,
+				664CE976AD88030535272BAE /* LivePlaybackSidebarMetrics.swift in Sources */,
+				2554E80261FE0B9F8E000B10 /* AppTag.swift in Sources */,
+				8C395D51F243AA5A32888C65 /* AppOpacity.swift in Sources */,
+				78A732FF5C6B6F6D623B4E5A /* AppRadius.swift in Sources */,
+				F95EBE6DA863F3B9DE7BBB1A /* AppTypography+Compact.swift in Sources */,
+				D59F10A108840582FD060945 /* AppColors+Live.swift in Sources */,
+				84BF509F0605A98C438245CD /* AppColors+Mixer.swift in Sources */,
+				433BCA6F5C0954266DF52226 /* SetlistTransitionBadge.swift in Sources */,
+				C8B83B0B644C13CBB25AAD78 /* ArrangementSectionPalette.swift in Sources */,
+				9FFFEDBE534E4FE635B0FC53 /* AppColors+LiveWaveform.swift in Sources */,
+				EE03E0F80D1AB4B771CF4E9F /* AppColors+Timeline.swift in Sources */,
+				069B6F59691212441E4B84FA /* TrackGroupPalette.swift in Sources */,
+				7E09A36F23B1762715D93F88 /* Color+SRGBAdjustments.swift in Sources */,
 				745CF3078ABCF7980BC662C5 /* SongTimeline+SectionEdges.swift in Sources */,
 				07FAE5CB4F9DF72E068EB295 /* ToolbarTransportControls.swift in Sources */,
 				E66D52B55133C839AD8FCC36 /* SetlistSectionGridView.swift in Sources */,
@@ -1960,7 +2303,6 @@
 				AA0000010000000000000001 /* CuesLiveApp.swift in Sources */,
 				AA0000010000000000000002 /* Song.swift in Sources */,
 				AA000001000000000000012A /* SongMusicalKey.swift in Sources */,
-				AA0000010000000000000047 /* ClickTrackSubdivision.swift in Sources */,
 				AA0000010000000000000003 /* AudioTrack.swift in Sources */,
 				AA0000010000000000000060 /* MIDITrack.swift in Sources */,
 				AA0000010000000000000061 /* MIDIEvent.swift in Sources */,
@@ -1991,7 +2333,6 @@
 				AA00000100000000000ED005 /* EditTransportBar.swift in Sources */,
 				AA00000100000000000ED004 /* EditToolbar.swift in Sources */,
 				AA00000100000000000ED003 /* EditSongSettingsMenus.swift in Sources */,
-				AA00000100000000000ED002 /* EditGuideTrackMenus.swift in Sources */,
 				AA00000100000000000ED001 /* AddTrackTypeSheet.swift in Sources */,
 				AA0000010000000000000010 /* TrackImportView.swift in Sources */,
 				AA0000010000000000000013 /* LivePlaybackView.swift in Sources */,
@@ -2001,7 +2342,6 @@
 				AA0000010000000000000C21 /* WaveformOverview.swift in Sources */,
 				AA0000010000000000000016 /* WaveformLaneView.swift in Sources */,
 				AA000001000000000000004D /* WaveformBarsCanvas.swift in Sources */,
-				AA0000010000000000000017 /* DAWColors.swift in Sources */,
 				AA0000010000000000000018 /* ArrangementMarker.swift in Sources */,
 				AA0000010000000000000035 /* TimeSignatureChange.swift in Sources */,
 				AA0000010000000000000B02 /* MeasureAnchoredChange.swift in Sources */,
@@ -2011,10 +2351,6 @@
 				AA0000010000000000000B20 /* TempoTimeline.swift in Sources */,
 				AA0000010000000000000B21 /* TempoOperations.swift in Sources */,
 				AA0000010000000000000041 /* SongTrackLoader.swift in Sources */,
-				AA0000010000000000000043 /* ClickTrackGenerator.swift in Sources */,
-				AA000001000000000000004E /* ClickTrackScheduler.swift in Sources */,
-				AA00000100000000000000F0 /* StemAudioWriter.swift in Sources */,
-				AA00000100000000000000F1 /* ClickTrackFileGenerator.swift in Sources */,
 				AA0000010000000000000110 /* TimecodeSettings.swift in Sources */,
 				AA0000010000000000000111 /* TimecodeSettingsStore.swift in Sources */,
 				AA0000010000000000000112 /* TimecodeStartCalculator.swift in Sources */,
@@ -2128,9 +2464,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				58F3A2353A36E045FCBACBBC /* TrackBatchRenameTests.swift in Sources */,
-				3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */,
-				18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */,
 				8867A15CD83A594136E90673 /* SongTempoDetectorTests.swift in Sources */,
+				18436B0FBDB9455F10B23ABC /* SongSectionLabelerTests.swift in Sources */,
+				3AA9D9BC8C9919789A3C6C5B /* SongGuideCueReaderTests.swift in Sources */,
+				9C21A7661F02F69FD520F5DA /* ClickSchedulerTests.swift in Sources */,
+				F312E9D035555008C0B8C8EC /* ClickSettingsTests.swift in Sources */,
+				460A55DAC0787F3E7BF6FEA7 /* ProceduralClickSourceTests.swift in Sources */,
+				0DD7C34337DCA6FF70E635F0 /* OverlapTransitionTimingTests.swift in Sources */,
+				738EE18766B5A80818027003 /* LiveLaneWindowTests.swift in Sources */,
+				4E900151A8FF848CF2FD6919 /* TimelineClipHoverModelTests.swift in Sources */,
+				E0C1D885FA7C719FD2A64238 /* TrackURLCacheTests.swift in Sources */,
+				C45C6F114451BCFFF6FF6FFE /* SongPlayRangeTests.swift in Sources */,
+				BDD1EA6E94499AA95724DB09 /* SongKeyModeTests.swift in Sources */,
+				F3D705B279F65450C2D567D9 /* VideoPlacementTests.swift in Sources */,
+				5CF60AD3FACCFBFF8EF43976 /* VideoSyncPolicyTests.swift in Sources */,
+				B234B2D75EEAB48CBB5A5EE5 /* OutputTestRunTests.swift in Sources */,
+				1BAB9C5627198031D3927AA9 /* OutputTestSignalBuilderTests.swift in Sources */,
+				9812E82EFB5A7227D81AEFA1 /* OutputTestPlanTests.swift in Sources */,
 				ABF4108669D7E227F40F28E7 /* SongTimelineTests.swift in Sources */,
 				D3638EC6FE73FC0503AD6FC8 /* TimelineTrailingSpaceTests.swift in Sources */,
 				6D0179874412861A54EDC792 /* ClipFadeRendererTests.swift in Sources */,
@@ -2149,12 +2499,10 @@
 				B62FCB804048FEFF5003FECD /* LiveStretcherTests.swift in Sources */,
 				CDFAB1E5052B9397692C0CB5 /* TrackClipTests.swift in Sources */,
 				009390130AA405EAC46FC592 /* TempoTrackLockTests.swift in Sources */,
-				AA0000010000000000000046 /* ClickTrackGeneratorTests.swift in Sources */,
 				AA0000010000000000000116 /* TimecodeStartCalculatorTests.swift in Sources */,
 				AA0000010000000000000117 /* LTCFrameEncoderTests.swift in Sources */,
 				AA0000010000000000000118 /* LTCGeneratorTests.swift in Sources */,
 				AA0000010000000000000119 /* OutputRoutingManagerTests.swift in Sources */,
-				AA0000010000000000000050 /* ClickTrackSchedulerTests.swift in Sources */,
 				AA00000100000000000000FE /* ClickSongCreatorTests.swift in Sources */,
 				AA0000010000000000000103 /* SectionLoopTimingTests.swift in Sources */,
 				AA00000100000000000001FF /* SectionTransitionRenderTests.swift in Sources */,
@@ -2192,20 +2540,87 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */,
+				1F2F4EC3AEE322FB2501B3C4 /* SongSetupSheet+Key.swift in Sources */,
 				4B1D3707971288484D8EE121 /* TrackBatchRenameSheet.swift in Sources */,
-				FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */,
-				BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */,
 				9C3AC3070618E13A2083689F /* MarkerQuickFindView.swift in Sources */,
 				B83117A0EB0B5508E8560616 /* MarkerQuickFind.swift in Sources */,
+				6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */,
+				BAE42316E30978A0A00B35C2 /* EditView+MarkerQuickFind.swift in Sources */,
+				BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */,
 				CC52EC5295FD261A84F1E396 /* SongSectionProfiler.swift in Sources */,
 				B39B152AAB5FBD59743C1E68 /* SongSectionLabeler.swift in Sources */,
-				2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */,
-				958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */,
 				4A594009640854AB943E58EC /* SongImportAnalyzer.swift in Sources */,
-				05619C719D4D3197CAE514B9 /* SongSetupSheet.swift in Sources */,
-				6C4A851E648B87363B55CF85 /* EditView+TempoDetection.swift in Sources */,
-				BC4E8210BD1E57D6EFC242A7 /* SongTempoDetector.swift in Sources */,
+				958FBD4DE46AEDCD5F249F1E /* SongGuideCueReader.swift in Sources */,
 				D3239364E48A69ADDCCF9EDA /* SongAnalysisAudio.swift in Sources */,
+				2A4ED5F6BB20907F81410108 /* OnDeviceTranscriber.swift in Sources */,
+				FD25854804F3CEFF6135887B /* TrackBatchRename.swift in Sources */,
+				F61C5914308C87261BE1B009 /* ClickScheduler.swift in Sources */,
+				5B83909C90BCDAF5794683E1 /* SmartGuideEditorSheet.swift in Sources */,
+				E8E685A81246FE2D6C5AC97E /* ClickSettingsSheet.swift in Sources */,
+				1D9F0E39A044053A4239FA45 /* PlaybackCoordinator+GeneratedPayloads.swift in Sources */,
+				33CDD78A4FB239A062AE1CFE /* ProceduralClickSource.swift in Sources */,
+				CB95C0D2C9CAE8BF8ABFE910 /* ClickPlaybackSupport.swift in Sources */,
+				EA23740CBCDBAC312368561C /* AudioEngineManager+Click.swift in Sources */,
+				0B8AC37369B703F07F6C597C /* ClickRhythm.swift in Sources */,
+				8256444B13C7824B82D466B6 /* ClickSettings.swift in Sources */,
+				78514FAEFB3C4DE16564E70A /* ClickSound.swift in Sources */,
+				C174DBD68F4695498EEB9F59 /* TimelinePlayRangeEdgeShadow.swift in Sources */,
+				97C68C3E9BBE0BE33266CAAB /* AudioEngineManager+PlayRange.swift in Sources */,
+				A5AD6B5C9F62CF822765CC94 /* LiveLaneWindow.swift in Sources */,
+				FAD2FFC3485D25C4A11447FD /* TimelineClipHoverModel.swift in Sources */,
+				526B358BD019D1F924FFBF08 /* TrackURLCache.swift in Sources */,
+				F9F8349AD5350F5F79A79B45 /* EditView+PlayRange.swift in Sources */,
+				B337EFADAA0D6F4A85255296 /* TimelinePlayRangeShade.swift in Sources */,
+				7D18143C8F4EA2CE18DCD87E /* TimelinePlayRangeFlags.swift in Sources */,
+				243B302FE0C7FACCB1826AF9 /* TimelinePlayRangePreview.swift in Sources */,
+				05E47D6780FD4B323B6AF612 /* TimelineScrollEdgeClamp.swift in Sources */,
+				EFE28075ED9005AF436EC4BA /* TimelineTimeRulerView.swift in Sources */,
+				D05E6C3E96648600403257E3 /* EditView+TrackHeaders.swift in Sources */,
+				D841811A2F9B080AD3694043 /* EditView+Rulers.swift in Sources */,
+				5722C3BA5B85FFDC5C3E48D3 /* SongPlayRange.swift in Sources */,
+				E5E1C51D2AAB1C496C872EE9 /* SongKeyMode.swift in Sources */,
+				1977A413A5998DE168D1D3CF /* SongKeyDetector.swift in Sources */,
+				7D191048737C9EEA7E429EC7 /* WindowMenuCommands.swift in Sources */,
+				75BF4337BEC27524F755CBF6 /* VideoWindowFullScreenSupport.swift in Sources */,
+				EFE04071933C1FCF4113F0C4 /* EditView+Video.swift in Sources */,
+				387E7D5DF360DE858AD55AA1 /* VideoTrackHeaderView.swift in Sources */,
+				B846FB66B9ADCFA328AAF62B /* VideoLaneView.swift in Sources */,
+				1FC57E76BEFF168A87F4749F /* VideoOutputClaimModifier.swift in Sources */,
+				59E1422F9C16EB82A32AB631 /* VideoOutputWindowView.swift in Sources */,
+				C1CC5EA8A2421D388DC6A615 /* VideoPlayerSurface.swift in Sources */,
+				AC50603DF4D9C9E0379C7EDB /* AppColors+Video.swift in Sources */,
+				A0556C26A5BB7BC87909A6E1 /* VideoOutputController.swift in Sources */,
+				51DEE931F732E481B42AD8B8 /* VideoSyncPolicy.swift in Sources */,
+				7E84431A3E0D8088ABF14807 /* VideoThumbnailStore.swift in Sources */,
+				8FF4E15F470E91D51063A6B9 /* FileStore+Video.swift in Sources */,
+				48322C9B71C601E60C50605F /* SongProjectBridge+Video.swift in Sources */,
+				A4B8F80BFE071C59310C6BA9 /* VideoTrackEditSnapshot.swift in Sources */,
+				1234AB17641F6644295E042B /* ProjectVideoTrack.swift in Sources */,
+				5B88D4B1CFA3041C29F9323B /* VideoPlacement.swift in Sources */,
+				FE8501EE821A745D9DFC2FCA /* VideoTrack.swift in Sources */,
+				7840E5ABE439D03850290F20 /* LivePlaybackView+SetlistDrop.swift in Sources */,
+				B44018689886DEB36B98D097 /* OutputTestRun.swift in Sources */,
+				C728275A926A3607B129322D /* OutputChannelTestPlayer+AllOutputs.swift in Sources */,
+				714F36F09015226F4DD7FC18 /* OutputTestSpeech.swift in Sources */,
+				2167501026B21200EEE9DBB4 /* OutputTestSignalBuilder.swift in Sources */,
+				15FD469E01DF82F5E7E30261 /* OutputTestPlan.swift in Sources */,
+				00F2410934454B67BB28D4DD /* TestAllOutputsSheet.swift in Sources */,
+				DDCFE3246BC271AFEE39E397 /* AppHairline.swift in Sources */,
+				AE082424725A9188390EF3F2 /* LivePlaybackSidebarLayout.swift in Sources */,
+				C5E1DA8E725EF0F8CAEF8269 /* LivePlaybackSidebarMetrics.swift in Sources */,
+				73E1CBF549A9172ADB425B3A /* AppTag.swift in Sources */,
+				C57E215E29EBF7C8D3FAE264 /* AppOpacity.swift in Sources */,
+				4F8A750B51A6C16D0E72A871 /* AppRadius.swift in Sources */,
+				51229AA695B438A31AD83FED /* AppTypography+Compact.swift in Sources */,
+				967A23B223029AB2EC538EA3 /* AppColors+Live.swift in Sources */,
+				D7BF9D23A78AE1881E10EA10 /* AppColors+Mixer.swift in Sources */,
+				F8FA21081E2154D73551E5C6 /* SetlistTransitionBadge.swift in Sources */,
+				BDC57E7C6A4C07D8E28AA7DC /* ArrangementSectionPalette.swift in Sources */,
+				B539C2F9B4574FBCDFAD5EB7 /* AppColors+LiveWaveform.swift in Sources */,
+				D299C1CF39D874723A90C48F /* AppColors+Timeline.swift in Sources */,
+				1A6D4FFEF76E7A320C445836 /* TrackGroupPalette.swift in Sources */,
+				7244A7EACFAF21EE7BC4CA55 /* Color+SRGBAdjustments.swift in Sources */,
 				59A25C650C7EF4EC56429EB4 /* SongTimeline+SectionEdges.swift in Sources */,
 				55B723C520047443A9425052 /* ToolbarTransportControls.swift in Sources */,
 				703A5ED995B313FD429DD51D /* SetlistSectionGridView.swift in Sources */,
@@ -2320,7 +2735,6 @@
 				4C41DD9AEDCFAE6113E7E89F /* CuesLiveApp.swift in Sources */,
 				5683783753979D5D44AA769D /* Song.swift in Sources */,
 				88CF0E142B71D61032550EC0 /* SongMusicalKey.swift in Sources */,
-				44E1F5758574E69D7A0983E6 /* ClickTrackSubdivision.swift in Sources */,
 				8B9717FD3846C0D5814AFFAF /* AudioTrack.swift in Sources */,
 				DEE1D44DC9B506579D93EEC7 /* MIDITrack.swift in Sources */,
 				202596B98683B07496BF0A8C /* MIDIEvent.swift in Sources */,
@@ -2351,7 +2765,6 @@
 				F6CA20BD88E6F35CD3BD5773 /* EditTransportBar.swift in Sources */,
 				3783F545E83A9FCE76DD3909 /* EditToolbar.swift in Sources */,
 				8FC9A566079D15729EE3CD63 /* EditSongSettingsMenus.swift in Sources */,
-				AA5CF1E506F6A4FAE6BC123E /* EditGuideTrackMenus.swift in Sources */,
 				33B1D1D0F78066D7DC4F76F9 /* AddTrackTypeSheet.swift in Sources */,
 				0ED0AD756C52C275816544DD /* TrackImportView.swift in Sources */,
 				59174B8DA8970F3382716FF6 /* LivePlaybackView.swift in Sources */,
@@ -2361,7 +2774,6 @@
 				8AF480949E8482DC31933EC2 /* WaveformOverview.swift in Sources */,
 				F61F8D583DD0B65FE15C8F39 /* WaveformLaneView.swift in Sources */,
 				286CB25439511310D21D5039 /* WaveformBarsCanvas.swift in Sources */,
-				7D412A866B68E52B871B8246 /* DAWColors.swift in Sources */,
 				3CB305E965C2989FEBD4EB18 /* ArrangementMarker.swift in Sources */,
 				C768AFEEFAD4C2989E94B51D /* TimeSignatureChange.swift in Sources */,
 				376CE795C5085A6296C2E115 /* MeasureAnchoredChange.swift in Sources */,
@@ -2371,10 +2783,6 @@
 				B10000010000000000000B20 /* TempoTimeline.swift in Sources */,
 				B10000010000000000000B21 /* TempoOperations.swift in Sources */,
 				C4127164C36D8FBC754013DF /* SongTrackLoader.swift in Sources */,
-				00E40C95FB92FD9F2EDC5AD3 /* ClickTrackGenerator.swift in Sources */,
-				1C67899A8054E132507425D9 /* ClickTrackScheduler.swift in Sources */,
-				D647644C01187801B0AD4DA8 /* StemAudioWriter.swift in Sources */,
-				F8A0670D0FA3E9DD3D013F8D /* ClickTrackFileGenerator.swift in Sources */,
 				0491D0CB258BB532C4D262E8 /* TimecodeSettings.swift in Sources */,
 				9180875E8B4415CA60BF47D7 /* TimecodeSettingsStore.swift in Sources */,
 				20D72445427598058DC15378 /* TimecodeStartCalculator.swift in Sources */,

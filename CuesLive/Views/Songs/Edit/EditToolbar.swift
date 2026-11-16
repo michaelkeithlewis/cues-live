@@ -8,13 +8,13 @@ struct EditTransportStatusStrip: View {
         Group {
             if let loadError = viewModel.loadError {
                 Text(loadError)
-                    .font(.caption)
+                    .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textTertiary)
                     .frame(maxWidth: .infinity)
             }
         }
         .padding(.horizontal)
-        .padding(.vertical, 6)
+        .padding(.vertical, AppSpacing.compact)
         .background(AppColors.surfaceElevated)
     }
 }
@@ -81,6 +81,7 @@ struct EditSongToolbarContent: ToolbarContent {
     let onDetectTempo: () -> Void
     let onImportAbleton: () -> Void
     let onAddMIDILane: () -> Void
+    let onAddVideo: () -> Void
     /// Nil hides the back button, as in the separate editor window.
     let onBack: (() -> Void)?
     let currentSectionAtTime: (TimeInterval) -> SongSection?
@@ -92,9 +93,7 @@ struct EditSongToolbarContent: ToolbarContent {
     let stoppedDisplayTime: TimeInterval
     let captureSnapshot: () -> SongEditSnapshot
     let registerUndo: (_ actionName: String, _ before: SongEditSnapshot, _ after: SongEditSnapshot) -> Void
-    let onClickTrackGenerated: () -> Void
     @Binding var showingClickEditor: Bool
-    @Binding var showingSmartGuideEditor: Bool
 
     @ToolbarContentBuilder
     var body: some ToolbarContent {
@@ -113,9 +112,21 @@ struct EditSongToolbarContent: ToolbarContent {
         }
 
         ToolbarItem(placement: .principal) {
-            LiveToolbarSongTitle(title: song.name, upNext: nil)
+            LiveToolbarSongTitle(title: song.name, upNext: nil, details: songDetails)
         }
         .cuesHideSharedBackground()
+
+        ToolbarItem(placement: .principal) {
+            clickButton
+        }
+
+        ToolbarItem(placement: .principal) {
+            SmartGuideToolbarToggle(
+                song: song,
+                captureSnapshot: captureSnapshot,
+                registerUndo: registerUndo
+            )
+        }
 
         if !arrangementActions.sections.isEmpty {
             ToolbarItem(placement: .automatic) {
@@ -133,6 +144,14 @@ struct EditSongToolbarContent: ToolbarContent {
             moreMenu
         }
         .cuesHideSharedBackground()
+    }
+
+    private var songDetails: [LiveToolbarSongTitle.Detail] {
+        [
+            LiveToolbarSongTitle.Detail(label: "Tempo", value: song.bpm.map { "\(Int($0.rounded()))" } ?? "–"),
+            LiveToolbarSongTitle.Detail(label: "Key", value: song.displayedKeyText ?? "–"),
+            LiveToolbarSongTitle.Detail(label: "Time", value: song.timeSignatureDisplay ?? "–"),
+        ]
     }
 
     private var editorTransportCluster: some View {
@@ -178,6 +197,24 @@ struct EditSongToolbarContent: ToolbarContent {
         .help("Add MIDI Lane")
     }
 
+    /// Shows as on while the click plays; pressing it opens the click settings either way.
+    private var clickButton: some View {
+        Toggle(isOn: Binding(get: { song.clickEnabled }, set: { _ in showingClickEditor = true })) {
+            Label("Click", systemImage: "metronome")
+        }
+        .toggleStyle(.button)
+        .labelStyle(.iconOnly)
+        .help(song.clickEnabled ? "Click On" : "Click Off")
+        .sheet(isPresented: $showingClickEditor) {
+            ClickSettingsSheet(
+                song: song,
+                viewModel: viewModel,
+                captureSnapshot: captureSnapshot,
+                registerUndo: registerUndo
+            )
+        }
+    }
+
     private var moreMenu: some View {
         Menu {
             Button(action: onChangeKey) {
@@ -186,21 +223,15 @@ struct EditSongToolbarContent: ToolbarContent {
             .disabled(song.sortedTracks.isEmpty)
 
             Button {
-                showingClickEditor = true
-            } label: {
-                Label("Generate Click", systemImage: "metronome")
-            }
-
-            Button {
-                showingSmartGuideEditor = true
-            } label: {
-                Label("Smart Cues", systemImage: "person.wave.2")
-            }
-
-            Button {
                 onImportAbleton()
             } label: {
                 Label("Add Ableton File…", systemImage: "doc")
+            }
+
+            Button {
+                onAddVideo()
+            } label: {
+                Label(song.videoTrack == nil ? "Add Video…" : "Replace Video…", systemImage: "film")
             }
 
             Divider()
@@ -226,25 +257,37 @@ struct EditSongToolbarContent: ToolbarContent {
                 .labelStyle(.iconOnly)
         }
         .help("More")
-        .popover(isPresented: $showingClickEditor, arrowEdge: .bottom) {
-            ClickTrackEditorButton(
-                song: song,
-                viewModel: viewModel,
-                captureSnapshot: captureSnapshot,
-                registerUndo: registerUndo,
-                onClickTrackGenerated: onClickTrackGenerated,
-                chrome: .sheet
-            )
+    }
+}
+
+/// Turns the song's Smart Guide callouts on and off as one undoable edit.
+private struct SmartGuideToolbarToggle: View {
+    @Environment(\.modelContext) private var modelContext
+    let song: Song
+    let captureSnapshot: () -> SongEditSnapshot
+    let registerUndo: (_ actionName: String, _ before: SongEditSnapshot, _ after: SongEditSnapshot) -> Void
+
+    var body: some View {
+        Toggle(isOn: isEnabled) {
+            Label("Smart Guide", systemImage: "person.wave.2")
         }
-        .popover(isPresented: $showingSmartGuideEditor, arrowEdge: .bottom) {
-            SmartGuideEditorButton(
-                song: song,
-                viewModel: viewModel,
-                captureSnapshot: captureSnapshot,
-                registerUndo: registerUndo,
-                chrome: .sheet
-            )
-        }
+        .toggleStyle(.button)
+        .labelStyle(.iconOnly)
+        .help(song.smartGuideEnabled ? "Turn Off Smart Guide" : "Turn On Smart Guide")
+    }
+
+    private var isEnabled: Binding<Bool> {
+        Binding(
+            get: { song.smartGuideEnabled },
+            set: { isOn in
+                guard isOn != song.smartGuideEnabled else { return }
+                let before = captureSnapshot()
+                song.smartGuideEnabled = isOn
+                try? modelContext.save()
+                try? SongProjectBridge.syncProjectFile(for: song, context: modelContext)
+                registerUndo("Smart Guide", before, captureSnapshot())
+            }
+        )
     }
 }
 #endif

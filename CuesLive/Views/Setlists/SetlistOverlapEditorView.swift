@@ -70,8 +70,8 @@ struct SetlistOverlapEditorView: View {
 
     private var maximumWindowZoom: CGFloat {
         guard baseWindowDuration > 0 else { return 1 }
-        let incomingDuration = incomingSnapshot?.timelineDuration ?? 0
-        let maxDuration = max(outgoingDuration, incomingDuration)
+        let incomingDuration = incomingSnapshot?.window.duration ?? 0
+        let maxDuration = max(outgoingSnapshot?.window.duration ?? 0, incomingDuration)
         return max(1, CGFloat(maxDuration / baseWindowDuration))
     }
 
@@ -85,15 +85,30 @@ struct SetlistOverlapEditorView: View {
         return baseWindowDuration * TimeInterval(zoom)
     }
 
+    /// The outgoing song's out point.
     private var outgoingDuration: TimeInterval {
         outgoingSnapshot?.timelineDuration ?? 0
+    }
+
+    /// The outgoing song's in point. The window never reaches back before it.
+    private var outgoingStart: TimeInterval {
+        outgoingSnapshot?.startTime ?? 0
+    }
+
+    private var outgoingWindowStart: TimeInterval {
+        OverlapTransitionTiming.outgoingWindowStart(
+            outgoingDuration: outgoingDuration,
+            windowDuration: windowDuration,
+            outgoingStart: outgoingStart
+        )
     }
 
     private var incomingLaneOffset: TimeInterval {
         OverlapTransitionTiming.incomingLaneOffset(
             outgoingDuration: outgoingDuration,
             windowDuration: windowDuration,
-            startOffsetSeconds: startOffsetSeconds
+            startOffsetSeconds: startOffsetSeconds,
+            outgoingStart: outgoingStart
         )
     }
 
@@ -130,8 +145,8 @@ struct SetlistOverlapEditorView: View {
 
                 if let previewError {
                     Text(previewError)
-                        .font(.caption)
-                        .foregroundStyle(.red)
+                        .font(AppTypography.caption)
+                        .foregroundStyle(AppColors.error)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -176,10 +191,10 @@ struct SetlistOverlapEditorView: View {
     private var editorHeader: some View {
         VStack(alignment: .leading, spacing: AppSpacing.xs) {
             Text(context.outgoingSong.name)
-                .font(.subheadline.weight(.semibold))
+                .font(AppTypography.subheadlineEmphasized)
                 .foregroundStyle(AppColors.textSecondary)
             Text("into \(context.incomingSong.name)")
-                .font(.headline)
+                .font(AppTypography.headline)
                 .foregroundStyle(AppColors.textPrimary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -310,7 +325,7 @@ struct SetlistOverlapEditorView: View {
                         previewEngine.isPlaying ? "Stop" : "Preview",
                         systemImage: previewEngine.isPlaying ? "stop.fill" : "play.fill"
                     )
-                    .font(.subheadline.weight(.semibold))
+                    .font(AppTypography.subheadlineEmphasized)
                 }
             }
             .disabled(windowDuration <= 0 || isLoadingPreview)
@@ -412,18 +427,19 @@ struct SetlistOverlapEditorView: View {
 
         startOffsetSeconds = OverlapTransitionTiming.defaultStartOffset(
             windowDuration: baseWindowDuration,
-            outgoingDuration: outgoingSnapshot.timelineDuration
+            outgoingDuration: outgoingSnapshot.timelineDuration,
+            outgoingStart: outgoingSnapshot.startTime
         )
     }
 
     private var outgoingWindowRange: ClosedRange<TimeInterval> {
-        let end = outgoingDuration
-        let start = max(0, end - windowDuration)
-        return start...end
+        outgoingWindowStart...max(outgoingDuration, outgoingWindowStart)
     }
 
+    /// The incoming song's first window, from its in point.
     private var incomingWindowRange: ClosedRange<TimeInterval> {
-        0...max(windowDuration, 0.001)
+        let start = incomingSnapshot?.startTime ?? 0
+        return start...(start + max(windowDuration, 0.001))
     }
 
     @ViewBuilder
@@ -469,7 +485,7 @@ struct SetlistOverlapEditorView: View {
                     .offset(x: xOffset)
                     .overlay {
                         Text("No waveform")
-                            .font(.caption)
+                            .font(AppTypography.caption)
                             .foregroundStyle(AppColors.textTertiary)
                     }
             }
@@ -485,14 +501,14 @@ struct SetlistOverlapEditorView: View {
                 }
                 guard let dragStartOffset, windowDuration > 0 else { return }
                 let deltaTime = TimeInterval(value.translation.width / contentWidth) * windowDuration
-                let outgoingWindowStart = max(0, outgoingDuration - windowDuration)
                 let startAlignment = outgoingDuration - dragStartOffset
                 let newAlignment = startAlignment + deltaTime
                 let newLaneOffset = newAlignment - outgoingWindowStart
                 startOffsetSeconds = OverlapTransitionTiming.startOffset(
                     outgoingDuration: outgoingDuration,
                     windowDuration: windowDuration,
-                    incomingLaneOffset: newLaneOffset
+                    incomingLaneOffset: newLaneOffset,
+                    outgoingStart: outgoingStart
                 )
             }
             .onEnded { _ in
@@ -634,14 +650,14 @@ private struct OverlapWaveformLaneView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: AppRadius.md, style: .continuous)
-                .fill(Color.liveVoiceMemosBackground)
+                .fill(AppColors.LiveWaveform.background)
 
             if sourcePeaks.isEmpty {
                 ProgressView()
                     .controlSize(.small)
             } else if displayPeaks.isEmpty {
                 Text("No waveform")
-                    .font(.caption)
+                    .font(AppTypography.caption)
                     .foregroundStyle(AppColors.textTertiary)
             } else {
                 WaveformBarsCanvas(
@@ -649,11 +665,11 @@ private struct OverlapWaveformLaneView: View {
                     showsEmptyBaseline: false,
                     style: .voiceMemosBars,
                     playheadFraction: playheadFraction,
-                    playedColor: .white.opacity(LiveSetlistWaveformMetrics.waveformPlayedOpacity),
-                    unplayedColor: .white.opacity(LiveSetlistWaveformMetrics.waveformUnplayedOpacity)
+                    playedColor: AppColors.LiveWaveform.monochrome.opacity(LiveSetlistWaveformMetrics.waveformPlayedOpacity),
+                    unplayedColor: AppColors.LiveWaveform.monochrome.opacity(LiveSetlistWaveformMetrics.waveformUnplayedOpacity)
                 )
                 .frame(width: max(contentWidth, 1), height: height)
-                .padding(.vertical, 2)
+                .padding(.vertical, AppSpacing.xxxs)
             }
         }
         .frame(width: max(contentWidth, 1), height: height)

@@ -25,8 +25,10 @@ struct SongMetadataSnapshot: Equatable, Hashable {
     var timeSignatureNumerator: Int?
     var timeSignatureDenominator: Int?
     var baseKeyRaw: String?
+    var keyModeRaw: String? = nil
     var transposeSemitones: Int
     var smartGuideEnabled: Bool
+    var click = ClickSettings()
 }
 
 struct SongEditSnapshot: Equatable {
@@ -37,6 +39,7 @@ struct SongEditSnapshot: Equatable {
     var songMetadata: SongMetadataSnapshot
     var tracks: [TrackEditSnapshot]
     var midiLaneHeights: [UUID: Double]
+    var video: VideoTrackEditSnapshot? = nil
 
     static func capture(
         song: Song,
@@ -55,8 +58,10 @@ struct SongEditSnapshot: Equatable {
                 timeSignatureNumerator: song.timeSignatureNumerator,
                 timeSignatureDenominator: song.timeSignatureDenominator,
                 baseKeyRaw: song.baseKeyRaw,
+                keyModeRaw: song.keyModeRaw,
                 transposeSemitones: song.transposeSemitones,
-                smartGuideEnabled: song.smartGuideEnabled
+                smartGuideEnabled: song.smartGuideEnabled,
+                click: song.clickSettings
             ),
             tracks: song.sortedTracks.map { track in
                 TrackEditSnapshot(
@@ -80,7 +85,8 @@ struct SongEditSnapshot: Equatable {
             },
             midiLaneHeights: Dictionary(
                 uniqueKeysWithValues: song.sortedMIDITracks.map { ($0.id, $0.laneHeight) }
-            )
+            ),
+            video: song.videoTrack.map(VideoTrackEditSnapshot.init(video:))
         )
     }
 
@@ -89,8 +95,10 @@ struct SongEditSnapshot: Equatable {
         song.timeSignatureNumerator = songMetadata.timeSignatureNumerator
         song.timeSignatureDenominator = songMetadata.timeSignatureDenominator
         song.baseKeyRaw = songMetadata.baseKeyRaw
+        song.keyModeRaw = songMetadata.keyModeRaw
         song.transposeSemitones = songMetadata.transposeSemitones
         song.smartGuideEnabled = songMetadata.smartGuideEnabled
+        song.clickSettings = songMetadata.click
     }
 
     func applyTracks(to song: Song, context: ModelContext) {

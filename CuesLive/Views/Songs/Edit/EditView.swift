@@ -35,6 +35,7 @@ struct ClipGainPromptRequest: Identifiable {
 
 struct EditView: View {
     @Environment(\.modelContext) var modelContext
+    @Environment(\.openWindow) var openWindow
 
     @Bindable var song: Song
     let viewModel: SongEditorViewModel
@@ -70,7 +71,6 @@ struct EditView: View {
     @Bindable var audioEngine = AudioEngineManager.shared
     @State var showingArrangementEditor = false
     @State private var showingClickEditor = false
-    @State private var showingSmartGuideEditor = false
     @State var showingTempoOperations = false
     @State var trackPendingRename: AudioTrack?
     @State var renameTrackName = ""
@@ -78,8 +78,8 @@ struct EditView: View {
     /// Shift-press on an already selected clip; removed on release unless the press became a drag.
     @State var pendingShiftDeselectID: UUID?
     @State var clipDrag: ClipDrag?
-    /// The clip under the pointer, which shows its fade curve and knobs.
-    @State var hoveredClipID: UUID?
+    /// The clip under the pointer. Kept out of this view's state so hovering does not rebuild the editor.
+    @State var clipHover = TimelineClipHoverModel()
     /// The edit selection. A selector drag writes it, and it stays after the pointer
     /// goes up. A click replaces it with an insertion, which has no range.
     @State var editSelection: ClipRangeDrag?
@@ -88,9 +88,13 @@ struct EditView: View {
     @State var laneResize: LaneResizeDrag?
     /// Snapped lane position Play starts from. A click places it; playback does not move it.
     @State var insertionTime: TimeInterval = 0
+    @State var playRangePreview = TimelinePlayRangePreview()
     @FocusState var isTimelineFocused: Bool
     @State var isTimelineReady = false
     @State var isAudioDropTargeted = false
+    @State var showingVideoImporter = false
+    /// Size and length of the song's movie, read from the file.
+    @State var videoInfo: VideoFileInfo?
 
     @Query(sort: [SortDescriptor(\TrackGroup.sortOrder), SortDescriptor(\TrackGroup.name)])
     var trackGroups: [TrackGroup]
@@ -101,6 +105,12 @@ struct EditView: View {
                 sheetContent(for: sheet)
             }
             .modifier(addTrackFlowModifier)
+            .fileImporter(
+                isPresented: $showingVideoImporter,
+                allowedContentTypes: FileStore.supportedVideoTypes,
+                allowsMultipleSelection: false,
+                onCompletion: handleVideoImport
+            )
             .modifier(detectSectionsModifier)
             .alert("Couldn’t Detect Tempo", isPresented: tempoDetectionAlert) {
                 Button("OK", role: .cancel) {}
@@ -116,7 +126,7 @@ struct EditView: View {
     /// The timeline with focus, keyboard, and drop handling.
     private var focusableEditor: some View {
         editorRoot
-            .background(Color.dawTimelineBackground)
+            .background(AppColors.Timeline.background)
             .overlay(alignment: .top) { markerQuickFindOverlay }
             .modifier(AudioFileDropModifier(
                 isTargeted: $isAudioDropTargeted,
@@ -147,6 +157,15 @@ struct EditView: View {
     private var editorWithLifecycle: some View {
         focusableEditor
             .onAppear(perform: handleAppear)
+            // A setlist-following editor leaves the Video window with the setlist.
+            .videoOutputClaim(song: song, engine: audioEngine, isEnabled: !viewModel.followsSetlist)
+            // The range selection is stored by row, and the video lane shifts every row below it.
+            .onChange(of: song.videoTrack?.id) { _, _ in
+                editSelection = nil
+            }
+            .task(id: song.videoTrack?.mediaPath) {
+                await refreshVideoInfo()
+            }
             .onDisappear {
                 SongImportAnalyzer.shared.endEditing(song.id)
             }
@@ -245,6 +264,7 @@ struct EditView: View {
             onDetectTempo: detectTempo,
             onImportAbleton: presentAbletonImporter,
             onAddMIDILane: { activeSheet = .midiDevicePicker },
+            onAddVideo: presentVideoImporter,
             onBack: viewModel.followsSetlist ? nil : onBack,
             currentSectionAtTime: { time in
                 displaySections.section(atTimeline: time)
@@ -257,9 +277,7 @@ struct EditView: View {
             stoppedDisplayTime: playbackStart,
             captureSnapshot: captureSnapshot,
             registerUndo: registerSnapshotChange(_:before:after:),
-            onClickTrackGenerated: reloadTimelineFromProject,
-            showingClickEditor: $showingClickEditor,
-            showingSmartGuideEditor: $showingSmartGuideEditor
+            showingClickEditor: $showingClickEditor
         )
     }
     #endif

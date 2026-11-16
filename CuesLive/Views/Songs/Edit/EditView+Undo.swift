@@ -36,6 +36,7 @@ extension EditView {
         let trackIDsBeforeApply = Set(song.sortedTracks.map(\.id))
         snapshot.applyTracks(to: song, context: modelContext)
         snapshot.applyMIDILaneHeights(to: song)
+        snapshot.applyVideo(to: song, context: modelContext)
         let trackIDsChanged = trackIDsBeforeApply != Set(song.sortedTracks.map(\.id))
 
         let defaultBPM = song.bpm ?? TempoChange.defaultBPM
@@ -94,13 +95,6 @@ extension EditView {
                 applySnapshot(snapshot)
             }
         )
-    }
-
-    /// Picks up timeline changes written straight to the project file, such as a regenerated click clip.
-    func reloadTimelineFromProject() {
-        guard let state = try? SongProjectBridge.loadProjectState(for: song) else { return }
-        timeline = state.timeline
-        syncPlayback()
     }
 
     func syncPlayback() {

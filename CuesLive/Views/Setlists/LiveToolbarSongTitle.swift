@@ -1,10 +1,20 @@
 import SwiftUI
 
-/// Centered toolbar song display: the current song over a small "Up Next" line, set in a
-/// continuous rounded panel. Occupies `.principal` so trailing controls stay on the right.
+/// Centered toolbar song display: the current song over a small "Up Next" line or a row of
+/// labelled details, set in a continuous rounded panel. Occupies `.principal` so trailing
+/// controls stay on the right.
 struct LiveToolbarSongTitle: View {
+    /// One column under the title: a small label over a value set at the title's size.
+    struct Detail: Identifiable {
+        let label: String
+        let value: String
+
+        var id: String { label }
+    }
+
     let title: String
     var upNext: String?
+    var details: [Detail] = []
 
     private var shape: RoundedRectangle {
         RoundedRectangle(cornerRadius: AppRadius.sm - 2, style: .continuous)
@@ -12,6 +22,11 @@ struct LiveToolbarSongTitle: View {
 
     /// Fills the toolbar's usable height: the macOS unified toolbar leaves 46pt for an item,
     /// while the iOS navigation bar is 44pt overall.
+    /// Gap between the title and the "up next" line.
+    private static let lineSpacing: CGFloat = 1
+    /// Gap between a detail's label and its value.
+    private static let detailLabelSpacing: CGFloat = 0
+
     private static var panelHeight: CGFloat {
         #if os(macOS)
         46
@@ -40,31 +55,52 @@ struct LiveToolbarSongTitle: View {
     }
 
     private var panel: some View {
-        VStack(spacing: 1) {
+        VStack(spacing: Self.lineSpacing) {
             Text(title)
-                .font(.subheadline.weight(.semibold))
+                .font(AppTypography.subheadlineEmphasized)
                 .foregroundStyle(AppColors.textPrimary)
                 .lineLimit(1)
                 .truncationMode(.tail)
             if let upNextName {
                 upNextLine(upNextName)
             }
+            if !details.isEmpty {
+                detailRow
+            }
         }
         .padding(.horizontal, AppSpacing.md)
         .frame(minWidth: 160, minHeight: Self.panelHeight)
         .background(shape.fill(AppColors.headerBand))
-        .overlay(shape.strokeBorder(Color.white.opacity(0.08), lineWidth: 1))
+        .overlay(shape.strokeBorder(AppColors.cardBorder, lineWidth: 1))
         .contentShape(shape)
+    }
+
+    private var detailRow: some View {
+        HStack(spacing: AppSpacing.md) {
+            ForEach(details) { detail in
+                VStack(spacing: Self.detailLabelSpacing) {
+                    Text(detail.label.uppercased())
+                        .font(AppTypography.Compact.microLabel)
+                        .tracking(0.6)
+                        .foregroundStyle(AppColors.textTertiary)
+                    Text(detail.value)
+                        .font(AppTypography.subheadlineEmphasized.monospacedDigit())
+                        .foregroundStyle(AppColors.textPrimary)
+                        .lineLimit(1)
+                }
+                .accessibilityElement(children: .combine)
+            }
+        }
     }
 
     private func upNextLine(_ name: String) -> some View {
         HStack(spacing: AppSpacing.xxs) {
             Text("UP NEXT")
-                .font(.system(size: 9, weight: .semibold))
+                .font(AppTypography.Compact.label)
                 .tracking(0.8)
                 .foregroundStyle(AppColors.textTertiary)
             Text(name)
-                .font(.caption)
+                .font(AppTypography.caption)
                 .foregroundStyle(AppColors.textSecondary)
                 .lineLimit(1)
                 .truncationMode(.tail)
