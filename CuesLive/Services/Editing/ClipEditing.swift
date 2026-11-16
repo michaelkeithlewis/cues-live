@@ -514,15 +514,35 @@ enum ClipEditing {
         timeline: inout SongTimeline,
         midiEvents: inout [MIDIEvent]
     ) -> [UUID: UUID] {
-        let length = end - start
-        guard length > tolerance else { return [:] }
+        guard let copied = extractSpan(
+            from: start,
+            to: end,
+            copyLoops: copyLoops,
+            timeline: timeline,
+            midiEvents: midiEvents
+        ) else { return [:] }
+        let inserted = insertSpan(copied.span, at: destination, timeline: &timeline, midiEvents: &midiEvents)
+        return copied.markerIDs.compactMapValues { inserted[$0] }
+    }
 
-        let copiedClips = timeline.clips.compactMap { clip -> TrackClip? in
+    /// Copies `[start, end)` from every track. A span that starts inside a section carries a marker
+    /// with that section's name at its start. Returns the span markers' IDs keyed by the originals.
+    static func extractSpan(
+        from start: TimeInterval,
+        to end: TimeInterval,
+        copyLoops: Bool = false,
+        timeline: SongTimeline,
+        midiEvents: [MIDIEvent]
+    ) -> (span: SongSpan, markerIDs: [UUID: UUID])? {
+        let length = end - start
+        guard length > tolerance else { return nil }
+
+        let clips = timeline.clips.compactMap { clip -> TrackClip? in
             let from = max(clip.timelineStartSeconds, start)
             let to = min(clip.timelineEndSeconds, end)
             guard to - from >= TrackClip.minimumDuration else { return nil }
             var copy = subClip(clip, from: from, to: to, id: UUID())
-            copy.timelineStartSeconds = destination + (from - start)
+            copy.timelineStartSeconds = from - start
             return copy
         }
 
@@ -530,33 +550,61 @@ enum ClipEditing {
         // An explicit section end inside the copied range is copied with it.
         let copiedEnd = { (sectionEnd: TimeInterval?) -> TimeInterval? in
             guard let sectionEnd, sectionEnd > start + tolerance, sectionEnd <= end + tolerance else { return nil }
-            return destination + (sectionEnd - start)
+            return sectionEnd - start
         }
-        var markerIDMap: [UUID: UUID] = [:]
-        var copiedMarkers = sorted
+        var markerIDs: [UUID: UUID] = [:]
+        var markers = sorted
             .filter { $0.startSeconds >= start - tolerance && $0.startSeconds < end - tolerance }
             .map { marker -> ArrangementMarker in
                 let copy = ArrangementMarker(
                     name: marker.name,
-                    startSeconds: destination + max(0, marker.startSeconds - start),
+                    startSeconds: max(0, marker.startSeconds - start),
                     endSeconds: copiedEnd(marker.endSeconds),
                     loops: copyLoops && marker.loops
                 )
-                markerIDMap[marker.id] = copy.id
+                markerIDs[marker.id] = copy.id
                 return copy
             }
-        let copyStartsOnMarker = sorted.contains { abs($0.startSeconds - start) <= tolerance }
-        if !copyStartsOnMarker, let owner = sorted.last(where: { $0.startSeconds < start }) {
-            copiedMarkers.append(
+        let startsOnMarker = sorted.contains { abs($0.startSeconds - start) <= tolerance }
+        if !startsOnMarker, let owner = sorted.last(where: { $0.startSeconds < start }) {
+            markers.append(
                 ArrangementMarker(
                     name: owner.name,
-                    startSeconds: destination,
+                    startSeconds: 0,
                     endSeconds: copiedEnd(owner.endSeconds),
                     loops: copyLoops && owner.loops
                 )
             )
         }
 
+        let events = midiEvents
+            .filter { $0.timelineSeconds >= start - tolerance && $0.timelineSeconds < end - tolerance }
+            .map { event in
+                MIDIEvent(
+                    trackID: event.trackID,
+                    timelineSeconds: event.timelineSeconds - start,
+                    commandID: event.commandID,
+                    label: event.label
+                )
+            }
+
+        let span = SongSpan(length: length, clips: clips, markers: markers, midiEvents: events)
+        return (span, markerIDs)
+    }
+
+    /// Inserts `span` at `destination`, pushing later material right. Material after the insertion
+    /// point keeps its section name. Every insert gets fresh IDs, so one span can be pasted many
+    /// times. Returns the inserted markers' IDs keyed by the span's marker IDs.
+    @discardableResult
+    static func insertSpan(
+        _ span: SongSpan,
+        at destination: TimeInterval,
+        timeline: inout SongTimeline,
+        midiEvents: inout [MIDIEvent]
+    ) -> [UUID: UUID] {
+        guard span.length > tolerance else { return [:] }
+
+        let sorted = timeline.sortedMarkers
         // A destination in the gap after a short section belongs to no section.
         let destinationOwner = sorted
             .last { $0.startSeconds < destination - tolerance }
@@ -565,37 +613,56 @@ enum ClipEditing {
         let materialFollows = timeline.clips.contains { $0.timelineEndSeconds > destination + tolerance }
             || sorted.contains { $0.startSeconds > destination + tolerance }
 
-        let copiedMIDI = midiEvents
-            .filter { $0.timelineSeconds >= start - tolerance && $0.timelineSeconds < end - tolerance }
-            .map { event in
-                MIDIEvent(
-                    trackID: event.trackID,
-                    timelineSeconds: destination + (event.timelineSeconds - start),
-                    commandID: event.commandID,
-                    label: event.label
-                )
-            }
+        insertSpace(at: destination, length: span.length, timeline: &timeline, midiEvents: &midiEvents)
 
-        insertSpace(at: destination, length: length, timeline: &timeline, midiEvents: &midiEvents)
-
-        timeline.clips.append(contentsOf: copiedClips)
+        timeline.clips.append(contentsOf: span.clips.map { clip in
+            TrackClip(
+                trackID: clip.trackID,
+                timelineStartSeconds: destination + clip.timelineStartSeconds,
+                duration: clip.duration,
+                sourceStartSeconds: clip.sourceStartSeconds,
+                gainDB: clip.gainDB,
+                playbackRate: clip.playbackRate,
+                fadeIn: clip.fadeIn,
+                fadeOut: clip.fadeOut
+            )
+        })
         sort(&timeline.clips)
-        timeline.markers.append(contentsOf: copiedMarkers)
+
+        var markerIDs: [UUID: UUID] = [:]
+        for marker in span.markers {
+            let inserted = ArrangementMarker(
+                name: marker.name,
+                startSeconds: destination + marker.startSeconds,
+                endSeconds: marker.endSeconds.map { destination + $0 },
+                loops: marker.loops
+            )
+            markerIDs[marker.id] = inserted.id
+            timeline.markers.append(inserted)
+        }
         if let destinationOwner, !destinationOnMarker, materialFollows {
             // The owner's end was pushed right with the material after the insertion point.
             let shiftedOwnerEnd = timeline.markers.first { $0.id == destinationOwner.id }?.endSeconds
             timeline.markers.append(
                 ArrangementMarker(
                     name: destinationOwner.name,
-                    startSeconds: destination + length,
+                    startSeconds: destination + span.length,
                     endSeconds: shiftedOwnerEnd,
                     loops: destinationOwner.loops
                 )
             )
         }
         timeline.markers.sort { $0.startSeconds < $1.startSeconds }
-        midiEvents.append(contentsOf: copiedMIDI)
-        return markerIDMap
+
+        midiEvents.append(contentsOf: span.midiEvents.map { event in
+            MIDIEvent(
+                trackID: event.trackID,
+                timelineSeconds: destination + event.timelineSeconds,
+                commandID: event.commandID,
+                label: event.label
+            )
+        })
+        return markerIDs
     }
 
     /// Moves `[start, end)` on every track to `destination`, which is measured on the timeline

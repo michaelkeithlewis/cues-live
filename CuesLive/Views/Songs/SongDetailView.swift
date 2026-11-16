@@ -57,8 +57,9 @@ struct SongDetailView: View {
             .onAppear(perform: handleAppear)
             .navigationBarBackButtonHidden(true)
             #if os(macOS)
-            .focusedValue(\.songEditorActions, songEditorActions)
-            .focusedValue(\.songUndoActions, songUndoActions)
+            // Scene-wide so the Song and Edit menus work wherever focus sits in the editor window.
+            .focusedSceneValue(\.songEditorActions, songEditorActions)
+            .focusedSceneValue(\.songUndoActions, songUndoActions)
             #endif
             .onDisappear {
                 AudioEngineManager.shared.stop()

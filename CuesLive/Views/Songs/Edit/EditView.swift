@@ -137,13 +137,12 @@ struct EditView: View {
             .liveInputMappingSession(isEnabled: !viewModel.followsSetlist, takesKeyFocus: false) { action in
                 handleMappedLiveAction(action)
             }
-            .focusedValue(\.clipEditorActions, clipEditorActions)
-            .focusedValue(\.trackHeightActions, trackHeightActions)
+            .focusedSceneValue(\.clipEditorActions, clipEditorActions)
+            .focusedSceneValue(\.trackHeightActions, trackHeightActions)
             .focusedValue(\.timelineZoomActions, timelineZoomActions)
             .onKeyPress(phases: .down, action: handleTrackHeightKeyPress)
             #if os(macOS)
             .onDeleteCommand(perform: removeClipSelection)
-            .onCommand(#selector(NSResponder.selectAll(_:)), perform: selectAllClips)
             .onExitCommand {
                 clipSelection.deselectAll()
             }

@@ -222,7 +222,7 @@ extension EditView {
     }
 
     /// Removes the section's span from every track, MIDI lane, and the marker list, closing the gap.
-    private func deleteSection(_ section: SongSection) {
+    func deleteSection(_ section: SongSection) {
         if cuedSectionID == section.id {
             clearMarkerCue()
         }

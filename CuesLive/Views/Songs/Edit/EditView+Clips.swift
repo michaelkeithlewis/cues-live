@@ -20,7 +20,12 @@ extension EditView {
             deselectAll: { clipSelection.deselectAll() },
             adjustGain: { beginAdjustGain() },
             nudgeGainUp: { nudgeSelectedClipGain(by: 1) },
-            nudgeGainDown: { nudgeSelectedClipGain(by: -1) }
+            nudgeGainDown: { nudgeSelectedClipGain(by: -1) },
+            cut: cutClips,
+            copy: copyClips,
+            paste: pasteClipboard,
+            delete: removeClipSelection,
+            selectAll: selectAllClips
         )
     }
 

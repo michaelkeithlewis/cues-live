@@ -242,6 +242,7 @@ struct TimelineRulerView: View {
     let onAddSection: (TimeInterval) -> Void
     let onRenameSection: (SongSection) -> Void
     let onRemoveMarker: (SongSection) -> Void
+    let sectionClipboard: SectionClipboardActions
     let previewSections: (SectionEdgeEdit) -> [SongSection]
     let onEditSectionEdge: (SectionEdgeEdit) -> Void
     let onTimeSignatureRulerTap: (TimeInterval) -> Void
@@ -323,7 +324,8 @@ struct TimelineRulerView: View {
             previewSections: previewSections,
             onEditSectionEdge: onEditSectionEdge,
             tempoChanges: tempoChanges,
-            timeSignatureChanges: timeSignatureChanges
+            timeSignatureChanges: timeSignatureChanges,
+            clipboard: sectionClipboard
         )
     }
 }

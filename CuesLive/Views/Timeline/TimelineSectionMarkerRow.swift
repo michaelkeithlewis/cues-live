@@ -26,6 +26,7 @@ struct TimelineSectionMarkerRowView: View {
     let onEditSectionEdge: (SectionEdgeEdit) -> Void
     let tempoChanges: [TempoChange]
     let timeSignatureChanges: [TimeSignatureChange]
+    var clipboard = SectionClipboardActions()
 
     @State private var pointerX: CGFloat = 0
     @State private var selectedSectionID: UUID?
@@ -164,6 +165,18 @@ struct TimelineSectionMarkerRowView: View {
                     if isPlaying {
                         Button("Cue Section") {
                             onCueSection(section)
+                        }
+                    }
+                    Divider()
+                    Button("Copy Section") {
+                        clipboard.copy(section)
+                    }
+                    Button("Cut Section") {
+                        clipboard.cut(section)
+                    }
+                    if clipboard.canPaste {
+                        Button("Paste Before This Section") {
+                            clipboard.pasteBefore(section)
                         }
                     }
                     Divider()

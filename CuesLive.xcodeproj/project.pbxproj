@@ -758,6 +758,16 @@
 		8D7564AC88777BD8D1B0DD7F /* ClickScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */; };
 		F61C5914308C87261BE1B009 /* ClickScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */; };
 		9C21A7661F02F69FD520F5DA /* ClickSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D63E0040BD9E28899BD348 /* ClickSchedulerTests.swift */; };
+		C2C7C6AED97E5B8136BDC813 /* SongSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE607949E4DEF75D53C1C99E /* SongSpan.swift */; };
+		DB5F7E50411BEC062ED6DDB9 /* SongSpan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE607949E4DEF75D53C1C99E /* SongSpan.swift */; };
+		6646C4CB6463E40DD216E93C /* EditorClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */; };
+		BFA52BC1DAEEB99CB715131C /* EditorClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */; };
+		A5195B8FA1FF8DD92CC5200C /* EditView+Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */; };
+		BF670FA5596DDEDEFD19DFF0 /* EditView+Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */; };
+		CA44FAA09C1FB29A29D42614 /* EditorPasteboardCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */; };
+		FEE2593102F0BD83912D7872 /* EditorPasteboardCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */; };
+		34957FA15974E0431F86DA33 /* SectionClipboardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9585C89B3153A52608626E60 /* SectionClipboardActions.swift */; };
+		156F38F7D2237340F86DFE19 /* SectionClipboardActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9585C89B3153A52608626E60 /* SectionClipboardActions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1187,6 +1197,11 @@
 		1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartGuideEditorSheet.swift; sourceTree = "<group>"; };
 		B1A1C12D3DF8D42242D9D737 /* ClickScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickScheduler.swift; sourceTree = "<group>"; };
 		61D63E0040BD9E28899BD348 /* ClickSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickSchedulerTests.swift; sourceTree = "<group>"; };
+		FE607949E4DEF75D53C1C99E /* SongSpan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongSpan.swift; sourceTree = "<group>"; };
+		4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorClipboard.swift; sourceTree = "<group>"; };
+		D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView+Clipboard.swift"; sourceTree = "<group>"; };
+		10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorPasteboardCommands.swift; sourceTree = "<group>"; };
+		9585C89B3153A52608626E60 /* SectionClipboardActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionClipboardActions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1294,6 +1309,7 @@
 		AA0000050000000000000004 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FE607949E4DEF75D53C1C99E /* SongSpan.swift */,
 				0A7814A8135DD33FC680F6EC /* ClickRhythm.swift */,
 				4749514E70DA5A2C9EDAAB27 /* ClickSettings.swift */,
 				45301C3D6553506A02E27DB6 /* ClickSound.swift */,
@@ -1817,6 +1833,7 @@
 		AA00000500000000000BB009 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				4B066E2DDF4E55746E824F98 /* EditorClipboard.swift */,
 				E6BE0AD74E302CEAF5DF9217 /* ClipEditing+Fades.swift */,
 				B7A689E2E3CD1BE86914752E /* TempoTrackLock.swift */,
 				AA0000020000000000000021 /* ArrangementTimelineMapper.swift */,
@@ -1834,6 +1851,7 @@
 		AA00000500000000000BB00A /* Timeline */ = {
 			isa = PBXGroup;
 			children = (
+				9585C89B3153A52608626E60 /* SectionClipboardActions.swift */,
 				907D3D32BD203EC40DB0AB81 /* TimelinePlayRangeEdgeShadow.swift */,
 				E6777432B38CBC780DCB0A90 /* TimelineClipHoverModel.swift */,
 				C3E9441AA46DEBA95770A536 /* TimelinePlayRangeShade.swift */,
@@ -1877,6 +1895,8 @@
 		AA00000500000000000EDI01 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
+				10A864A47B86B569D6E19025 /* EditorPasteboardCommands.swift */,
+				D9553012690B83F0F455EA21 /* EditView+Clipboard.swift */,
 				1D91AF3F9F4CB4063FA29F45 /* SmartGuideEditorSheet.swift */,
 				DD984B4EC7F13690AFA17081 /* ClickSettingsSheet.swift */,
 				6294143EABD69374CF7B54EE /* EditView+PlayRange.swift */,
@@ -2044,6 +2064,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34957FA15974E0431F86DA33 /* SectionClipboardActions.swift in Sources */,
+				CA44FAA09C1FB29A29D42614 /* EditorPasteboardCommands.swift in Sources */,
+				A5195B8FA1FF8DD92CC5200C /* EditView+Clipboard.swift in Sources */,
+				6646C4CB6463E40DD216E93C /* EditorClipboard.swift in Sources */,
+				C2C7C6AED97E5B8136BDC813 /* SongSpan.swift in Sources */,
 				8D7564AC88777BD8D1B0DD7F /* ClickScheduler.swift in Sources */,
 				AAB5DB242501F1607B004089 /* SmartGuideEditorSheet.swift in Sources */,
 				DD7E6302DACD3BFAFF586D22 /* ClickSettingsSheet.swift in Sources */,
@@ -2459,6 +2484,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156F38F7D2237340F86DFE19 /* SectionClipboardActions.swift in Sources */,
+				FEE2593102F0BD83912D7872 /* EditorPasteboardCommands.swift in Sources */,
+				BF670FA5596DDEDEFD19DFF0 /* EditView+Clipboard.swift in Sources */,
+				BFA52BC1DAEEB99CB715131C /* EditorClipboard.swift in Sources */,
+				DB5F7E50411BEC062ED6DDB9 /* SongSpan.swift in Sources */,
 				F61C5914308C87261BE1B009 /* ClickScheduler.swift in Sources */,
 				5B83909C90BCDAF5794683E1 /* SmartGuideEditorSheet.swift in Sources */,
 				E8E685A81246FE2D6C5AC97E /* ClickSettingsSheet.swift in Sources */,

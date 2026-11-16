@@ -52,6 +52,7 @@ extension EditView {
             onAddSection: addSection,
             onRenameSection: beginRenameSection,
             onRemoveMarker: removeMarker,
+            sectionClipboard: sectionClipboardActions,
             previewSections: previewSections(_:),
             onEditSectionEdge: applySectionEdge(_:),
             onTimeSignatureRulerTap: handleTimeSignatureRulerTap,
